@@ -230,9 +230,10 @@
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<div class="page-container">
-
-  <div class="page-content transparent-box" style="margin-top: 120px;">
+<div class="page-content" style="margin-top: 120px;">
+  <div class="transparent-box">
+    
+    <!-- الترحيب -->
     <h1 class="fade-in" id="welcomeText" style="animation-delay: 0.5s;">حيّاك الله، </h1>
     <h2 class="fade-in" style="animation-delay: 1s;">دعوة خاصة</h2>
     <h3 class="fade-in" style="animation-delay: 1.5s;">بارك الله لهم وبارك عليهما وجمع بينهم في خير</h3>
@@ -240,17 +241,10 @@
     <h5 class="fade-in" style="animation-delay: 2.5s;">لحفل زفاف</h5>
     <h6 class="fade-in" style="animation-delay: 3s;">نواف & أسماء</h6>
     <h7 class="fade-in" style="animation-delay: 3.5s;">اللهم ألف بين قلوبهم، وأسعد حياتهم، واجعل بينهم مودة ورحمة</h7>
-  </div>
 
-  <div class="page-content transparent-box" style="margin-top: 80px;">
-    <h1>تفاصيل الحفل</h1>
-    <h2>📍 قاعة صدر المنصة - الرياض</h2>
-    <h4>🕒 الجمعة 25 يوليو 2025 - الساعة 9 مساءً</h4>
-    <div id="countdown" style="margin-top: 10px;"></div>
-    <iframe src="https://www.google.com/maps?q=24.7136,46.6753&output=embed" width="60%" height="200" style="border:0; margin-top:20px;" allowfullscreen></iframe>
-  </div>
+    <hr style="margin: 40px auto; border: 1px solid #fff; width: 80%; opacity: 0.3;" />
 
-  <div class="page-content transparent-box" style="margin-top: 80px;">
+    <!-- التأكيد -->
     <h2 id="attendanceTitle">هل ستحضر؟</h2>
     <div id="responseButtons" style="margin-top:30px;">
       <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('yes')">نعم، بإذن الله</button>
@@ -263,9 +257,19 @@
     <h1 id="qrNote" style="display: none; font-size: 14px;">📌 استخدم رمز الدخول عند الوصول للقاعة.</h1>
     <h2 id="invitationCount" style="font-size: 14px; display: none;"></h2>
     <button id="downloadBtn" style="display: none; margin-top: 10px;">📥تحميل الدعوة</button>
-  </div>
 
+    <hr style="margin: 40px auto; border: 1px solid #fff; width: 80%; opacity: 0.3;" />
+
+    <!-- التفاصيل -->
+    <h1>تفاصيل الحفل</h1>
+    <h2>📍 قاعة صدر المنصة - الرياض</h2>
+    <h4>🕒 الجمعة 25 يوليو 2025 - الساعة 9 مساءً</h4>
+    <div id="countdown" style="margin-top: 10px;"></div>
+    <iframe src="https://www.google.com/maps?q=24.7136,46.6753&output=embed" width="60%" height="200" style="border:0; margin-top:20px;" allowfullscreen></iframe>
+
+  </div>
 </div>
+
 
 
 
@@ -381,6 +385,7 @@
 
 </body>
 </html>
+
 
 
 
