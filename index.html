@@ -4,16 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>دعوة حفل زفاف</title>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa+Ink:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Amiri', serif;
-      background-color: transparent ;
-      overflow-x: hidden;
-      color: #000000;
+ .aref-ruqaa-ink-regular {
+  font-family: "Aref Ruqaa Ink", serif;
+  font-weight: 400;
+  font-style: normal;
+   color: white;
+}
+
+.aref-ruqaa-ink-bold {
+  font-family: "Aref Ruqaa Ink", serif;
+  font-weight: 700;
+  font-style: normal;
+  color:black;
+}
+
     }
 
     .hidden {
@@ -236,28 +247,7 @@
       <h5 class="fade-in" style="animation-delay: 2.5s;">لحفل زفاف</h5>
       <h6 class="fade-in" style="animation-delay: 3s;">نواف & أسماء</h6>
       <h7 class="fade-in" style="animation-delay: 3.5s;">اللهم ألف بين قلوبهم، وأسعد حياتهم، واجعل بينهم مودة ورحمة</h7>
-    </div>
-  </div>
-</section>
-
-<!-- سكشن التفاصيل -->
-<section class="section" id="page2">
-  <div class="page-content">
-    <div class="transparent-box">
-      <h1>تفاصيل الحفل</h1>
-      <h2>📍 قاعة صدر المنصة - الرياض</h2>
-      <h4>🕒 الجمعة 25 يوليو 2025 - الساعة 9 مساءً</h4>
-      <div id="countdown"></div>
-      <iframe src="https://www.google.com/maps?q=24.7136,46.6753&output=embed" width="60%" height="200" style="border:0; margin-top:20px;" allowfullscreen></iframe>
-    </div>
-  </div>
-</section>
-
-<!-- سكشن التأكيد -->
-<section class="section" id="page3">
-  <div class="page-content">
-    <div class="transparent-box">
-      <h2 id="attendanceTitle">هل ستحضر؟</h2>
+       <h2 id="attendanceTitle">هل ستحضر؟</h2>
       <div id="responseButtons" style="margin-top:30px;">
         <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('yes')">نعم، بإذن الله</button>
         <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('no')">لا، أعتذر عن الحضور</button>
@@ -269,9 +259,15 @@
       <h1 id="qrNote" style="display: none; font-size: 14px;">📌 استخدم رمز الدخول عند الوصول للقاعة.</h1>
       <h2 id="invitationCount" style="font-size: 14px; display: none;"></h2>
       <button id="downloadBtn" style="display: none; margin-top: 10px;">📥تحميل الدعوة</button>
+      <h1>تفاصيل الحفل</h1>
+      <h2>📍 قاعة صدر المنصة - الرياض</h2>
+      <h4>🕒 الجمعة 25 يوليو 2025 - الساعة 9 مساءً</h4>
+      <div id="countdown"></div>
+      <iframe src="https://www.google.com/maps?q=24.7136,46.6753&output=embed" width="60%" height="200" style="border:0; margin-top:20px;" allowfullscreen></iframe>
     </div>
   </div>
 </section>
+
 
 <!-- مكتبة QR -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -385,6 +381,7 @@
 
 </body>
 </html>
+
 
 
 
