@@ -51,15 +51,18 @@
       text-align: center;
     }
     #intro button {
-      padding: 14px 30px;
-      font-size: 20px;
-      background-color: rgba(255,255,255,0.8);
-      color: #ffffff;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      margin-top: -30px;
-      z-index: 3;
+
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    font-size: 90px;
+    border: none;
+    margin-top: -30px;
+    z-index: 3;
+    background-image: url('114582.png');
+
     }
     #intro.starting button {
       display: none;
@@ -212,11 +215,11 @@
 <body>
 
 <video autoplay muted loop playsinline id="bg-video">
-  <source src="112903 - Trim.mp4" type="video/mp4">
+  <source src="3333.mp4" type="video/mp4">
 </video>
 
 <div id="intro">
-  <img src="112921.png" id="intro-bg" alt="خلفية الانترو">
+  <img src="114555.jpg" id="intro-bg" alt="خلفية الانترو">
   <div class="overlay">
     <button onclick="startExperience()">ابدأ</button>
   </div>
@@ -239,25 +242,26 @@
     <h4 class="fade-in" style="animation-delay: 2s;">نتشرف</h4>
     
      
-      <div class="fade-in" style="animation-delay: 3s; display: flex; justify-content: center; gap: 30px;">
+      <div class="fade-in" style="animation-delay: 2.5s; display: flex; justify-content: center; gap: 70px;font-size: 30px">
         <span>السيدة</span>
         <span>السيدة</span>
       </div>
 
-      <div class="fade-in" style="animation-delay: 3s; display: flex; justify-content: center; gap: 30px;">
+      <div class="fade-in" style="animation-delay: 3s; display: flex; justify-content: center; gap: 70px;font-size: 30px">
         <span>أم أحمد</span>
         <span>أم سمر</span>
       </div>
 
     <h8 class="fade-in" style="animation-delay: 3.5s;">بدعوتكم لحضور حفل زفاف </h8>
 
-      <div class="fade-in" style="animation-delay: 3s; display: flex; justify-content: center; gap: 30px;">
+      <div class="fade-in" style="animation-delay: 4s; display: flex; justify-content: center; gap: 70px;font-size: 30px">
         <span> أحمد</span>
          <span>&</span>
         <span> سمر</span>
       </div>
 
-    
+    <h3 class="fade-in" style="animation-delay: 4.4s;">بارك الله لهم وبارك عليهما وجمع بينهم في خير</h3>
+
     
     <p style="color: white; font-size: 16px; text-align: center; margin-top: 40px; animation: bounce 2s infinite;">
       ↓ تاكيد الحضور ↓
@@ -388,7 +392,7 @@
   };
 
   const countdownEl = document.getElementById("countdown");
-  const eventDate = new Date("2025-08-05T21:00:00").getTime();
+  const eventDate = new Date("2025-08-08T21:00:00").getTime();
   setInterval(() => {
     const now = new Date().getTime();
     const diff = eventDate - now;
@@ -422,25 +426,5 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
