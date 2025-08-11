@@ -205,6 +205,40 @@
       align-items: center;
       margin-top: 20px;
     }
+    .message-box {
+  margin: 20px auto;
+  padding: 10px;
+  background: #1f1f1f;
+  border-radius: 12px;
+  max-width: 300px;
+  text-align: center;
+}
+
+.message-box textarea {
+  width: 100%;
+  height: 80px;
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 8px;
+  resize: none;
+  background: #2a2a2a;
+  color: white;
+}
+
+.message-box button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  background: #b6c8a2;
+  color: black;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.message-box button:hover {
+  background: #a0b48a;
+}
+
   </style>
 </head>
 <body>
@@ -285,6 +319,25 @@
     <h1 id="qrNote" style="display: none; font-size: 14px;">📌 استخدم رمز الدخول عند الوصول للقاعة.</h1>
     <h2 id="invitationCount" style="font-size: 14px; display: none;"></h2>
     <button id="downloadBtn" style="display: none; margin-top: 10px;">📥تحميل الدعوة</button>
+    
+     <p style="color: white; font-size: 16px; text-align: center; margin-top: 40px; animation: bounce 2s infinite;">
+      ↓ رسالة الضيف  ↓
+    </p>
+    
+    <style>
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
+    </style>
+    <hr style="margin: 40px auto; border: 1px solid #fff; width: 80%; opacity: 0.3;" />
+        
+       <div class="message-box">
+    <textarea id="message" placeholder=" اكتب رسالة للعروسين"></textarea>
+    <button id="sendMessage"> إرسال</button>
+  </div>
+
+    
      <p style="color: white; font-size: 16px; text-align: center; margin-top: 40px; animation: bounce 2s infinite;">
       ↓ التفاصيل  ↓
     </p>
@@ -419,10 +472,28 @@
         responseMsg.innerText = "❌ لم نتمكن من التحقق من حالتك.";
       });
   });
+  document.getElementById("sendMessage").addEventListener("click", function() {
+  var msg = document.getElementById("message").value.trim();
+  if(msg === "") {
+    alert("الرجاء كتابة رسالة");
+    return;
+  }
+
+  fetch("https://script.google.com/macros/s/AKfycbyuNmYxaML-QFA7kMSJsCP0vG915-xbd5__pz7AH384-FE3jcLD3E1lftgOdlk7lvIHXA/exec", {
+    method: "POST",
+    body: new URLSearchParams({ message: msg })
+  })
+  .then(res => res.text())
+  .then(data => {
+    alert("✅ تم إرسال الرسالة بنجاح");
+    document.getElementById("message").value = "";
+  });
+});
 </script>
 
 </body>
 </html>
+
 
 
 
