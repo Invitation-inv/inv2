@@ -54,8 +54,8 @@
   position: absolute;
   top: 240px; /* المسافة من الأعلى */
   left: 20px; /* المسافة من اليسار */
-  width: 140px;
-  height: 140px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   display: inline-block;
   box-sizing: border-box;
@@ -66,7 +66,7 @@
   background-image: url('114582.png');
   background-size: cover;
   background-position: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* ظل ناعم */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* ظل ناعم */
 }
 
     #intro.starting button {
@@ -214,6 +214,34 @@
       align-items: center;
       margin-top: 20px;
     }
+        #countdown {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      font-family: 'Amiri', serif;
+      margin-top: 20px;
+    }
+
+    .time-box {
+      background: rgba(182, 200, 162, 0.8); /* لون شفاف */
+      color: white;
+      padding: 10px 15px;
+      border-radius: 15px;
+      text-align: center;
+      min-width: 70px;
+    }
+
+    .time-box span {
+      display: block;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .time-label {
+      font-size: 14px;
+      margin-top: 5px;
+      color: #333;
+    }
   </style>
 </head>
 <body>
@@ -311,7 +339,25 @@
     <h1>تفاصيل الحفل</h1>
     <h2>📍 قاعة صدر المنصة - الرياض</h2>
     <h4>🕒 الجمعة 25 يوليو 2025 - الساعة 9 مساءً</h4>
-    <div id="countdown" style="margin-top: 10px;"></div>
+    
+    <div id="countdown">
+      <div class="time-box">
+        <span id="days">00</span>
+        <div class="time-label">يوم</div>
+      </div>
+      <div class="time-box">
+        <span id="hours">00</span>
+        <div class="time-label">ساعة</div>
+      </div>
+      <div class="time-box">
+        <span id="minutes">00</span>
+        <div class="time-label">دقيقة</div>
+      </div>
+      <div class="time-box">
+        <span id="seconds">00</span>
+        <div class="time-label">ثانية</div>
+      </div>
+    </div>
     <iframe src="https://www.google.com/maps?q=24.7136,46.6753&output=embed" width="60%" height="200" style="border:0; margin-top:20px;" allowfullscreen></iframe>
 
   </div>
@@ -398,7 +444,7 @@
   };
 
   const countdownEl = document.getElementById("countdown");
-  const eventDate = new Date("2025-08-08T21:00:00").getTime();
+  const eventDate = new Date("2025-08-20T21:00:00").getTime();
   setInterval(() => {
     const now = new Date().getTime();
     const diff = eventDate - now;
@@ -432,6 +478,7 @@
 
 </body>
 </html>
+
 
 
 
