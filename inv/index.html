@@ -242,7 +242,6 @@
       margin-top: 5px;
       color: white;
     }
-    textarea { width: 80%; height: 100px; margin-top: 10px; }
 
   </style>
 </head>
@@ -377,13 +376,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <script>
+ <script>
   function startExperience() {
     const intro = document.getElementById("intro");
     const music = document.getElementById("bg-music");
-
     intro.classList.add("close");
     music.play().catch(() => {});
-
     setTimeout(() => {
       intro.remove();
     }, 1000);
@@ -391,16 +389,15 @@
 
   function toggleMusic() {
     const bgMusic = document.getElementById("bg-music");
-    try { bgMusic.paused ? bgMusic.play() : bgMusic.pause(); } catch {}
+    bgMusic.paused ? bgMusic.play() : bgMusic.pause();
   }
 
-  const nameParam = new URLSearchParams(location.search).get("name") || "ضيفنا";
-  const welcomeText = document.getElementById("welcomeText");
-  if (welcomeText) {
-    welcomeText.innerText += nameParam;
-  }
+  const urlParams = new URLSearchParams(window.location.search);
+  const nameParam = urlParams.get("name") || "ضيفنا";
+  const token = urlParams.get("token") || "";
 
-  const token = new URLSearchParams(location.search).get("token") || "";
+  document.getElementById("welcomeText").innerText += nameParam;
+
   const qrContainer = document.getElementById("qrContainer");
   const responseButtons = document.getElementById("responseButtons");
   const attendanceTitle = document.getElementById("attendanceTitle");
@@ -417,7 +414,6 @@
         responseButtons.style.display = "none";
         attendanceTitle.style.display = "none";
         responseMsg.innerText = res.message;
-
         if (res.status === "success" || res.status === "already") {
           showQR(res.qr, res.max);
         } else if (res.status === "declined") {
@@ -450,28 +446,24 @@
     }
   };
 
+  // عد تنازلي
   var countDownDate = new Date("Aug 20, 2025 20:00:00").getTime();
-
   var x = setInterval(function() {
     var now = new Date().getTime();
     var distance = countDownDate - now;
-
     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
     document.getElementById("days").innerHTML = days;
     document.getElementById("hours").innerHTML = hours;
     document.getElementById("minutes").innerHTML = minutes;
-    document.getElementById("seconds").innerHTML = seconds;
-
     if (distance < 0) {
       clearInterval(x);
       document.getElementById("countdown").innerHTML = "انتهى الوقت";
     }
   }, 1000);
 
+  // تحقق من حالة الحضور عند تحميل الصفحة
   window.addEventListener('DOMContentLoaded', () => {
     fetch(`https://script.google.com/macros/s/AKfycbyuNmYxaML-QFA7kMSJsCP0vG915-xbd5__pz7AH384-FE3jcLD3E1lftgOdlk7lvIHXA/exec?token=${token}&check=true`)
       .then(res => res.json())
@@ -490,123 +482,47 @@
       .catch(() => {
         responseMsg.innerText = "❌ لم نتمكن من التحقق من حالتك.";
       });
-  });
-  let token = new URLSearchParams(window.location.search).get("token");
 
-function sendMessage() {
-  let msg = document.getElementById("guestMessage").value.trim();
-  if (!msg) {
-    alert("الرجاء كتابة الرسالة");
-    return;
-  }
-
-  fetch("YOUR_SCRIPT_URL", {
-    method: "POST",
-    body: JSON.stringify({ token: token, message: msg })
-  })
-  .then(res => res.json())
-  .then(data => {
-    alert(data.message);
-    if (data.success) {
-      document.getElementById("guestMessage").disabled = true;
-      document.getElementById("sendBtn").disabled = true;
-    }
-  })
-  .catch(err => console.error(err));
-}
-
-window.onload = function() {
-  // جلب حالة الضيف إذا كتب رسالة من قبل
-  fetch("YOUR_SCRIPT_URL?token=" + token)
-  .then(res => res.json())
-  .then(data => {
-    if (data.message) {
-      document.getElementById("guestMessage").value = data.message;
-      document.getElementById("guestMessage").disabled = true;
-      document.getElementById("sendBtn").disabled = true;
-    }
-  });
-};
-  const token = new URLSearchParams(window.location.search).get("token");
-
-  // عند تحميل الصفحة، فحص إذا أرسل الضيف رسالة سابقاً
-  fetch(`https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec?action=getMessage&token=${token}`)
-    .then(res => res.json())
-    .then(data => {
-      if (data.message) {
-        document.getElementById("guestMessage").value = data.message;
-        document.getElementById("guestMessage").disabled = true;
-        document.getElementById("sendMessageBtn").disabled = true;
-        document.getElementById("messageStatus").innerText = "✅ تم إرسال رسالتك";
-        document.getElementById("messageStatus").style.display = "block";
-      }
-    });
-
-  // إرسال الرسالة
-  document.getElementById("sendMessageBtn").addEventListener("click", () => {
-    const message = document.getElementById("guestMessage").value.trim();
-    if (!message) {
-      alert("الرجاء كتابة الرسالة أولاً");
-      return;
-    }
-
-    fetch(`https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec?action=saveMessage&token=${token}&message=${encodeURIComponent(message)}`)
+    // جلب الرسالة السابقة
+    fetch(`https://script.google.com/macros/s/AKfycbyuNmYxaML-QFA7kMSJsCP0vG915-xbd5__pz7AH384-FE3jcLD3E1lftgOdlk7lvIHXA/exec??action=getMessage&token=${token}`)
       .then(res => res.json())
       .then(data => {
-        if (data.success) {
+        if (data.message) {
+          document.getElementById("guestMessage").value = data.message;
           document.getElementById("guestMessage").disabled = true;
           document.getElementById("sendMessageBtn").disabled = true;
           document.getElementById("messageStatus").innerText = "✅ تم إرسال رسالتك";
           document.getElementById("messageStatus").style.display = "block";
-        } else {
-          alert(data.error || "لا يمكنك إرسال الرسالة أكثر من مرة");
         }
       });
-  });
 
-
-
-  const token = new URLSearchParams(window.location.search).get("token");
-
-  // عند تحميل الصفحة، فحص إذا أرسل الضيف رسالة سابقاً
-  fetch(`https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec?action=getMessage&token=${token}`)
-    .then(res => res.json())
-    .then(data => {
-      if (data.message) {
-        document.getElementById("guestMessage").value = data.message;
-        document.getElementById("guestMessage").disabled = true;
-        document.getElementById("sendMessageBtn").disabled = true;
-        document.getElementById("messageStatus").innerText = "✅ تم إرسال رسالتك";
-        document.getElementById("messageStatus").style.display = "block";
+    // إرسال الرسالة
+    document.getElementById("sendMessageBtn").addEventListener("click", () => {
+      const message = document.getElementById("guestMessage").value.trim();
+      if (!message) {
+        alert("الرجاء كتابة الرسالة أولاً");
+        return;
       }
+      fetch(`https://script.google.com/macros/s/AKfycbyuNmYxaML-QFA7kMSJsCP0vG915-xbd5__pz7AH384-FE3jcLD3E1lftgOdlk7lvIHXA/exec??action=saveMessage&token=${token}&message=${encodeURIComponent(message)}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            document.getElementById("guestMessage").disabled = true;
+            document.getElementById("sendMessageBtn").disabled = true;
+            document.getElementById("messageStatus").innerText = "✅ تم إرسال رسالتك";
+            document.getElementById("messageStatus").style.display = "block";
+          } else {
+            alert(data.error || "لا يمكنك إرسال الرسالة أكثر من مرة");
+          }
+        });
     });
-
-  // إرسال الرسالة
-  document.getElementById("sendMessageBtn").addEventListener("click", () => {
-    const message = document.getElementById("guestMessage").value.trim();
-    if (!message) {
-      alert("الرجاء كتابة الرسالة أولاً");
-      return;
-    }
-
-    fetch(`https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec?action=saveMessage&token=${token}&message=${encodeURIComponent(message)}`)
-      .then(res => res.json())
-      .then(data => {
-        if (data.success) {
-          document.getElementById("guestMessage").disabled = true;
-          document.getElementById("sendMessageBtn").disabled = true;
-          document.getElementById("messageStatus").innerText = "✅ تم إرسال رسالتك";
-          document.getElementById("messageStatus").style.display = "block";
-        } else {
-          alert(data.error || "لا يمكنك إرسال الرسالة أكثر من مرة");
-        }
-      });
   });
-
 </script>
+
 
 </body>
 </html>
+
 
 
 
