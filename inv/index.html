@@ -369,42 +369,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
  <script>
-     const token = new URLSearchParams(window.location.search).get("token");
-
-  // عند تحميل الصفحة، فحص إذا أرسل الضيف رسالة سابقاً
-  fetch(`https://script.google.com/macros/s/AKfycbyuNmYxaML-QFA7kMSJsCP0vG915-xbd5__pz7AH384-FE3jcLD3E1lftgOdlk7lvIHXA/exec?action=getMessage&token=${token}`)
-    .then(res => res.json())
-    .then(data => {
-      if (data.message) {
-        document.getElementById("guestMessage").value = data.message;
-        document.getElementById("guestMessage").disabled = true;
-        document.getElementById("sendMessageBtn").disabled = true;
-        document.getElementById("messageStatus").innerText = "✅ تم إرسال رسالتك";
-        document.getElementById("messageStatus").style.display = "block";
-      }
-    });
-
-  // إرسال الرسالة
-  document.getElementById("sendMessageBtn").addEventListener("click", () => {
-    const message = document.getElementById("guestMessage").value.trim();
-    if (!message) {
-      alert("الرجاء كتابة الرسالة أولاً");
-      return;
-    }
-
-    fetch(`https://script.google.com/macros/s/AKfycbyuNmYxaML-QFA7kMSJsCP0vG915-xbd5__pz7AH384-FE3jcLD3E1lftgOdlk7lvIHXA/exec?action=saveMessage&token=${token}&message=${encodeURIComponent(message)}`)
-      .then(res => res.json())
-      .then(data => {
-        if (data.success) {
-          document.getElementById("guestMessage").disabled = true;
-          document.getElementById("sendMessageBtn").disabled = true;
-          document.getElementById("messageStatus").innerText = "✅ تم إرسال رسالتك";
-          document.getElementById("messageStatus").style.display = "block";
-        } else {
-          alert(data.error || "لا يمكنك إرسال الرسالة أكثر من مرة");
-        }
-      });
-  });
+   
   function startExperience() {
     const intro = document.getElementById("intro");
     const music = document.getElementById("bg-music");
@@ -550,6 +515,7 @@
 
 </body>
 </html>
+
 
 
 
