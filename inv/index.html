@@ -242,6 +242,8 @@
       margin-top: 5px;
       color: white;
     }
+    textarea { width: 80%; height: 100px; margin-top: 10px; }
+
   </style>
 </head>
 <body>
@@ -322,6 +324,11 @@
     <h1 id="qrNote" style="display: none; font-size: 14px;">📌 استخدم رمز الدخول عند الوصول للقاعة.</h1>
     <h2 id="invitationCount" style="font-size: 14px; display: none;"></h2>
     <button id="downloadBtn" style="display: none; margin-top: 10px;">📥تحميل الدعوة</button>
+    <hr style="margin: 40px auto; border: 1px solid #fff; width: 80%; opacity: 0.3;" />
+
+     <h2>اكتب رسالتك</h2>
+    <textarea id="guestMessage" placeholder="اكتب تهنئتك هنا..."></textarea><br>
+    <button id="sendBtn" onclick="sendMessage()">إرسال</button>
      <p style="color: white; font-size: 16px; text-align: center; margin-top: 40px; animation: bounce 2s infinite;">
       ↓ التفاصيل  ↓
     </p>
@@ -480,10 +487,47 @@
         responseMsg.innerText = "❌ لم نتمكن من التحقق من حالتك.";
       });
   });
+  let token = new URLSearchParams(window.location.search).get("token");
+
+function sendMessage() {
+  let msg = document.getElementById("guestMessage").value.trim();
+  if (!msg) {
+    alert("الرجاء كتابة الرسالة");
+    return;
+  }
+
+  fetch("https://script.google.com/macros/s/AKfycbyuNmYxaML-QFA7kMSJsCP0vG915-xbd5__pz7AH384-FE3jcLD3E1lftgOdlk7lvIHXA/exec", {
+    method: "POST",
+    body: JSON.stringify({ token: token, message: msg })
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert(data.message);
+    if (data.success) {
+      document.getElementById("guestMessage").disabled = true;
+      document.getElementById("sendBtn").disabled = true;
+    }
+  })
+  .catch(err => console.error(err));
+}
+
+window.onload = function() {
+  // جلب حالة الضيف إذا كتب رسالة من قبل
+  fetch("https://script.google.com/macros/s/AKfycbyuNmYxaML-QFA7kMSJsCP0vG915-xbd5__pz7AH384-FE3jcLD3E1lftgOdlk7lvIHXA/exec=" + token)
+  .then(res => res.json())
+  .then(data => {
+    if (data.message) {
+      document.getElementById("guestMessage").value = data.message;
+      document.getElementById("guestMessage").disabled = true;
+      document.getElementById("sendBtn").disabled = true;
+    }
+  });
+};
 </script>
 
 </body>
 </html>
+
 
 
 
