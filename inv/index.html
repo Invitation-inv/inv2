@@ -325,6 +325,15 @@
     <h2 id="invitationCount" style="font-size: 14px; display: none;"></h2>
     <button id="downloadBtn" style="display: none; margin-top: 10px;">📥تحميل الدعوة</button>
     <hr style="margin: 40px auto; border: 1px solid #fff; width: 80%; opacity: 0.3;" />
+
+      
+      <div id="guestMessageSection" style="margin-top:20px;">
+        <label for="guestMessage">اكتب رسالتك للتهنئة:</label>
+        <textarea id="guestMessage" placeholder="اكتب رسالتك هنا..." rows="4" style="width:100%;"></textarea>
+        <button id="sendMessageBtn" style="margin-top:10px;">إرسال الرسالة</button>
+        <p id="messageStatus" style="color:green; display:none;"></p>
+      </div>
+
       ↓ التفاصيل  ↓
     </p>
     
@@ -482,11 +491,123 @@
         responseMsg.innerText = "❌ لم نتمكن من التحقق من حالتك.";
       });
   });
+  let token = new URLSearchParams(window.location.search).get("token");
+
+function sendMessage() {
+  let msg = document.getElementById("guestMessage").value.trim();
+  if (!msg) {
+    alert("الرجاء كتابة الرسالة");
+    return;
+  }
+
+  fetch("YOUR_SCRIPT_URL", {
+    method: "POST",
+    body: JSON.stringify({ token: token, message: msg })
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert(data.message);
+    if (data.success) {
+      document.getElementById("guestMessage").disabled = true;
+      document.getElementById("sendBtn").disabled = true;
+    }
+  })
+  .catch(err => console.error(err));
+}
+
+window.onload = function() {
+  // جلب حالة الضيف إذا كتب رسالة من قبل
+  fetch("YOUR_SCRIPT_URL?token=" + token)
+  .then(res => res.json())
+  .then(data => {
+    if (data.message) {
+      document.getElementById("guestMessage").value = data.message;
+      document.getElementById("guestMessage").disabled = true;
+      document.getElementById("sendBtn").disabled = true;
+    }
+  });
+};
+  const token = new URLSearchParams(window.location.search).get("token");
+
+  // عند تحميل الصفحة، فحص إذا أرسل الضيف رسالة سابقاً
+  fetch(`https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec?action=getMessage&token=${token}`)
+    .then(res => res.json())
+    .then(data => {
+      if (data.message) {
+        document.getElementById("guestMessage").value = data.message;
+        document.getElementById("guestMessage").disabled = true;
+        document.getElementById("sendMessageBtn").disabled = true;
+        document.getElementById("messageStatus").innerText = "✅ تم إرسال رسالتك";
+        document.getElementById("messageStatus").style.display = "block";
+      }
+    });
+
+  // إرسال الرسالة
+  document.getElementById("sendMessageBtn").addEventListener("click", () => {
+    const message = document.getElementById("guestMessage").value.trim();
+    if (!message) {
+      alert("الرجاء كتابة الرسالة أولاً");
+      return;
+    }
+
+    fetch(`https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec?action=saveMessage&token=${token}&message=${encodeURIComponent(message)}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          document.getElementById("guestMessage").disabled = true;
+          document.getElementById("sendMessageBtn").disabled = true;
+          document.getElementById("messageStatus").innerText = "✅ تم إرسال رسالتك";
+          document.getElementById("messageStatus").style.display = "block";
+        } else {
+          alert(data.error || "لا يمكنك إرسال الرسالة أكثر من مرة");
+        }
+      });
+  });
+
+
+
+  const token = new URLSearchParams(window.location.search).get("token");
+
+  // عند تحميل الصفحة، فحص إذا أرسل الضيف رسالة سابقاً
+  fetch(`https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec?action=getMessage&token=${token}`)
+    .then(res => res.json())
+    .then(data => {
+      if (data.message) {
+        document.getElementById("guestMessage").value = data.message;
+        document.getElementById("guestMessage").disabled = true;
+        document.getElementById("sendMessageBtn").disabled = true;
+        document.getElementById("messageStatus").innerText = "✅ تم إرسال رسالتك";
+        document.getElementById("messageStatus").style.display = "block";
+      }
+    });
+
+  // إرسال الرسالة
+  document.getElementById("sendMessageBtn").addEventListener("click", () => {
+    const message = document.getElementById("guestMessage").value.trim();
+    if (!message) {
+      alert("الرجاء كتابة الرسالة أولاً");
+      return;
+    }
+
+    fetch(`https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec?action=saveMessage&token=${token}&message=${encodeURIComponent(message)}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          document.getElementById("guestMessage").disabled = true;
+          document.getElementById("sendMessageBtn").disabled = true;
+          document.getElementById("messageStatus").innerText = "✅ تم إرسال رسالتك";
+          document.getElementById("messageStatus").style.display = "block";
+        } else {
+          alert(data.error || "لا يمكنك إرسال الرسالة أكثر من مرة");
+        }
+      });
+  });
 
 </script>
 
 </body>
 </html>
+
 
 
 
