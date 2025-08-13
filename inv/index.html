@@ -453,7 +453,7 @@
   const messageStatus = document.getElementById("messageStatus");
 
   // URL for the Google Apps Script
-  const scriptURL = "https://script.google.com/macros/s/AKfycbzBVVfyT6xisoPgOqkI3k0VJAT0u2-nDBEowr9cV4hfnWV2IrAfUYBd1CPfeuXCg9Fc-Q/exec";
+  const scriptURL = "https://script.google.com/macros/s/AKfycbySJipAEd5nZ1649h5wRp0MNWbtfnOIx9oE1OiNIpxj-lV08z5jRDg3EXJFWSXQVaef/exec";
 
 
   function confirmAttendance(response) {
@@ -554,28 +554,27 @@ var countDownDate = new Date("Aug 20, 2025 20:00:00").getTime();
         token: token // إرسال التوكن لربط الرسالة بالضيف
       })
     })
-    .then(res => res.text())
-    .then(data => {
-      if (data.includes("success")) {
-          messageStatus.style.color = "green";
-          messageStatus.innerText = "✅ تم إرسال الرسالة بنجاح.";
-          messageTextarea.value = "";
-      } else {
-          messageStatus.style.color = "red";
-          messageStatus.innerText = "❌ حدث خطأ، حاول مرة أخرى.";
-      }
-      sendMessageBtn.disabled = false;
-    })
-    .catch(() => {
-        messageStatus.style.color = "red";
-        messageStatus.innerText = "❌ حدث خطأ في الاتصال، حاول مرة أخرى.";
-        sendMessageBtn.disabled = false;
+   .then(data => {
+  if (data.includes("success")) {
+    messageStatus.style.color = "green";
+    messageStatus.innerText = "✅ تم إرسال الرسالة بنجاح.";
+    messageTextarea.value = "";
+  } else if (data.includes("already_sent")) {
+    messageStatus.style.color = "orange";
+    messageStatus.innerText = "⚠️ لقد أرسلت رسالة مسبقاً.";
+  } else {
+    messageStatus.style.color = "red";
+    messageStatus.innerText = "❌ حدث خطأ، حاول مرة أخرى.";
+  }
+  sendMessageBtn.disabled = false;
+})
     });
   });
 </script>
 
 </body>
 </html>
+
 
 
 
