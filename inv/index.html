@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -242,6 +243,44 @@
       margin-top: 5px;
       color: white;
     }
+    message-box {
+      margin: 20px auto;
+      padding: 10px;
+      background: white;
+      border-radius: 12px;
+      max-width: 300px;
+      text-align: center;
+    }
+
+    .message-box textarea {
+      width: 100%;
+      height: 80px;
+      border: none;
+      outline: none;
+      padding: 10px;
+      border-radius: 8px;
+      resize: none;
+      background: #b6c8a2;
+      color: white;
+    }
+
+    .message-box button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      border: none;
+      background: #b6c8a2;
+      color: white;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    .message-box button:hover {
+      background: white;
+    }
+
+    .message-status {
+        margin-top: 10px;
+        font-weight: bold;
+    }
 
   </style>
 </head>
@@ -324,6 +363,12 @@
       <h2 id="invitationCount" style="font-size: 14px; display: none;"></h2>
       <button id="downloadBtn" style="display: none; margin-top: 10px;">📥تحميل الدعوة</button>
       <hr style="margin: 40px auto; border: 1px solid #fff; width: 80%; opacity: 0.3;" />
+        <div class="message-box">
+    <textarea id="message" placeholder=" اكتب رسالة للعروسين"></textarea>
+    <button id="sendMessageBtn"> إرسال</button>
+    <p id="messageStatus" class="message-status"></p>
+     </div>
+
   
 
       ↓ التفاصيل  ↓
@@ -336,7 +381,8 @@
     }
     </style>
     <hr style="margin: 40px auto; border: 1px solid #fff; width: 80%; opacity: 0.3;" />
-        
+       
+
    
     <!-- التفاصيل -->
     <h1>تفاصيل الحفل</h1>
@@ -365,16 +411,17 @@
 
 
 
-<!-- مكتبة QR -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
- <script>
-   
+<script>
   function startExperience() {
     const intro = document.getElementById("intro");
     const music = document.getElementById("bg-music");
+
     intro.classList.add("close");
     music.play().catch(() => {});
+
     setTimeout(() => {
       intro.remove();
     }, 1000);
@@ -382,15 +429,16 @@
 
   function toggleMusic() {
     const bgMusic = document.getElementById("bg-music");
-    bgMusic.paused ? bgMusic.play() : bgMusic.pause();
+    try { bgMusic.paused ? bgMusic.play() : bgMusic.pause(); } catch {}
   }
 
-  const urlParams = new URLSearchParams(window.location.search);
-  const nameParam = urlParams.get("name") || "ضيفنا";
-  const token = urlParams.get("token") || "";
+  const nameParam = new URLSearchParams(location.search).get("name") || "ضيفنا";
+  const welcomeText = document.getElementById("welcomeText");
+  if (welcomeText) {
+    welcomeText.innerText += nameParam;
+  }
 
-  document.getElementById("welcomeText").innerText += nameParam;
-
+  const token = new URLSearchParams(location.search).get("token") || "";
   const qrContainer = document.getElementById("qrContainer");
   const responseButtons = document.getElementById("responseButtons");
   const attendanceTitle = document.getElementById("attendanceTitle");
@@ -398,15 +446,25 @@
   const qrNote = document.getElementById("qrNote");
   const downloadBtn = document.getElementById("downloadBtn");
   const invitationCount = document.getElementById("invitationCount");
+  
+  // Elements for the message box
+  const messageTextarea = document.getElementById("message");
+  const sendMessageBtn = document.getElementById("sendMessageBtn");
+  const messageStatus = document.getElementById("messageStatus");
+
+  // URL for the Google Apps Script
+  const scriptURL = "https://script.google.com/macros/s/AKfycbx8LrHjX66ujqmtpIhdvo72lMJ9by5cWphv5FYxrQNSMzuiOXTn-MtqHLpBDc8B9f0kIw/exec";
+
 
   function confirmAttendance(response) {
     responseMsg.innerText = "⏳ جاري التسجيل...";
-    fetch(`https://script.google.com/macros/s/AKfycbyuNmYxaML-QFA7kMSJsCP0vG915-xbd5__pz7AH384-FE3jcLD3E1lftgOdlk7lvIHXA/exec?name=${encodeURIComponent(nameParam)}&token=${token}&response=${response}`)
+    fetch(`${scriptURL}?name=${encodeURIComponent(nameParam)}&token=${token}&response=${response}`)
       .then(res => res.json())
       .then(res => {
         responseButtons.style.display = "none";
         attendanceTitle.style.display = "none";
         responseMsg.innerText = res.message;
+
         if (res.status === "success" || res.status === "already") {
           showQR(res.qr, res.max);
         } else if (res.status === "declined") {
@@ -439,26 +497,20 @@
     }
   };
 
-  // عد تنازلي
-  var countDownDate = new Date("Aug 20, 2025 20:00:00").getTime();
-  var x = setInterval(function() {
-    var now = new Date().getTime();
-    var distance = countDownDate - now;
-    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    document.getElementById("days").innerHTML = days;
-    document.getElementById("hours").innerHTML = hours;
-    document.getElementById("minutes").innerHTML = minutes;
-    if (distance < 0) {
-      clearInterval(x);
-      document.getElementById("countdown").innerHTML = "انتهى الوقت";
-    }
+  const countdownEl = document.getElementById("countdown");
+  const eventDate = new Date("2025-08-020T21:00:00").getTime();
+  setInterval(() => {
+    const now = new Date().getTime();
+    const diff = eventDate - now;
+    if (diff < 0) return countdownEl.innerText = "بدأ الزفاف!";
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    countdownEl.innerHTML = `⏳ يتبقى <strong>${d}</strong> يوم <strong>${h}</strong> ساعة <strong>${m}</strong> دقيقة`;
   }, 1000);
 
-  // تحقق من حالة الحضور عند تحميل الصفحة
   window.addEventListener('DOMContentLoaded', () => {
-    fetch(`https://script.google.com/macros/s/AKfycbyuNmYxaML-QFA7kMSJsCP0vG915-xbd5__pz7AH384-FE3jcLD3E1lftgOdlk7lvIHXA/exec?token=${token}&check=true`)
+    fetch(`${scriptURL}?token=${token}&check=true`)
       .then(res => res.json())
       .then(res => {
         if (res.status === "already" || res.status === "used") {
@@ -475,48 +527,50 @@
       .catch(() => {
         responseMsg.innerText = "❌ لم نتمكن من التحقق من حالتك.";
       });
+  });
 
-    // جلب الرسالة السابقة
-    fetch(`https://script.google.com/macros/s/AKfycbyuNmYxaML-QFA7kMSJsCP0vG915-xbd5__pz7AH384-FE3jcLD3E1lftgOdlk7lvIHXA/exec??action=getMessage&token=${token}`)
-      .then(res => res.json())
-      .then(data => {
-        if (data.message) {
-          document.getElementById("guestMessage").value = data.message;
-          document.getElementById("guestMessage").disabled = true;
-          document.getElementById("sendMessageBtn").disabled = true;
-          document.getElementById("messageStatus").innerText = "✅ تم إرسال رسالتك";
-          document.getElementById("messageStatus").style.display = "block";
-        }
-      });
+  sendMessageBtn.addEventListener("click", function() {
+    const message = messageTextarea.value.trim();
+    if(message === "") {
+      messageStatus.style.color = "red";
+      messageStatus.innerText = "⚠️ الرجاء كتابة رسالة قبل الإرسال.";
+      return;
+    }
 
-    // إرسال الرسالة
-    document.getElementById("sendMessageBtn").addEventListener("click", () => {
-      const message = document.getElementById("guestMessage").value.trim();
-      if (!message) {
-        alert("الرجاء كتابة الرسالة أولاً");
-        return;
+    messageStatus.style.color = "yellow";
+    messageStatus.innerText = "⏳ جاري إرسال الرسالة...";
+    sendMessageBtn.disabled = true;
+
+    fetch(scriptURL, {
+      method: "POST",
+      body: new URLSearchParams({ 
+        action: "saveMessage", // هذا هو الإجراء الذي سيقوم به السكربت
+        message: message,
+        token: token // إرسال التوكن لربط الرسالة بالضيف
+      })
+    })
+    .then(res => res.text())
+    .then(data => {
+      if (data.includes("success")) {
+          messageStatus.style.color = "green";
+          messageStatus.innerText = "✅ تم إرسال الرسالة بنجاح.";
+          messageTextarea.value = "";
+      } else {
+          messageStatus.style.color = "red";
+          messageStatus.innerText = "❌ حدث خطأ، حاول مرة أخرى.";
       }
-      fetch(`https://script.google.com/macros/s/AKfycbyuNmYxaML-QFA7kMSJsCP0vG915-xbd5__pz7AH384-FE3jcLD3E1lftgOdlk7lvIHXA/exec??action=saveMessage&token=${token}&message=${encodeURIComponent(message)}`)
-        .then(res => res.json())
-        .then(data => {
-          if (data.success) {
-            document.getElementById("guestMessage").disabled = true;
-            document.getElementById("sendMessageBtn").disabled = true;
-            document.getElementById("messageStatus").innerText = "✅ تم إرسال رسالتك";
-            document.getElementById("messageStatus").style.display = "block";
-          } else {
-            alert(data.error || "لا يمكنك إرسال الرسالة أكثر من مرة");
-          }
-        });
+      sendMessageBtn.disabled = false;
+    })
+    .catch(() => {
+        messageStatus.style.color = "red";
+        messageStatus.innerText = "❌ حدث خطأ في الاتصال، حاول مرة أخرى.";
+        sendMessageBtn.disabled = false;
     });
   });
 </script>
 
-
 </body>
 </html>
-
-
 
 
 
