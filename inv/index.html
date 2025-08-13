@@ -273,7 +273,7 @@
       cursor: pointer;
     }
     .message-box button:hover {
-      background: white;
+      background:  #b6c8a2;
     }
 
     .message-status {
@@ -393,8 +393,7 @@
       </div>
     </div>
      <hr style="margin: 40px auto; border: 1px solid #fff; width: 80%; opacity: 0.3;" />
-   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100000.00!2d46.72!3d24.71!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNCDYp9mE2YTZhdmE2Ycg2YXYp9mE2YTZhdmE2Ycg2KfZhNmE2YTZhdmE2Ycg!5e0!3m2!1sar!2ssa!4v1678229890693" width="200" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-  </div>
+     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.6707907180357!2d46.837938325403954!3d24.703841178031816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa9d80414dc89%3A0x4c6795d330c79745!2z2YLYtdixINiv2YrYqtmK2YTYsiDZhNmE2KXYrdiq2YHYp9mE2KfYqiDZiNin2YTZhdik2KrZhdix2KfYqg!5e0!3m2!1sar!2ssa!4v1754914876687!5m2!1sar!2ssa" width="200" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  </div>
 </div>
 
 
@@ -525,12 +524,12 @@ var countDownDate = new Date("Aug 20, 2025 20:00:00").getTime();
     sendMessageBtn.addEventListener("click", function() {
         const message = messageTextarea.value.trim();
         if(message === "") {
-          messageStatus.style.color = "red";
+          messageStatus.style.color = "white";
           messageStatus.innerText = "⚠️ الرجاء كتابة رسالة قبل الإرسال.";
           return;
         }
 
-        messageStatus.style.color = "yellow";
+        messageStatus.style.color = "white";
         messageStatus.innerText = "⏳ جاري إرسال الرسالة...";
         sendMessageBtn.disabled = true;
 
@@ -545,14 +544,14 @@ var countDownDate = new Date("Aug 20, 2025 20:00:00").getTime();
         .then(response => response.text())
         .then(data => {
             if (data.includes("success")) {
-                messageStatus.style.color = "green";
+                messageStatus.style.color = "white";
                 messageStatus.innerText = "✅ تم إرسال الرسالة بنجاح.";
                 messageTextarea.value = "";
             } else if (data.includes("already_sent")) {
-                messageStatus.style.color = "orange";
+                messageStatus.style.color = "white";
                 messageStatus.innerText = "⚠️ لقد أرسلت رسالة مسبقاً.";
             } else {
-                messageStatus.style.color = "red";
+                messageStatus.style.color = "white";
                 messageStatus.innerText = "❌ حدث خطأ، حاول مرة أخرى.";
             }
             sendMessageBtn.disabled = false;
@@ -568,6 +567,7 @@ var countDownDate = new Date("Aug 20, 2025 20:00:00").getTime();
 
 </body>
 </html>
+
 
 
 
