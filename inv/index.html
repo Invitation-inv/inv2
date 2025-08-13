@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -243,7 +242,7 @@
       margin-top: 5px;
       color: white;
     }
-    message-box {
+    .message-box {
       margin: 20px auto;
       padding: 10px;
       background: white;
@@ -286,8 +285,6 @@
 </head>
 <body>
 
-<body>
-
 <video autoplay muted loop playsinline id="bg-video">
   <source src="3333.mp4" type="video/mp4">
 </video>
@@ -306,15 +303,14 @@
 
 <div class="page-content" style="margin-top: 120px;">
   <div class="transparent-box">
-    
-    <!-- الترحيب -->
+   
     <h1 class="fade-in" id="welcomeText" style="animation-delay: 0.5s;">حيّاك الله، </h1>
     <p></p>
     <h2 class="fade-in" style="animation-delay: 1s;">دعوة خاصة</h2>
     <p></p>
     <h3 class="fade-in" style="animation-delay: 1.5s;">بارك الله لهم وبارك عليهما وجمع بينهم في خير</h3>
     <h4 class="fade-in" style="animation-delay: 2s;">نتشرف</h4>
-    
+   
      
       <div class="fade-in" style="animation-delay: 2.5s; display: flex; justify-content: center; gap: 70px;font-size: 30px">
         <span>السيدة</span>
@@ -326,7 +322,7 @@
         <span>أم سمر</span>
       </div>
 
-    <h8 class="fade-in" style="animation-delay: 3.5s;">بدعوتكم لحضور حفل زفاف </h8>
+    <h4 class="fade-in" style="animation-delay: 3.5s;">بدعوتكم لحضور حفل زفاف </h4>
 
       <div class="fade-in" style="animation-delay: 4s; display: flex; justify-content: center; gap: 70px;font-size: 30px">
         <span> أحمد</span>
@@ -336,11 +332,11 @@
 
     <h3 class="fade-in" style="animation-delay: 4.4s;">بارك الله لهم وبارك عليهما وجمع بينهم في خير</h3>
 
-    
+   
     <p style="color: white; font-size: 16px; text-align: center; margin-top: 40px; animation: bounce 2s infinite;">
       ↓ تاكيد الحضور ↓
     </p>
-    
+   
     <style>
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
@@ -349,8 +345,7 @@
     </style>
     <hr style="margin: 40px auto; border: 1px solid #fff; width: 80%; opacity: 0.3;" />
 
-    <!-- التأكيد -->
-      <h2 id="attendanceTitle">هل ستحضر؟</h2>
+    <h2 id="attendanceTitle">هل ستحضر؟</h2>
       <div id="responseButtons" style="margin-top:30px;">
         <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('yes')">نعم، بإذن الله</button>
         <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('no')">لا، أعتذر عن الحضور</button>
@@ -369,24 +364,18 @@
     <p id="messageStatus" class="message-status"></p>
      </div>
 
-  
+ 
 
-      ↓ التفاصيل  ↓
+      <p style="color: white; font-size: 16px; text-align: center; margin-top: 40px;">
+      ↓ التفاصيل ↓
     </p>
-    
-    <style>
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(5px); }
-    }
-    </style>
+   
     <hr style="margin: 40px auto; border: 1px solid #fff; width: 80%; opacity: 0.3;" />
        
 
    
-    <!-- التفاصيل -->
     <h1>تفاصيل الحفل</h1>
-    <img src="1000217189.png" 
+    <img src="1000217189.png"
      style="width: 300px; height: 300px; filter: brightness(0) saturate(100%) invert(87%) sepia(8%) saturate(629%) hue-rotate(53deg) brightness(93%) contrast(90%);">
 
     <div id="countdown">
@@ -404,7 +393,7 @@
       </div>
     </div>
      <hr style="margin: 40px auto; border: 1px solid #fff; width: 80%; opacity: 0.3;" />
-   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.6707907180357!2d46.837938325403954!3d24.703841178031816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa9d80414dc89%3A0x4c6795d330c79745!2z2YLYtdixINiv2YrYqtmK2YTYsiDZhNmE2KXYrdiq2YHYp9mE2KfYqiDZiNin2YTZhdik2KrZhdix2KfYqg!5e0!3m2!1sar!2ssa!4v1754914876687!5m2!1sar!2ssa" width="200" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100000.00!2d46.72!3d24.71!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNCDYp9mE2YTZhdmE2Ycg2YXYp9mE2YTZhdmE2Ycg2KfZhNmE2YTZhdmE2Ycg!5e0!3m2!1sar!2ssa!4v1678229890693" width="200" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
 </div>
 
@@ -446,7 +435,7 @@
   const qrNote = document.getElementById("qrNote");
   const downloadBtn = document.getElementById("downloadBtn");
   const invitationCount = document.getElementById("invitationCount");
-  
+ 
   // Elements for the message box
   const messageTextarea = document.getElementById("message");
   const sendMessageBtn = document.getElementById("sendMessageBtn");
@@ -532,50 +521,49 @@ var countDownDate = new Date("Aug 20, 2025 20:00:00").getTime();
       .catch(() => {
         responseMsg.innerText = "❌ لم نتمكن من التحقق من حالتك.";
       });
-  });
 
-  sendMessageBtn.addEventListener("click", function() {
-    const message = messageTextarea.value.trim();
-    if(message === "") {
-      messageStatus.style.color = "red";
-      messageStatus.innerText = "⚠️ الرجاء كتابة رسالة قبل الإرسال.";
-      return;
-    }
+    sendMessageBtn.addEventListener("click", function() {
+        const message = messageTextarea.value.trim();
+        if(message === "") {
+          messageStatus.style.color = "red";
+          messageStatus.innerText = "⚠️ الرجاء كتابة رسالة قبل الإرسال.";
+          return;
+        }
 
-    messageStatus.style.color = "yellow";
-    messageStatus.innerText = "⏳ جاري إرسال الرسالة...";
-    sendMessageBtn.disabled = true;
-  fetch(scriptURL, {
-    method: "POST",
-    body: new URLSearchParams({
-      action: "saveMessage",
-      message: message,
-      token: token
-    })
-  })
-  .then(response => response.text()) // ← هنا نحول الرد لنص
-  .then(data => {
-    if (data.includes("success")) {
-      messageStatus.style.color = "green";
-      messageStatus.innerText = "✅ تم إرسال الرسالة بنجاح.";
-      messageTextarea.value = "";
-    } else if (data.includes("already_sent")) {
-      messageStatus.style.color = "orange";
-      messageStatus.innerText = "⚠️ لقد أرسلت رسالة مسبقاً.";
-    } else {
-      messageStatus.style.color = "red";
-      messageStatus.innerText = "❌ حدث خطأ، حاول مرة أخرى.";
-    }
-    sendMessageBtn.disabled = false;
-  })
-  .catch(() => {
-    messageStatus.style.color = "red";
-    messageStatus.innerText = "❌ فشل الاتصال بالخادم.";
-    sendMessageBtn.disabled = false;
-  });
-  
-      });
+        messageStatus.style.color = "yellow";
+        messageStatus.innerText = "⏳ جاري إرسال الرسالة...";
+        sendMessageBtn.disabled = true;
+
+        fetch(scriptURL, {
+            method: "POST",
+            body: new URLSearchParams({
+                action: "saveMessage",
+                message: message,
+                token: token
+            })
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data.includes("success")) {
+                messageStatus.style.color = "green";
+                messageStatus.innerText = "✅ تم إرسال الرسالة بنجاح.";
+                messageTextarea.value = "";
+            } else if (data.includes("already_sent")) {
+                messageStatus.style.color = "orange";
+                messageStatus.innerText = "⚠️ لقد أرسلت رسالة مسبقاً.";
+            } else {
+                messageStatus.style.color = "red";
+                messageStatus.innerText = "❌ حدث خطأ، حاول مرة أخرى.";
+            }
+            sendMessageBtn.disabled = false;
+        })
+        .catch(() => {
+            messageStatus.style.color = "red";
+            messageStatus.innerText = "❌ فشل الاتصال بالخادم.";
+            sendMessageBtn.disabled = false;
+        });
     });
+  });
 </script>
 
 </body>
