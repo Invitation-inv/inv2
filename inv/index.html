@@ -545,35 +545,42 @@ var countDownDate = new Date("Aug 20, 2025 20:00:00").getTime();
     messageStatus.style.color = "yellow";
     messageStatus.innerText = "⏳ جاري إرسال الرسالة...";
     sendMessageBtn.disabled = true;
-
-    fetch(scriptURL, {
-      method: "POST",
-      body: new URLSearchParams({ 
-        action: "saveMessage", // هذا هو الإجراء الذي سيقوم به السكربت
-        message: message,
-        token: token // إرسال التوكن لربط الرسالة بالضيف
-      })
+  fetch(scriptURL, {
+    method: "POST",
+    body: new URLSearchParams({
+      action: "saveMessage",
+      message: message,
+      token: token
     })
-   .then(data => {
-  if (data.includes("success")) {
-    messageStatus.style.color = "green";
-    messageStatus.innerText = "✅ تم إرسال الرسالة بنجاح.";
-    messageTextarea.value = "";
-  } else if (data.includes("already_sent")) {
-    messageStatus.style.color = "orange";
-    messageStatus.innerText = "⚠️ لقد أرسلت رسالة مسبقاً.";
-  } else {
+  })
+  .then(response => response.text()) // ← هنا نحول الرد لنص
+  .then(data => {
+    if (data.includes("success")) {
+      messageStatus.style.color = "green";
+      messageStatus.innerText = "✅ تم إرسال الرسالة بنجاح.";
+      messageTextarea.value = "";
+    } else if (data.includes("already_sent")) {
+      messageStatus.style.color = "orange";
+      messageStatus.innerText = "⚠️ لقد أرسلت رسالة مسبقاً.";
+    } else {
+      messageStatus.style.color = "red";
+      messageStatus.innerText = "❌ حدث خطأ، حاول مرة أخرى.";
+    }
+    sendMessageBtn.disabled = false;
+  })
+  .catch(() => {
     messageStatus.style.color = "red";
-    messageStatus.innerText = "❌ حدث خطأ، حاول مرة أخرى.";
-  }
-  sendMessageBtn.disabled = false;
-})
-    });
+    messageStatus.innerText = "❌ فشل الاتصال بالخادم.";
+    sendMessageBtn.disabled = false;
   });
+  
+      });
+    });
 </script>
 
 </body>
 </html>
+
 
 
 
