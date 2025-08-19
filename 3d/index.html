@@ -1,27 +1,101 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>دعوة زواج</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary-color: #b88b5c;
+      --secondary-color: #3c2e1f;
+      --bg-color: #000;
+      --card-bg-url: url("115948.png");
+      --left-door-url: url("IMG_٢٠٢٥٠٨١٩_١٨٠١٥٢.jpg");
+      --right-door-url: url("IMG_٢٠٢٥٠٨١٩_١٨٠٢٣٦.jpg");
+      --scene-bg-url: url("115904.jpg");
+    }
+
     body {
       margin: 0;
       height: 100vh;
       overflow: hidden;
       font-family: "Cairo", sans-serif;
-      background: #000;
+      background: var(--bg-color);
+      perspective: 1200px;
     }
 
     /* المشهد الخلفي */
     .scene {
-      background: url("115904.jpg") no-repeat center center/cover;
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
-      position: relative;
-      z-index: 1;
+      transform-style: preserve-3d;
+      transition: transform 1s ease-in-out;
+    }
+    
+    .scene::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--scene-bg-url) no-repeat center center/cover;
+      transform: translateZ(-200px) scale(1.1);
+      z-index: -1;
+      animation: subtle-3d-move 30s infinite ease-in-out;
+    }
+
+    /* الانيميشن الخاص بالخلفية 3D */
+    @keyframes subtle-3d-move {
+      0%, 100% { transform: translateZ(-200px) scale(1.1); }
+      50% { transform: translateZ(-250px) scale(1.15); }
+    }
+
+    /* شاشة البداية مع الباب وزر ابدأ */
+    .intro-screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 10;
+      transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+    }
+    
+    .intro-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .start-btn {
+      padding: 1rem 3rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
+      background: var(--primary-color);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      z-index: 12;
+      transition: transform 0.3s ease;
+    }
+
+    .start-btn:hover {
+      transform: scale(1.1);
     }
 
     /* الباب */
@@ -30,7 +104,7 @@
       top: 0;
       width: 50%;
       height: 100%;
-      z-index: 3;
+      z-index: 11;
       transition: transform 2s ease-in-out;
       background-size: cover;
       background-position: center;
@@ -38,142 +112,191 @@
 
     .door.left {
       left: 0;
-      background-image: url("IMG_٢٠٢٥٠٨١٩_١٨٠١٥٢.jpg"); /* صورة الباب اليسار */
+      background-image: var(--left-door-url);
+      transform-origin: left;
     }
 
     .door.right {
       right: 0;
-      background-image: url("IMG_٢٠٢٥٠٨١٩_١٨٠٢٣٦.jpg"); /* صورة الباب اليمين */
+      background-image: var(--right-door-url);
+      transform-origin: right;
     }
 
     /* لما يفتح الباب */
     .open .left {
-      transform: translateX(-100%);
+      transform: translateX(-100%) rotateY(20deg) translateZ(-50px);
     }
 
     .open .right {
-      transform: translateX(100%);
+      transform: translateX(100%) rotateY(-20deg) translateZ(-50px);
     }
-
+    
     /* البطاقات */
     .cards {
       display: flex;
-      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 3vw;
+      width: 90%;
+      max-width: 800px;
       z-index: 1;
     }
 
     .card {
-      width: 200px;
-      height: 300px;
-      background: url("115948.png") no-repeat center center/cover; /* خلفية للكرت */
+      width: 40vw;
+      max-width: 250px;
+      height: 50vw;
+      max-height: 350px;
+      background: var(--card-bg-url) no-repeat center center/cover;
       border-radius: 20px;
-      padding: 20px;
       text-align: center;
       box-shadow: 0 10px 20px rgba(0,0,0,0.3);
       cursor: pointer;
-      transition: transform 0.3s;
+      transition: transform 0.6s, width 0.6s, height 0.6s, top 0.6s, left 0.6s;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 1.2rem;
       font-weight: bold;
-      color: #3c2e1f;
+      color: var(--secondary-color);
+      transform: translateZ(50px);
+      position: relative;
     }
-
+    
     .card:hover {
-      transform: scale(1.05);
+      transform: scale(1.05) translateZ(50px);
     }
 
-    /* العرض الكامل */
-    .fullscreen {
+    /* البطاقة عند التكبير */
+    .card.expanded {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.9);
+      width: 100vw;
+      height: 100vh;
+      border-radius: 0;
+      background-size: cover;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      z-index: 10;
-      flex-direction: column;
-      padding: 20px;
-      color: white;
+      z-index: 20;
+      transform: none;
+    }
+
+    /* إخفاء النص الأصلي عند التكبير */
+    .card.expanded .card-title {
+      display: none;
+    }
+
+    /* تغيير تنسيق المحتوى ليكون مباشرة على البطاقة */
+    .card-content {
+      position: relative; /* تغيير لـ relative ليكون في مجرى البطاقة */
+      width: 90%;
       text-align: center;
-    }
-
-    .fullscreen-content {
-      background: #fff;
-      color: #000;
-      border-radius: 20px;
-      padding: 30px;
-      max-width: 600px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      transform: scale(0.5);
+      background: none; /* إزالة الخلفية */
+      color: white; /* تغيير لون الخط ليناسب خلفية البطاقة */
+      padding: 0; /* إزالة المسافات الداخلية */
+      box-shadow: none; /* إزالة الظل */
+      font-size: 1.8rem;
+      font-weight: bold;
       opacity: 0;
-      animation: zoomIn 0.6s ease forwards;
+      transition: opacity 0.8s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
     }
-
-    /* الانيميشن */
-    @keyframes zoomIn {
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
+    
+    /* جعل المحتوى مرئياً عند التكبير */
+    .card.expanded .card-content {
+      opacity: 1;
     }
 
     .back-btn {
       margin-top: 20px;
       padding: 10px 20px;
-      background: #b88b5c;
+      background: var(--primary-color);
       color: white;
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 1rem;
+      z-index: 21;
     }
-
+    
     .back-btn:hover {
       background: #8c6239;
+    }
+
+    @media (min-width: 768px) {
+      .card {
+        font-size: 1.5rem;
+        width: 200px;
+        height: 300px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- الباب -->
-  <div class="door left"></div>
-  <div class="door right"></div>
-
-  <!-- المشهد -->
   <div class="scene">
     <div class="cards">
-      <div class="card" onclick="openCard('أهلاً بكم في حفل زفافنا 🎉')">الترحيب</div>
-      <div class="card" onclick="openCard('📅 التاريخ: 3 / 11 / 2025')">التاريخ</div>
-      <div class="card" onclick="openCard('📍 المكان: قاعة الاحتفالات الكبرى')">المكان</div>
+      <div class="card" onclick="openCard(this)">
+        <div class="card-title">الترحيب</div>
+        <div class="card-content">
+          أهلاً بكم في حفل زفافنا 🎉
+          <button class="back-btn" onclick="event.stopPropagation(); closeCard(this);">رجوع</button>
+        </div>
+      </div>
+      <div class="card" onclick="openCard(this)">
+        <div class="card-title">التاريخ</div>
+        <div class="card-content">
+          📅 التاريخ: 3 / 11 / 2025
+          <button class="back-btn" onclick="event.stopPropagation(); closeCard(this);">رجوع</button>
+        </div>
+      </div>
+      <div class="card" onclick="openCard(this)">
+        <div class="card-title">المكان</div>
+        <div class="card-content">
+          📍 المكان: قاعة الاحتفالات الكبرى
+          <button class="back-btn" onclick="event.stopPropagation(); closeCard(this);">رجوع</button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- العرض الكامل -->
-  <div id="fullscreen" class="fullscreen" style="display:none;">
-    <div class="fullscreen-content" id="fullscreenContent"></div>
-    <button class="back-btn" onclick="closeCard()">رجوع</button>
+  <div id="introScreen" class="intro-screen">
+    <div class="door left"></div>
+    <div class="door right"></div>
+    <button class="start-btn" onclick="startIntro()">ابدأ</button>
   </div>
 
   <script>
-    // يفتح الباب بعد ثانيتين
-    setTimeout(() => {
-      document.body.classList.add("open");
-    }, 2000);
+    function startIntro() {
+      const introScreen = document.getElementById('introScreen');
+      
+      introScreen.classList.add('open');
 
-    // فتح البطاقة
-    function openCard(content) {
-      document.getElementById("fullscreen").style.display = "flex";
-      document.getElementById("fullscreenContent").innerText = content;
+      setTimeout(() => {
+        document.querySelector('.start-btn').style.opacity = '0';
+        document.querySelector('.start-btn').style.pointerEvents = 'none';
+      }, 500);
+
+      setTimeout(() => {
+        introScreen.style.display = 'none';
+      }, 2500);
     }
 
-    // إغلاق البطاقة
-    function closeCard() {
-      document.getElementById("fullscreen").style.display = "none";
+    function openCard(cardElement) {
+      cardElement.classList.add('expanded');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCard(buttonElement) {
+      const cardElement = buttonElement.closest('.card');
+      cardElement.classList.remove('expanded');
+      document.body.style.overflow = 'auto';
     }
   </script>
 
