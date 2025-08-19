@@ -12,10 +12,10 @@
       --primary-color: #b88b5c;
       --secondary-color: #3c2e1f;
       --bg-color: #000;
-      --card-bg-url: url("115948.png");
-      --left-door-url: url("IMG_٢٠٢٥٠٨١٩_١٨٠١٥٢.jpg");
-      --right-door-url: url("IMG_٢٠٢٥٠٨١٩_١٨٠٢٣٦.jpg");
-      --scene-bg-url: url("115904.jpg");
+      --card-bg-url: url("https://i.ibb.co/6y4jGkM/115948.png");
+      --left-door-url: url("https://i.ibb.co/3k8t3rM/IMG-20250819-180152.jpg");
+      --right-door-url: url("https://i.ibb.co/Jz5T5t3/IMG-20250819-180236.jpg");
+      --scene-bg-url: url("https://i.ibb.co/v4b2yV8/115904.jpg");
     }
 
     body {
@@ -175,7 +175,10 @@
       width: 100vw;
       height: 100vh;
       border-radius: 0;
-      background-size: cover;
+      background-size: contain; /* تغيير رئيسي: جعل الصورة تتناسب مع الأبعاد */
+      background-color: var(--bg-color); /* إضافة لون خلفية لملء المساحة الفارغة */
+      background-repeat: no-repeat;
+      background-position: center;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -191,13 +194,14 @@
 
     /* تغيير تنسيق المحتوى ليكون مباشرة على البطاقة */
     .card-content {
-      position: relative; /* تغيير لـ relative ليكون في مجرى البطاقة */
+      position: relative;
       width: 90%;
+      max-width: 80vw;
       text-align: center;
-      background: none; /* إزالة الخلفية */
-      color: white; /* تغيير لون الخط ليناسب خلفية البطاقة */
-      padding: 0; /* إزالة المسافات الداخلية */
-      box-shadow: none; /* إزالة الظل */
+      background: none;
+      color: white;
+      padding: 0;
+      box-shadow: none;
       font-size: 1.8rem;
       font-weight: bold;
       opacity: 0;
