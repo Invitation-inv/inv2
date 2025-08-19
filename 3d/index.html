@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>دعوة زواج</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      font-family: "Cairo", sans-serif;
+      background: #000;
+    }
+
+    /* المشهد الخلفي */
+    .scene {
+      background: url("115904.jpg") no-repeat center center/cover;
+      width: 110%;
+      height: 110%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.2s ease-out;
+    }
+
+    /* الباب */
+    .door {
+      position: absolute;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      z-index: 3;
+      transition: transform 2s ease-in-out;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .door.left {
+      left: 0;
+      background-image: url("115945.png");
+    }
+
+    .door.right {
+      right: 0;
+      background-image: url("115946.png");
+    }
+
+    /* لما يفتح الباب */
+    .open .left {
+      transform: translateX(-100%);
+    }
+    .open .right {
+      transform: translateX(100%);
+    }
+
+    /* زر البداية */
+    .start-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 15px 40px;
+      font-size: 20px;
+      font-weight: bold;
+      background: #b88b5c;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      z-index: 5;
+      transition: 0.3s;
+    }
+    .start-btn:hover {
+      background: #8c6239;
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+
+    /* البطاقات */
+    .cards {
+      display: flex;
+      gap: 20px;
+      z-index: 1;
+      perspective: 1000px;
+    }
+
+    .card {
+      width: 200px;
+      height: 300px;
+      background: url("115948.png") no-repeat center center/cover;
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #3c2e1f;
+      transform-style: preserve-3d;
+    }
+
+    .card:hover {
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    /* العرض الكامل */
+    .fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      flex-direction: column;
+      padding: 20px;
+      color: white;
+      text-align: center;
+    }
+
+    .fullscreen-content {
+      background: rgba(255,255,255,0.9);
+      color: #000;
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 600px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      transform: scale(0.5);
+      opacity: 0;
+      animation: zoomIn 0.6s ease forwards;
+    }
+
+    @keyframes zoomIn {
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .back-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #b88b5c;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .back-btn:hover {
+      background: #8c6239;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- الباب -->
+  <div class="door left"></div>
+  <div class="door right"></div>
+
+  <!-- زر البداية -->
+  <button class="start-btn" onclick="openDoor()">ابدأ</button>
+
+  <!-- المشهد -->
+  <div class="scene" id="scene">
+    <div class="cards">
+      <div class="card" 
+           style="background-image: url('115948.png')" 
+           onclick="openCard('أهلاً بكم في حفل زفافنا 🎉','card1.jpg')">
+        الترحيب
+      </div>
+      <div class="card" 
+           style="background-image: url('115948.png')" 
+           onclick="openCard('📅 التاريخ: 3 / 11 / 2025','card2.jpg')">
+        التاريخ
+      </div>
+      <div class="card" 
+           style="background-image: url('115948.png')" 
+           onclick="openCard('📍 المكان: قاعة الاحتفالات الكبرى','card3.jpg')">
+        المكان
+      </div>
+    </div>
+  </div>
+
+  <!-- العرض الكامل -->
+  <div id="fullscreen" class="fullscreen">
+    <div class="fullscreen-content" id="fullscreenContent"></div>
+    <button class="back-btn" onclick="closeCard()">رجوع</button>
+  </div>
+
+  <script>
+    // فتح الباب عند الضغط على ابدأ
+    function openDoor() {
+      document.body.classList.add("open");
+      document.querySelector(".start-btn").style.display = "none";
+    }
+
+    // تأثير 3D للكروت بالماوس
+    const cards = document.querySelectorAll(".card");
+    cards.forEach(card => {
+      card.addEventListener("mousemove", e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * 10;
+        const rotateY = ((x - centerX) / centerX) * 10;
+        card.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+      });
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
+      });
+    });
+
+    // تأثير الخلفية تتحرك (Parallax)
+    const scene = document.getElementById("scene");
+    document.addEventListener("mousemove", e => {
+      const moveX = (e.clientX / window.innerWidth - 0.5) * 30;
+      const moveY = (e.clientY / window.innerHeight - 0.5) * 30;
+      scene.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
+    });
+
+    // فتح البطاقة
+    function openCard(content, bgImage) {
+      const fullscreen = document.getElementById("fullscreen");
+      fullscreen.style.backgroundImage = `url(${bgImage})`;
+      fullscreen.style.display = "flex";
+      document.getElementById("fullscreenContent").innerText = content;
+    }
+
+    // إغلاق البطاقة
+    function closeCard() {
+      document.getElementById("fullscreen").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
