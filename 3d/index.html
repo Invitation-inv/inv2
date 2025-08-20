@@ -7,7 +7,6 @@
     body {
       margin: 0;
       height: 100vh;
-      overflow: hidden;
       font-family: "Cairo", sans-serif;
       background: #000;
       display: flex;
@@ -15,7 +14,7 @@
       align-items: center;
     }
 
-    /* المشهد */
+    /* الخلفية */
     .scene {
       background: url("115904.jpg") no-repeat center center/cover;
       width: 100%;
@@ -23,59 +22,99 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      perspective: 1500px;
+      overflow: hidden;
     }
 
+    /* شبكة الكروت */
     .cards {
       display: flex;
       gap: 5vw;
       justify-content: center;
       align-items: center;
+      flex-wrap: wrap;
     }
 
+    /* الكرت */
     .card {
       width: 120px;
       height: 180px;
       border-radius: 15px;
       cursor: pointer;
       position: relative;
-      transform-style: preserve-3d;
-      transition: transform 0.8s ease, box-shadow 0.8s ease;
-      box-shadow: 0 8px 15px rgba(0,0,0,0.3);
-    }
-
-    .card .face {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 15px;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
       font-weight: bold;
+      font-size: 16px;
       padding: 10px;
-      font-size: 14px;
-      background: url("115948.png") no-repeat center center/cover; /* نفس الخلفية */
+      text-align: center;
+      background: url("115948.png") no-repeat center center/cover;
       color: #3c2e1f;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      transition: transform 0.4s ease;
+    }
+    .card:hover {
+      transform: scale(1.05);
     }
 
-    .card .back {
-      transform: rotateY(180deg);
-      color: #000;
-      background: url("115948.png") no-repeat center center/cover; /* نفس الخلفية */
+    /* وضع العرض الكامل */
+    .fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 100;
+      animation: fadeIn 0.5s ease forwards;
     }
 
-    .card.open {
-      transform: rotateY(180deg) scale(1.1);
-      box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-      z-index: 10;
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
-    @media (min-width: 768px) {
-      .card { width: 180px; height: 250px; }
-      .card .face { font-size: 18px; }
+    .fullscreen-card {
+      width: 80%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 15px;
+      background: url("115948.png") no-repeat center center/cover;
+      padding: 20px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      color: #3c2e1f;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      animation: zoomIn 0.4s ease forwards;
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.3); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .back-btn {
+      margin-top: 20px;
+      padding: 10px 25px;
+      background: #b88b5c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    .back-btn:hover {
+      background: #8c6239;
+    }
+
+    @media (max-width: 768px) {
+      .card { width: 100px; height: 150px; font-size: 14px; }
+      .fullscreen-card { font-size: 18px; }
     }
   </style>
 </head>
@@ -83,27 +122,26 @@
 
   <div class="scene">
     <div class="cards">
-      <div class="card" onclick="toggleCard(this)">
-        <div class="face front">الترحيب</div>
-        <div class="face back">🎉 أهلاً بكم في حفل زفافنا</div>
-      </div>
-
-      <div class="card" onclick="toggleCard(this)">
-        <div class="face front">التاريخ</div>
-        <div class="face back">📅 3 / 11 / 2025</div>
-      </div>
-
-      <div class="card" onclick="toggleCard(this)">
-        <div class="face front">المكان</div>
-        <div class="face back">📍 قاعة الاحتفالات الكبرى</div>
-      </div>
+      <div class="card" onclick="openCard('🎉 أهلاً بكم في حفل زفافنا')">الترحيب</div>
+      <div class="card" onclick="openCard('📅 التاريخ: 3 / 11 / 2025')">التاريخ</div>
+      <div class="card" onclick="openCard('📍 المكان: قاعة الاحتفالات الكبرى')">المكان</div>
     </div>
   </div>
 
+  <!-- العرض الكامل -->
+  <div id="fullscreen" class="fullscreen">
+    <div class="fullscreen-card" id="fullscreenContent"></div>
+    <button class="back-btn" onclick="closeCard()">رجوع</button>
+  </div>
+
   <script>
-    function toggleCard(card) {
-      document.querySelectorAll(".card").forEach(c => c.classList.remove("open"));
-      card.classList.add("open");
+    function openCard(content) {
+      document.getElementById("fullscreenContent").innerText = content;
+      document.getElementById("fullscreen").style.display = "flex";
+    }
+
+    function closeCard() {
+      document.getElementById("fullscreen").style.display = "none";
     }
   </script>
 
