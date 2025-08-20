@@ -39,15 +39,16 @@
       box-shadow: 0 6px 15px rgba(0,0,0,0.3);
     }
 
+    /* التعديل هنا فقط */
     .card.active .inner {
       position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 80%;
-      max-width: 400px;
-      height: 65%;
-      transform: translate(-50%, -50%) rotateY(180deg);
+      top: 0;
+      left: 0;
+      width: 100vw; /* عرض الشاشة كامل */
+      height: 100vh; /* طول الشاشة كامل */
+      transform: rotateY(180deg);
       z-index: 999;
+      border-radius: 0;
       box-shadow: 0 15px 40px rgba(0,0,0,0.6);
     }
 
