@@ -27,6 +27,8 @@
       height: 200px;
       perspective: 1000px;
       cursor: pointer;
+      position: relative;
+      transition: transform 0.6s ease;
     }
 
     .inner {
@@ -34,24 +36,29 @@
       height: 100%;
       position: relative;
       border-radius: 15px;
-      transition: transform 0.8s ease, width 0.8s ease, height 0.8s ease, top 0.8s ease, left 0.8s ease;
+      transition: transform 0.6s ease, width 0.6s ease, height 0.6s ease, top 0.6s ease, left 0.6s ease;
       transform-style: preserve-3d;
       box-shadow: 0 6px 15px rgba(0,0,0,0.3);
     }
 
-    /* البطاقة لما تنفتح */
-    .card.active .inner {
+    /* البطاقة في وضعها العادي */
+    .card:not(.active) .inner {
+      transform: rotateY(0deg);
+    }
+
+    /* البطاقة عند التفعيل */
+    .card.active {
       position: fixed;
       top: 50%;
       left: 50%;
-      width: 70vw; /* عرض متوسط */
-      max-width: 420px; /* أقصى عرض */
-      height: 80vh; /* طول متوسط */
-      transform: translate(-50%, -50%) rotateY(180deg);
-      z-index: 999;
-      border-radius: 15px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-      background: url("115948.png") no-repeat center/cover; /* نفس الخلفية */
+      z-index: 1000;
+      transform: translate(-50%, -50%) scale(1.1); /* تكبير في النص */
+    }
+
+    .card.active .inner {
+      width: 300px;
+      height: 420px;
+      transform: rotateY(180deg);
     }
 
     .front, .back {
@@ -75,7 +82,7 @@
       transform: rotateY(180deg);
       flex-direction: column;
       overflow-y: auto;
-      background: transparent; /* بدون بني */
+      background: transparent; /* بدون اللون البني */
     }
 
     .back button {
@@ -122,7 +129,7 @@
       <div class="inner">
         <div class="front">💌 رسالتك</div>
         <div class="back">
-          <textarea placeholder="اكتب تهنئتك هنا" style="width:90%;height:100px;border-radius:8px;padding:8px;"></textarea>
+          <textarea placeholder="اكتب تهنئتك هنا"></textarea>
           <button>إرسال</button>
           <button class="back-btn" onclick="closeCard(event)">رجوع</button>
         </div>
