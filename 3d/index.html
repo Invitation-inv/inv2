@@ -1,148 +1,169 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>دعوة زواج</title>
+  <title>دعوة زفاف</title>
   <style>
     body {
       margin: 0;
+      font-family: 'Aref Ruqaa', serif;
+      background: url("114555.jpg") no-repeat center center/cover;
       height: 100vh;
-      font-family: "Cairo", sans-serif;
-      background: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    /* الخلفية */
-    .scene {
-      background: url("115904.jpg") no-repeat center center/cover;
-      width: 100%;
-      height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
       overflow: hidden;
     }
 
-    /* شبكة الكروت */
     .cards {
       display: flex;
-      gap: 5vw;
-      justify-content: center;
-      align-items: center;
+      gap: 4vw;
       flex-wrap: wrap;
+      justify-content: center;
     }
 
-    /* الكرت */
     .card {
-      width: 120px;
-      height: 180px;
-      border-radius: 15px;
+      width: 140px;
+      height: 200px;
+      perspective: 1000px;
       cursor: pointer;
+    }
+
+    .inner {
+      width: 100%;
+      height: 100%;
       position: relative;
+      border-radius: 15px;
+      transition: transform 0.8s ease, width 0.8s ease, height 0.8s ease, top 0.8s ease, left 0.8s ease;
+      transform-style: preserve-3d;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+
+    .card.active .inner {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 80%;
+      max-width: 400px;
+      height: 65%;
+      transform: translate(-50%, -50%) rotateY(180deg);
+      z-index: 999;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    }
+
+    .front, .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 15px;
+      backface-visibility: hidden;
+      background: url("115948.png") no-repeat center/cover;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: bold;
-      font-size: 16px;
-      padding: 10px;
+      font-size: 18px;
+      padding: 15px;
       text-align: center;
-      background: url("115948.png") no-repeat center center/cover;
-      color: #3c2e1f;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-      transition: transform 0.4s ease;
-    }
-    .card:hover {
-      transform: scale(1.05);
     }
 
-    /* وضع العرض الكامل */
-    .fullscreen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.7);
-      display: none;
-      justify-content: center;
-      align-items: center;
+    .back {
+      background: rgba(60, 46, 31, 0.9);
+      color: #fff;
+      transform: rotateY(180deg);
       flex-direction: column;
-      z-index: 100;
-      animation: fadeIn 0.5s ease forwards;
+      overflow-y: auto;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .fullscreen-card {
-      width: 80%;
-      max-width: 400px;
-      height: auto;
-      border-radius: 15px;
-      background: url("115948.png") no-repeat center center/cover;
-      padding: 20px;
-      text-align: center;
-      font-size: 20px;
-      font-weight: bold;
-      color: #3c2e1f;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-      animation: zoomIn 0.4s ease forwards;
-    }
-
-    @keyframes zoomIn {
-      from { transform: scale(0.3); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    .back-btn {
-      margin-top: 20px;
-      padding: 10px 25px;
-      background: #b88b5c;
-      color: white;
+    .back button {
+      margin-top: 15px;
+      padding: 8px 18px;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      font-size: 18px;
+      font-size: 16px;
     }
-    .back-btn:hover {
-      background: #8c6239;
-    }
+    .back .back-btn { background: #fff; color:#3c2e1f; }
 
-    @media (max-width: 768px) {
-      .card { width: 100px; height: 150px; font-size: 14px; }
-      .fullscreen-card { font-size: 18px; }
-    }
+    #countdown { display:flex; gap:15px; margin-top:15px; }
+    .time-box { background:#fff; color:#3c2e1f; padding:8px 12px; border-radius:8px; }
   </style>
 </head>
 <body>
 
-  <div class="scene">
-    <div class="cards">
-      <div class="card" onclick="openCard('🎉 أهلاً بكم في حفل زفافنا')">الترحيب</div>
-      <div class="card" onclick="openCard('📅 التاريخ: 3 / 11 / 2025')">التاريخ</div>
-      <div class="card" onclick="openCard('📍 المكان: قاعة الاحتفالات الكبرى')">المكان</div>
+  <div class="cards">
+    <div class="card" onclick="openCard(this)">
+      <div class="inner">
+        <div class="front">🎉 الترحيب</div>
+        <div class="back">
+          <h2>حيّاك الله ضيفنا</h2>
+          <p>بارك الله لهما وبارك عليهما وجمع بينهما في خير</p>
+          <button class="back-btn" onclick="closeCard(event)">رجوع</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openCard(this)">
+      <div class="inner">
+        <div class="front">✅ تأكيد الحضور</div>
+        <div class="back">
+          <h2>هل ستحضر؟</h2>
+          <button>نعم</button>
+          <button>لا</button>
+          <button class="back-btn" onclick="closeCard(event)">رجوع</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openCard(this)">
+      <div class="inner">
+        <div class="front">💌 رسالتك</div>
+        <div class="back">
+          <textarea placeholder="اكتب تهنئتك هنا"></textarea>
+          <button>إرسال</button>
+          <button class="back-btn" onclick="closeCard(event)">رجوع</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openCard(this)">
+      <div class="inner">
+        <div class="front">📋 التفاصيل</div>
+        <div class="back">
+          <h2>تفاصيل الحفل</h2>
+          <div id="countdown">
+            <div class="time-box"><span id="days">00</span> يوم</div>
+            <div class="time-box"><span id="hours">00</span> ساعة</div>
+            <div class="time-box"><span id="minutes">00</span> دقيقة</div>
+          </div>
+          <iframe src="https://www.google.com/maps/embed?pb=YOUR_MAP" width="250" height="200" style="border:0;margin-top:15px;" allowfullscreen></iframe>
+          <button class="back-btn" onclick="closeCard(event)">رجوع</button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- العرض الكامل -->
-  <div id="fullscreen" class="fullscreen">
-    <div class="fullscreen-card" id="fullscreenContent"></div>
-    <button class="back-btn" onclick="closeCard()">رجوع</button>
-  </div>
-
   <script>
-    function openCard(content) {
-      document.getElementById("fullscreenContent").innerText = content;
-      document.getElementById("fullscreen").style.display = "flex";
+    function openCard(card) {
+      document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+    }
+    function closeCard(event) {
+      event.stopPropagation(); // ما يفتح ثاني
+      const card = event.target.closest('.card');
+      card.classList.remove('active');
     }
 
-    function closeCard() {
-      document.getElementById("fullscreen").style.display = "none";
-    }
+    // عداد تنازلي بسيط
+    const countDownDate = new Date("Aug 20, 2025 20:00:00").getTime();
+    setInterval(() => {
+      const now = new Date().getTime();
+      const dist = countDownDate - now;
+      if (dist < 0) return;
+      document.getElementById("days").innerText = Math.floor(dist / (1000*60*60*24));
+      document.getElementById("hours").innerText = Math.floor((dist % (1000*60*60*24))/(1000*60*60));
+      document.getElementById("minutes").innerText = Math.floor((dist % (1000*60*60))/(1000*60));
+    }, 1000);
   </script>
 
 </body>
