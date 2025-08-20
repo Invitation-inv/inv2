@@ -7,7 +7,7 @@
     body {
       margin: 0;
       font-family: 'Aref Ruqaa', serif;
-      background: url("114555.jpg") no-repeat center center/cover;
+      background: url("115904.jpg") no-repeat center center/cover;
       height: 100vh;
       display: flex;
       justify-content: center;
@@ -40,17 +40,21 @@
     }
 
     /* التعديل هنا فقط */
-    .card.active .inner {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw; /* عرض الشاشة كامل */
-      height: 100vh; /* طول الشاشة كامل */
-      transform: rotateY(180deg);
-      z-index: 999;
-      border-radius: 0;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-    }
+    <style>
+  .card.active .inner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100vw; /* عرض الشاشة كامل */
+    height: 100vh; /* طول الشاشة كامل */
+    transform: translate(-50%, -50%) rotateY(180deg);
+    z-index: 999;
+    border-radius: 0;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    background: url("115948.png") no-repeat center/cover; /* نفس خلفية الكارد */
+  }
+</style>
+
 
     .front, .back {
       position: absolute;
@@ -169,3 +173,4 @@
 
 </body>
 </html>
+
