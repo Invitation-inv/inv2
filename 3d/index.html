@@ -246,30 +246,35 @@
 .message-box button:hover {
   background: #a0b48a;
 }
-.cards {
-      display: flex;
-      gap: 4vw;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-   .cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-  gap: 25px; /* مسافة بين الكروت */
+cards {
+  position: fixed;
+  bottom: 20px; /* كلها تحت */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  display: flex;
   justify-content: center;
-  align-items: center;
-  margin-top: 50px;
+  gap: 40px; /* مسافة بين الكروت */
+  flex-wrap: wrap;
 }
 
 .card {
-  width: 100px; /* حجم أصغر قبل الفتح */
-  height: 140px;
+  width: 90px; /* حجم صغير */
+  height: 120px;
   perspective: 1000px;
   cursor: pointer;
   position: relative;
   transition: transform 0.6s ease;
+  transform: translateY(0) rotate(calc(-10deg + 20deg * var(--r, 0)));
+   background: url("115948.png") no-repeat center/cover;
+
 }
+
+/* الكروت متوزعة يمين يسار عشوائي */
+.card:nth-child(1) { --r: -1; margin-left: 20px; }
+.card:nth-child(2) { --r: 0; margin-left: 60px; }
+.card:nth-child(3) { --r: 1; margin-right: 40px; }
+.card:nth-child(4) { --r: -1; margin-right: 80px; }
 
 .inner {
   width: 100%;
@@ -281,18 +286,20 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-/* الكرت في وضعه الطبيعي */
+/* وضع الكرت العادي */
 .card:not(.active) .inner {
   transform: rotateY(0deg);
 }
 
-/* الكرت عند التفعيل */
+/* وضع الكرت عند الفتح */
 .card.active {
   position: fixed;
   top: 50%;
   left: 50%;
   z-index: 1000;
-  transform: translate(-50%, -50%) scale(1.2); /* تكبير في النص */
+  transform: translate(-50%, -50%) scale(1.3); /* يكبر ويجي النص */
+  background: url("115948.png") no-repeat center/cover;
+
 }
 
 .card.active .inner {
@@ -300,7 +307,6 @@
   height: 420px;
   transform: rotateY(180deg);
 }
-
 
   </style>
 </head>
@@ -564,6 +570,7 @@
 
 </body>
 </html>
+
 
 
 
