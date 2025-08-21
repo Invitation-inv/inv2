@@ -246,68 +246,96 @@
 .message-box button:hover {
   background: #a0b48a;
 }
-cards {
-  position: fixed;
-  bottom: 20px; /* كلها تحت */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  gap: 40px; /* مسافة بين الكروت */
-  flex-wrap: wrap;
-}
 
-.card {
-  width: 90px; /* حجم صغير */
-  height: 120px;
-  perspective: 1000px;
-  cursor: pointer;
-  position: relative;
-  transition: transform 0.6s ease;
-  transform: translateY(0) rotate(calc(-10deg + 20deg * var(--r, 0)));
-   background: url("115948.png") no-repeat center/cover;
+.cards {
+      display: flex;
+      gap: 4vw;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-}
+    .card {
+      width: 140px;
+      height: 200px;
+      perspective: 1000px;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.6s ease;
+    }
+   card:nth-child(1) { --r: 0; margin-left: 20px; }
+  .card:nth-child(2) { --r: 0; margin-left: 60px; }
+  .card:nth-child(3) { --r: 1; margin-right: 40px; }
+  .card:nth-child(4) { --r: -1; margin-right: 80px; }
 
-/* الكروت متوزعة يمين يسار عشوائي */
-.card:nth-child(1) { --r: -1; margin-left: 20px; }
-.card:nth-child(2) { --r: 0; margin-left: 60px; }
-.card:nth-child(3) { --r: 1; margin-right: 40px; }
-.card:nth-child(4) { --r: -1; margin-right: 80px; }
+    .inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      border-radius: 15px;
+      transition: transform 0.6s ease, width 0.6s ease, height 0.6s ease, top 0.6s ease, left 0.6s ease;
+      transform-style: preserve-3d;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
 
-.inner {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  border-radius: 10px;
-  transition: transform 0.6s ease, width 0.6s ease, height 0.6s ease, top 0.6s ease, left 0.6s ease;
-  transform-style: preserve-3d;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
+    /* البطاقة في وضعها العادي */
+    .card:not(.active) .inner {
+      transform: rotateY(0deg);
+    }
 
-/* وضع الكرت العادي */
-.card:not(.active) .inner {
-  transform: rotateY(0deg);
-}
+    /* البطاقة عند التفعيل */
+    .card.active {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      z-index: 1000;
+      transform: translate(-50%, -50%) scale(1.1); /* تكبير في النص */
+    }
 
-/* وضع الكرت عند الفتح */
-.card.active {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 1000;
-  transform: translate(-50%, -50%) scale(1.3); /* يكبر ويجي النص */
-  background: url("115948.png") no-repeat center/cover;
+    .card.active .inner {
+      width: 300px;
+      height: 400px;
+      transform: rotateY(180deg);
+    }
 
-}
+    .front, .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 15px;
+      backface-visibility: hidden;
+      background: url("115948.png") no-repeat center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+      padding: 15px;
+      text-align: center;
+    }
 
-.card.active .inner {
-  width: 300px;
-  height: 420px;
-  transform: rotateY(180deg);
-}
+    .back {
+      color: #fff;
+      transform: rotateY(180deg);
+      flex-direction: column;
+      overflow-y: auto;
+      background: transparent; /* بدون اللون البني */
+      background: url("115948.png") no-repeat center/cover;
 
+
+    }
+
+    .back button {
+      margin-top: 15px;
+      padding: 8px 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .back .back-btn { background: #fff; color:#3c2e1f; }
+
+    #countdown { display:flex; gap:15px; margin-top:15px; }
+    .time-box { background:#fff; color:#3c2e1f; padding:8px 12px; border-radius:8px; }
   </style>
 </head>
 <body>
@@ -570,6 +598,7 @@ cards {
 
 </body>
 </html>
+
 
 
 
