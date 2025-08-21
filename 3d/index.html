@@ -1,21 +1,252 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>دعوة زفاف</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دعوة حفل زفاف</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      margin: 0;
-      font-family: 'Aref Ruqaa', serif;
+    font-family: 'Aref Ruqaa', serif;
+      background-color:  #ffffff;
+      overflow-x: hidden;
+      color:  #ffffff;
       background: url("115904.jpg") no-repeat center center/cover;
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       overflow: hidden;
+      margin: 0;
+
     }
 
-    .cards {
+    .hidden {
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+    .visible {
+      opacity: 1;
+    }
+
+    #intro {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background-color: black;
+    }
+    #intro video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      z-index: 1;
+    }
+    #intro .overlay {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding-bottom: 100px;
+      background-color: rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    #intro button {
+      padding: 14px 30px;
+      font-size: 20px;
+      background-color: rgba(255,255,255,0.8);
+      color: #ffffff;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-top: -30px;
+      z-index: 3;
+    }
+    #intro.starting button {
+      display: none;
+    }
+    #intro.close {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1s ease;
+    }
+
+    .section {
+      min-height: 100vh;
+      text-align: center;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      padding: 60px 20px;
+    }
+
+    .page-content {
+      position: relative;
+      z-index: 2;
+      margin-top: 90px
+    }
+
+    .decor-img {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      width: 1700px;
+      max-width: 100%;
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    .image-full {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: auto;
+      transform: translateY(-40px);
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInText 1s forwards;
+    }
+
+    @keyframes fadeInText {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    button {
+      padding: 20px 20px;
+      font-size: 15px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 20px;
+      background-image: url('112904.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-color: transparent;
+      color: #ffffff;
+    }
+
+    .music-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 999;
+      background: rgba(0,0,0,0.4);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 10px;
+    }
+
+    #bg-video {
+      position: fixed;
+      top:0;
+      left:0;
+      z-index: -1;
+      inset: 0;
+      object-fit: cover;
+      width: 100%;
+      height: 100vh;
+    }
+
+    #intro-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    #center-img {
+      width: 200px;
+      z-index: 2;
+      transform: translateY(-90px);
+    }
+
+    .corner {
+      position: absolute;
+      width: 175px;
+      animation: rotate360 10s linear infinite;
+      z-index: 2;
+    }
+
+    .corner1 {
+      top: 20px;
+      right: 10px;
+    }
+
+    .corner2 {
+      bottom: 20px;
+      left: 10px;
+    }
+
+    @keyframes rotate360 {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .transparent-box {
+      background-color: rgba(0, 0, 0, 0.6); ;
+      padding: 20px;
+      border-radius: 12px;
+      color: white;
+      max-width: 90%;
+      margin: auto;
+      text-align: center;
+    }
+
+    .qr-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .message-box {
+  margin: 20px auto;
+  padding: 10px;
+  background: #1f1f1f;
+  border-radius: 12px;
+  max-width: 300px;
+  text-align: center;
+}
+
+.message-box textarea {
+  width: 100%;
+  height: 80px;
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 8px;
+  resize: none;
+  background: #2a2a2a;
+  color: white;
+}
+
+.message-box button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  background: #b6c8a2;
+  color: black;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.message-box button:hover {
+  background: #a0b48a;
+}
+.cards {
       display: flex;
       gap: 4vw;
       flex-wrap: wrap;
@@ -56,8 +287,8 @@
     }
 
     .card.active .inner {
-      width: 300px;
-      height: 420px;
+      width: 500px;
+      height: 600px;
       transform: rotateY(180deg);
     }
 
@@ -83,6 +314,9 @@
       flex-direction: column;
       overflow-y: auto;
       background: transparent; /* بدون اللون البني */
+      background: url("115948.png") no-repeat center/cover;
+
+
     }
 
     .back button {
@@ -98,63 +332,124 @@
     #countdown { display:flex; gap:15px; margin-top:15px; }
     .time-box { background:#fff; color:#3c2e1f; padding:8px 12px; border-radius:8px; }
   </style>
+
+  </style>
 </head>
 <body>
 
-  <div class="cards">
+
+
+<button class="music-btn" onclick="toggleMusic()">🎵</button>
+<audio id="bg-music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+      <div class="cards">
     <div class="card" onclick="openCard(this)">
       <div class="inner">
         <div class="front">🎉 الترحيب</div>
         <div class="back">
-          <h2>حيّاك الله ضيفنا</h2>
-          <p>بارك الله لهما وبارك عليهما وجمع بينهما في خير</p>
+                <!-- الترحيب -->
+    <h1 class="fade-in" id="welcomeText" style="animation-delay: 0.5s;">حيّاك الله، </h1>
+    <p></p>
+    <h2 class="fade-in" style="animation-delay: 1s;">دعوة خاصة</h2>
+    <p></p>
+    <h3 class="fade-in" style="animation-delay: 1.5s;">بارك الله لهم وبارك عليهما وجمع بينهم في خير</h3>
+    <h4 class="fade-in" style="animation-delay: 2s;">نتشرف</h4>
+    
+     
+      <div class="fade-in" style="animation-delay: 2.5s; display: flex; justify-content: center; gap: 70px;font-size: 30px">
+        <span>السيدة</span>
+        <span>السيدة</span>
+      </div>
+
+      <div class="fade-in" style="animation-delay: 3s; display: flex; justify-content: center; gap: 70px;font-size: 30px">
+        <span>أم أحمد</span>
+        <span>أم سمر</span>
+      </div>
+
+    <h8 class="fade-in" style="animation-delay: 3.5s;">بدعوتكم لحضور حفل زفاف </h8>
+
+      <div class="fade-in" style="animation-delay: 4s; display: flex; justify-content: center; gap: 70px;font-size: 30px">
+        <span> أحمد</span>
+         <span>&</span>
+        <span> سمر</span>
+      </div>
+
+    <h3 class="fade-in" style="animation-delay: 4.4s;">بارك الله لهم وبارك عليهما وجمع بينهم في خير</h3>
           <button class="back-btn" onclick="closeCard(event)">رجوع</button>
         </div>
       </div>
     </div>
 
+    
     <div class="card" onclick="openCard(this)">
       <div class="inner">
         <div class="front">✅ تأكيد الحضور</div>
         <div class="back">
-          <h2>هل ستحضر؟</h2>
-          <button>نعم</button>
-          <button>لا</button>
+       <h2 id="attendanceTitle">هل ستحضر؟</h2>
+    <div id="responseButtons" style="margin-top:30px;">
+            <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('yes')">نعم، بإذن الله</button>
+            <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('no')">لا، أعتذر عن الحضور</button>
+            </div>
+            <p id="responseMsg" style="margin-top: 20px;"></p>
+            <div class="qr-wrapper">
+            <div id="qrContainer" style="margin-top: 20px;"></div>
+            </div>
+            <h1 id="qrNote" style="display: none; font-size: 14px;">📌 استخدم رمز الدخول عند الوصول للقاعة.</h1>
+            <h2 id="invitationCount" style="font-size: 14px; display: none;"></h2>
+            <button id="downloadBtn" style="display: none; margin-top: 10px;">📥تحميل الدعوة</button>
           <button class="back-btn" onclick="closeCard(event)">رجوع</button>
         </div>
       </div>
     </div>
-
+  
+    <!-- التأكيد -->
+    
     <div class="card" onclick="openCard(this)">
       <div class="inner">
         <div class="front">💌 رسالتك</div>
         <div class="back">
-          <textarea placeholder="اكتب تهنئتك هنا"></textarea>
-          <button>إرسال</button>
+                    
+         <div class="message-box">
+            <textarea id="message" placeholder=" اكتب رسالة للعروسين"></textarea>
+            <button id="sendMessage"> إرسال</button>
+         </div>
+
           <button class="back-btn" onclick="closeCard(event)">رجوع</button>
         </div>
       </div>
     </div>
-
-    <div class="card" onclick="openCard(this)">
+    
+        
+     <div class="card" onclick="openCard(this)">
       <div class="inner">
         <div class="front">📋 التفاصيل</div>
         <div class="back">
-          <h2>تفاصيل الحفل</h2>
-          <div id="countdown">
-            <div class="time-box"><span id="days">00</span> يوم</div>
-            <div class="time-box"><span id="hours">00</span> ساعة</div>
-            <div class="time-box"><span id="minutes">00</span> دقيقة</div>
-          </div>
-          <iframe src="https://www.google.com/maps/embed?pb=YOUR_MAP" width="250" height="200" style="border:0;margin-top:15px;" allowfullscreen></iframe>
+          <h1>تفاصيل الحفل</h1>
+            <h2>📍 قاعة صدر المنصة - الرياض</h2>
+            <h4>🕒 الجمعة 25 يوليو 2025 - الساعة 9 مساءً</h4>
+            <div id="countdown" style="margin-top: 10px;"></div>
+            <iframe src="https://www.google.com/maps?q=24.7136,46.6753&output=embed" width="60%" height="200" style="border:0; margin-top:20px;" allowfullscreen></iframe>
+                
           <button class="back-btn" onclick="closeCard(event)">رجوع</button>
         </div>
       </div>
     </div>
   </div>
+    
+ 
+  </div>
+</div>
 
-  <script>
-    function openCard(card) {
+
+
+
+<!-- مكتبة QR -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+     function openCard(card) {
       document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
       card.classList.add('active');
     }
@@ -174,7 +469,129 @@
       document.getElementById("hours").innerText = Math.floor((dist % (1000*60*60*24))/(1000*60*60));
       document.getElementById("minutes").innerText = Math.floor((dist % (1000*60*60))/(1000*60));
     }, 1000);
-  </script>
+ 
+  function startExperience() {
+    const intro = document.getElementById("intro");
+    const music = document.getElementById("bg-music");
+
+    intro.classList.add("close");
+    music.play().catch(() => {});
+
+    setTimeout(() => {
+      intro.remove();
+    }, 1000);
+  }
+
+  function toggleMusic() {
+    const bgMusic = document.getElementById("bg-music");
+    try { bgMusic.paused ? bgMusic.play() : bgMusic.pause(); } catch {}
+  }
+
+  const nameParam = new URLSearchParams(location.search).get("name") || "ضيفنا";
+  const welcomeText = document.getElementById("welcomeText");
+  if (welcomeText) {
+    welcomeText.innerText += nameParam;
+  }
+
+  const token = new URLSearchParams(location.search).get("token") || "";
+  const qrContainer = document.getElementById("qrContainer");
+  const responseButtons = document.getElementById("responseButtons");
+  const attendanceTitle = document.getElementById("attendanceTitle");
+  const responseMsg = document.getElementById("responseMsg");
+  const qrNote = document.getElementById("qrNote");
+  const downloadBtn = document.getElementById("downloadBtn");
+  const invitationCount = document.getElementById("invitationCount");
+
+  function confirmAttendance(response) {
+    responseMsg.innerText = "⏳ جاري التسجيل...";
+    fetch(`https://script.google.com/macros/s/AKfycbyuNmYxaML-QFA7kMSJsCP0vG915-xbd5__pz7AH384-FE3jcLD3E1lftgOdlk7lvIHXA/exec?name=${encodeURIComponent(nameParam)}&token=${token}&response=${response}`)
+      .then(res => res.json())
+      .then(res => {
+        responseButtons.style.display = "none";
+        attendanceTitle.style.display = "none";
+        responseMsg.innerText = res.message;
+
+        if (res.status === "success" || res.status === "already") {
+          showQR(res.qr, res.max);
+        } else if (res.status === "declined") {
+          qrContainer.innerHTML = "";
+          qrNote.style.display = "none";
+          invitationCount.style.display = "none";
+        }
+      })
+      .catch(() => {
+        responseMsg.innerText = "❌ حدث خطأ أثناء الاتصال بالخادم.";
+      });
+  }
+
+  function showQR(link, count) {
+    qrContainer.innerHTML = "";
+    new QRCode(qrContainer, { text: link, width: 200, height: 200 });
+    qrNote.style.display = "block";
+    invitationCount.style.display = "block";
+    invitationCount.innerText = `📩 عدد الدعوات: ${count}`;
+    downloadBtn.style.display = "inline-block";
+  }
+
+  downloadBtn.onclick = () => {
+    const img = qrContainer.querySelector("img");
+    if (img) {
+      const link = document.createElement("a");
+      link.href = img.src;
+      link.download = "qr_code.png";
+      link.click();
+    }
+  };
+
+  const countdownEl = document.getElementById("countdown");
+  const eventDate = new Date("2025-08-08T21:00:00").getTime();
+  setInterval(() => {
+    const now = new Date().getTime();
+    const diff = eventDate - now;
+    if (diff < 0) return countdownEl.innerText = "بدأ الزفاف!";
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    countdownEl.innerHTML = `⏳ يتبقى <strong>${d}</strong> يوم <strong>${h}</strong> ساعة <strong>${m}</strong> دقيقة`;
+  }, 1000);
+
+  window.addEventListener('DOMContentLoaded', () => {
+    fetch(`https://script.google.com/macros/s/AKfycbyuNmYxaML-QFA7kMSJsCP0vG915-xbd5__pz7AH384-FE3jcLD3E1lftgOdlk7lvIHXA/exec?token=${token}&check=true`)
+      .then(res => res.json())
+      .then(res => {
+        if (res.status === "already" || res.status === "used") {
+          showQR(res.qr, res.max);
+          responseButtons.style.display = "none";
+          attendanceTitle.style.display = "none";
+          responseMsg.innerText = res.message;
+        } else if (res.status === "declined") {
+          responseButtons.style.display = "none";
+          attendanceTitle.style.display = "none";
+          responseMsg.innerText = res.message || "نأسف لعدم تمكنك من الحضور.";
+        }
+      })
+      .catch(() => {
+        responseMsg.innerText = "❌ لم نتمكن من التحقق من حالتك.";
+      });
+  });
+  document.getElementById("sendMessage").addEventListener("click", function() {
+  var msg = document.getElementById("message").value.trim();
+  if(msg === "") {
+    alert("الرجاء كتابة رسالة");
+    return;
+  }
+
+  fetch("https://script.google.com/macros/s/AKfycbyuNmYxaML-QFA7kMSJsCP0vG915-xbd5__pz7AH384-FE3jcLD3E1lftgOdlk7lvIHXA/exec", {
+    method: "POST",
+    body: new URLSearchParams({ message: msg })
+  })
+  .then(res => res.text())
+  .then(data => {
+    alert("✅ تم إرسال الرسالة بنجاح");
+    document.getElementById("message").value = "";
+  });
+});
+</script>
 
 </body>
 </html>
