@@ -11,7 +11,6 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
     font-family: 'Aref Ruqaa', serif;
-      background-color:  #ffffff;
       overflow-x: hidden;
       color:  #ffffff;
       height: 100vh;
@@ -21,20 +20,10 @@
       overflow: hidden;
       margin: 0;
 
+
+
     }
-    
-    .background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 120%;
-      height: 120%;
-      background-image: url('115904.jpg');
-      background-size: cover;
-      background-repeat: no-repeat;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s ease-out;
-    }
+
 
     .hidden {
       opacity: 0;
@@ -259,92 +248,98 @@
   background: #a0b48a;
 }
 
+
+.scene {
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  background: url("115904.jpg") no-repeat center/cover;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.1s ease-out;
+}
+
 .cards {
-      display: relative;
-      flex-wrap: wrap;
-    }
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 
-    .card {
-      width: 100px;
-      height: 150px;
-      perspective: 1000px;
-      cursor: pointer;
-      position: absolute;
-      transition: transform 0.6s ease;
-    }
-  .card:nth-child(1) { top:500px ;left: 150px; }
-  .card:nth-child(2) { top:450px ;left: 250px; }
-  .card:nth-child(3) {top:580px ;left: 60px;}
-  .card:nth-child(4) { top:580px ;left: 250px;}
+.card {
+  width: 100px;
+  height: 150px;
+  perspective: 1000px;
+  cursor: pointer;
+  position: absolute;
+  transition: transform 0.6s ease;
+  z-index: 10;
+}
 
-    .inner {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      border-radius: 15px;
-      transition: transform 0.6s ease, width 0.6s ease, height 0.6s ease, top 0.6s ease, left 0.6s ease;
-      transform-style: preserve-3d;
-    }
+.inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 15px;
+  transition: transform 0.6s ease, width 0.6s ease, height 0.6s ease, top 0.6s ease, left 0.6s ease;
+  transform-style: preserve-3d;
+}
 
-    /* البطاقة في وضعها العادي */
-    .card:not(.active) .inner {
-      transform: rotateY(0deg);
-    }
+.card:not(.active) .inner {
+  transform: rotateY(0deg);
+}
 
-    /* البطاقة عند التفعيل */
-    .card.active {
-      position: fixed;
-      top: 50%;
-      left: 80%;
-      z-index: 1000;
-      transform: translate(-50%, -50%) scale(1.1); /* تكبير في النص */
-    }
+.card.active {
+  position: fixed;
+  top: 50%;
+  left: 80%;
+  z-index: 1000;
+  transform: translate(-50%, -50%) scale(1.1);
+}
 
-    .card.active .inner {
-      top:-200px;
-      width: 300px;
-      height: 600px;
+.card.active .inner {
+  top: -200px;
+  width: 300px;
+  height: 600px;
+  transform: rotateY(180deg);
+}
 
-      transform: rotateY(180deg);
-    }
+.front, .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  backface-visibility: hidden;
+  background: url("115948.png") no-repeat center/cover;
+  display: flex;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 15px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
 
-    .front, .back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 15px;
-      backface-visibility: hidden;
-      background: url("115948.png") no-repeat center/cover;
-      display: flex;
-      font-weight: bold;
-      font-size: 18px;
-      padding: 15px;
-      text-align: center;
-    }
+.back {
+  transform: rotateY(180deg);
+  flex-direction: column;
+  overflow-y: auto;
+  color: #fff;
+}
 
-    .back {
-      display: flex;
-      justify-content: flex-end;
-      color: #fff;
-      transform: rotateY(180deg);
-      flex-direction: column;
-      overflow-y: auto;
-      background: transparent; /* بدون اللون البني */
-      background: url("115948.png") no-repeat center/cover;
+.back button {
+  margin-top: 15px;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
 
-     text-align: center;
+.back .back-btn {
+  background: #fff;
+  color: #3c2e1f;
+}
 
-    }
-
-    .back button {
-      margin-top: 15px;
-      padding: 8px 18px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    .back .back-btn { background: #fff; color:#3c2e1f; }
 
     #countdown { display:flex; gap:15px; margin-top:15px; }
     .time-box { background:#fff; color:#3c2e1f; padding:8px 12px; border-radius:8px; }
@@ -353,26 +348,18 @@
 <body>
 
 
-<div class="background" id="background"></div>
 
 <button class="music-btn" onclick="toggleMusic()">🎵</button>
 <audio id="bg-music" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
-
+<div class="scene" id="scene"></div>
       <div class="cards">
-    <div class="card" onclick="openCard(this)">
+    <div class="card" style="left: 10px;bottom: 80px;" onclick="openCard(this)">
       <div class="inner">
         <div class="front">🎉 الترحيب</div>
         <div class="back">
                 <!-- الترحيب -->
-    <h1 class="fade-in" id="welcomeText" style="animation-delay: 0.5s;">حيّاك الله، </h1>
-    <p></p>
-    <h2 class="fade-in" style="animation-delay: 1s;">دعوة خاصة</h2>
-    <p></p>
-    <h3 class="fade-in" style="animation-delay: 1.5s;">بارك الله لهم وبارك عليهما وجمع بينهم في خير</h3>
-    <h4 class="fade-in" style="animation-delay: 2s;">نتشرف</h4>
-    
      
       <div class="fade-in" style="animation-delay: 2.5s; display: flex; justify-content: center; gap: 70px;font-size: 30px">
         <span>السيدة</span>
@@ -397,9 +384,13 @@
         </div>
       </div>
     </div>
+</div>
+    
+  
+ <div class="cards">
 
     
-    <div class="card" onclick="openCard(this)">
+    <div class="card" style="left: 10px;bottom: 10px;" onclick="openCard(this)">
       <div class="inner">
         <div class="front">✅ تأكيد الحضور</div>
         <div class="back">
@@ -419,10 +410,11 @@
         </div>
       </div>
     </div>
+    </div>
   
     <!-- التأكيد -->
     
-    <div class="card" onclick="openCard(this)">
+    <div class="card" style="left: 60px;bottom: 100px;" onclick="openCard(this)">
       <div class="inner">
         <div class="front">💌 رسالتك</div>
         <div class="back">
@@ -438,7 +430,7 @@
     </div>
     
         
-     <div class="card" onclick="openCard(this)">
+     <div class="card" style="left: 240px;bottom: 10px;"onclick="openCard(this)">
       <div class="inner">
         <div class="front">📋 التفاصيل</div>
         <div class="back">
@@ -465,7 +457,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <script>
-     const background = document.getElementById('background');
+     const background = document.getElementById('scene');
 
     document.addEventListener('mousemove', (e) => {
       const x = (e.clientX / window.innerWidth) * 10;
