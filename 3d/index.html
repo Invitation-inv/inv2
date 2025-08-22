@@ -14,7 +14,6 @@
       background-color:  #ffffff;
       overflow-x: hidden;
       color:  #ffffff;
-      background: url("115904.jpg") no-repeat center center/cover;
       height: 100vh;
       display: flex;
       justify-content: center;
@@ -22,6 +21,19 @@
       overflow: hidden;
       margin: 0;
 
+    }
+    
+    .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      background-image: url('115904.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease-out;
     }
 
     .hidden {
@@ -342,6 +354,7 @@
 <body>
 
 
+<div class="background" id="background"></div>
 
 <button class="music-btn" onclick="toggleMusic()">🎵</button>
 <audio id="bg-music" loop>
@@ -453,6 +466,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <script>
+     const background = document.getElementById('background');
+
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      background.style.transform = `translate(-${x}%, -${y}%)`;
+    });
+
+    document.addEventListener('touchmove', (e) => {
+      const touch = e.touches[0];
+      const x = (touch.clientX / window.innerWidth) * 100;
+      const y = (touch.clientY / window.innerHeight) * 100;
+      background.style.transform = `translate(-${x}%, -${y}%)`;
+    });
      function openCard(card) {
       document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
       card.classList.add('active');
