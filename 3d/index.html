@@ -24,11 +24,11 @@
     }
     
     .background {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
-      width: 200%;
-      height: 200%;
+      width: 120%;
+      height: 120%;
       background-image: url('115904.jpg');
       background-size: cover;
       background-repeat: no-repeat;
@@ -284,7 +284,6 @@
       border-radius: 15px;
       transition: transform 0.6s ease, width 0.6s ease, height 0.6s ease, top 0.6s ease, left 0.6s ease;
       transform-style: preserve-3d;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
     }
 
     /* البطاقة في وضعها العادي */
@@ -333,7 +332,7 @@
       background: transparent; /* بدون اللون البني */
       background: url("115948.png") no-repeat center/cover;
 
-        text-align: center;
+     text-align: center;
 
     }
 
@@ -469,15 +468,15 @@
      const background = document.getElementById('background');
 
     document.addEventListener('mousemove', (e) => {
-      const x = (e.clientX / window.innerWidth) * 100;
-      const y = (e.clientY / window.innerHeight) * 100;
+      const x = (e.clientX / window.innerWidth) * 10;
+      const y = (e.clientY / window.innerHeight) * 10;
       background.style.transform = `translate(-${x}%, -${y}%)`;
     });
 
     document.addEventListener('touchmove', (e) => {
       const touch = e.touches[0];
-      const x = (touch.clientX / window.innerWidth) * 100;
-      const y = (touch.clientY / window.innerHeight) * 100;
+      const x = (touch.clientX / window.innerWidth) * 10;
+      const y = (touch.clientY / window.innerHeight) * 10;
       background.style.transform = `translate(-${x}%, -${y}%)`;
     });
      function openCard(card) {
