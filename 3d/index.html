@@ -346,21 +346,13 @@ button:hover {
 function openDoors() {
   const intro = document.getElementById("intro");
   intro.classList.add("open");
-
   setTimeout(() => {
     intro.style.display = "none";
-
-    // هنا نشغل الفيد إن للنصوص
     document.querySelectorAll(".fade-in").forEach((el, i) => {
-      setTimeout(() => {
-        el.classList.add("show");
-      }, i * 600); // يخلي كل نص يطلع بعد الثاني بـ 0.6 ثانية
+      setTimeout(() => { el.classList.add("show"); }, i * 600);
     });
-
-  }, 2200); // نفس مدة الأنيميشن حق الأبواب
+  }, 2200);
 }
-         
-    }
     const deck = document.querySelector(".deck");
     let cards = Array.from(document.querySelectorAll(".card"));
     let animating = false;
@@ -581,6 +573,7 @@ var countDownDate = new Date("sep 15, 2025 20:00:00").getTime();
 
 </body>
 </html>
+
 
 
 
