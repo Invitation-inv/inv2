@@ -2,6 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>دعوة زفاف</title>
   <style>
    body {
@@ -17,21 +18,17 @@
   flex-direction: column;
   color: #fff;
 }
-fade-in{
+
+.fade-in {
   opacity:0;
-  transform:translatey(20px);
-  transition :opacity 1s ease,transform  1s ease
-  
+  transform:translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
 }
-    fade-in.show.{
-        opacity:1;
-        transform:translatey(0);
-
-      
-
-    }
-    
-/* الكروت */
+.fade-in.show {
+  opacity:1;
+  transform:translateY(0);
+}
+   
 .deck {
   position: relative;
   width: 90vw;
@@ -57,7 +54,6 @@ fade-in{
   transition: transform 1s ease-in-out, opacity 0.5s ease;
 }
 
-/* الأزرار */
 button {
   padding: 12px 24px;
   font-size: 16px;
@@ -78,9 +74,10 @@ button:hover {
   margin-top: 20px;
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-/* زر الموسيقى */
 .music-btn {
   position: fixed;
   top: 15px;
@@ -94,12 +91,12 @@ button:hover {
   border: 1px solid #fff;
 }
 
-/* العداد */
 #countdown {
   display: flex;
   justify-content: center;
   gap: 20px;
   margin-top: 20px;
+  flex-wrap: wrap;
 }
 
 .time-box {
@@ -117,7 +114,6 @@ button:hover {
   font-weight: bold;
 }
 
-/* صندوق الرسائل */
 .message-box {
   margin: 20px auto;
   padding: 15px;
@@ -155,86 +151,88 @@ button:hover {
   color: #ddc2c9;
 }
 
-/* حالة الرسالة */
 .message-status {
   margin-top: 8px;
   font-weight: bold;
   font-size: 14px;
 }
 
+.intro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: rgba(0,0,0,0.5);
+}
 
-    .intro {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      background: rgba(0,0,0,0.5);
-    }
+.doors {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 
-    .doors {
-      display: flex;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
+.door {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  transition: transform 2s ease-in-out;
+}
 
-    .door {
-      flex: 1;
-      background-size: cover;
-      background-position: center;
-      transition: transform 2s ease-in-out;
-    }
+.left-door {
+  background-image: url("IMG_٢٠٢٥٠٨١٩_١٨٠١٥٢.jpg");
+  transform-origin: left center;
+}
 
-    .left-door {
-      background-image: url("IMG_٢٠٢٥٠٨١٩_١٨٠١٥٢.jpg"); /* صورة الباب اليسار */
-      transform-origin: left center;
-    }
+.right-door {
+  background-image: url("IMG_٢٠٢٥٠٨١٩_١٨٠٢٣٦.jpg");
+  transform-origin: right center;
+}
 
-    .right-door {
-      background-image: url("IMG_٢٠٢٥٠٨١٩_١٨٠٢٣٦.jpg"); /* صورة الباب اليمين */
-      transform-origin: right center;
-    }
+.intro.open .left-door { transform: translateX(100%); }
+.intro.open .right-door { transform: translateX(-100%); }
 
-    .intro.open .left-door {
-      transform: translateX(100%);
-    }
+.start-btn {
+  z-index: 1001;
+  padding: 12px 24px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  background: #fff;
+  color: #3c2e1f;
+  cursor: pointer;
+  font-weight: bold;
+}
 
-    .intro.open .right-door {
-      transform: translateX(-100%);
-    }
+.content {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+}
 
-    .start-btn {
-      z-index: 1001;
-      padding: 12px 24px;
-      font-size: 18px;
-      border: none;
-      border-radius: 8px;
-      background: #fff;
-      color: #3c2e1f;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .content {
-      position: relative;
-      z-index: 1;
-      padding: 20px;
-      text-align: center;
-      color: #fff;
-    }
+@media (max-width: 600px) {
+  h1 { font-size: 20px; }
+  h2 { font-size: 18px; }
+  h3, h4 { font-size: 16px; }
+  button { font-size: 14px; padding: 8px 16px; }
+  .time-box { min-width: 60px; padding: 10px; }
+  .time-box span { font-size: 20px; }
+  iframe { width: 100% !important; height: 200px !important; }
+}
   </style>
 </head>
 <body>
-  
-  
+ 
    <div class="intro" id="intro">
     <div class="doors">
       <div class="door left-door"></div>
@@ -243,48 +241,41 @@ button:hover {
     <button class="start-btn" onclick="openDoors()">ابدأ</button>
   </div>
 
-
-    <button class="music-btn" onclick="toggleMusic()">🎵</button>
+  <button class="music-btn" onclick="toggleMusic()">🎵</button>
   <audio id="bg-music" loop>
     <source src="music.mp3" type="audio/mpeg">
   </audio>
 
   <div class="deck">
+    <!-- البطاقة الأولى -->
     <div class="card" >
-        
-    <h1 class="fade-in" id="welcomeText" style="animation-delay: 0.5s;">حيّاك الله، </h1>
-    <h2 class="fade-in" style="animation-delay: 1s;">دعوة خاصة</h2>
-    <h3 class="fade-in" style="animation-delay: 1.5s;">بارك الله لهم وبارك عليهما وجمع بينهم في خير</h3>
-    <h4 class="fade-in" style="animation-delay: 2s;">نتشرف</h4>
-    
-     
-      <div class="fade-in" style="animation-delay: 2.5s; display: flex; justify-content: center; gap: 70px;font-size: 30px">
+    <h1 class="fade-in" id="welcomeText">حيّاك الله، </h1>
+    <h2 class="fade-in">دعوة خاصة</h2>
+    <h3 class="fade-in">بارك الله لهم وبارك عليهما وجمع بينهم في خير</h3>
+    <h4 class="fade-in">نتشرف</h4>
+      <div class="fade-in" style="display: flex; justify-content: center; gap: 30px;font-size: 22px">
         <span>السيدة</span>
         <span>السيدة</span>
       </div>
-
-      <div class="fade-in" style="animation-delay: 3s; display: flex; justify-content: center; gap: 70px;font-size: 30px">
+      <div class="fade-in" style="display: flex; justify-content: center; gap: 30px;font-size: 22px">
         <span>أم أحمد</span>
         <span>أم سمر</span>
       </div>
-
-    <h4 class="fade-in" style="animation-delay: 3.5s;">بدعوتكم لحضور حفل زفاف </h4>
-
-      <div class="fade-in" style="animation-delay: 4s; display: flex; justify-content: center; gap: 70px;font-size: 30px">
+    <h4 class="fade-in">بدعوتكم لحضور حفل زفاف </h4>
+      <div class="fade-in" style="display: flex; justify-content: center; gap: 30px;font-size: 22px">
         <span> أحمد</span>
          <span>&</span>
         <span> سمر</span>
       </div>
-
-    <h3 class="fade-in" style="animation-delay: 4.4s;">بارك الله لهم وبارك عليهما وجمع بينهم في خير</h3>
-    
+    <h3 class="fade-in">بارك الله لهم وبارك عليهما وجمع بينهم في خير</h3>
   <div class="controls">
     <button onclick="prevCard()">السابق</button>
     <button onclick="nextCard()">التالي</button>
   </div>
     </div>
+    <!-- البطاقة الثانية -->
     <div class="card" >
-          <h2 id="attendanceTitle">هل ستحضر؟</h2>
+      <h2 id="attendanceTitle">هل ستحضر؟</h2>
       <div id="responseButtons" style="margin-top:30px;">
         <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('yes')">نعم، بإذن الله</button>
         <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('no')">لا، أعتذر عن الحضور</button>
@@ -297,22 +288,19 @@ button:hover {
       <h2 id="invitationCount" style="font-size: 14px; display: none;"></h2>
       <button id="downloadBtn" style="display: none; margin-top: 10px;">📥تحميل الدعوة</button>
        <h1>رسالتك للعروسين</h1>
-
       <div class="message-box">
-    <textarea id="message" placeholder=" اكتب تهنئتك"></textarea>
-    <button id="sendMessageBtn"> إرسال</button>
-    <p id="messageStatus" class="message-status"></p>
+        <textarea id="message" placeholder=" اكتب تهنئتك"></textarea>
+        <button id="sendMessageBtn"> إرسال</button>
+        <p id="messageStatus" class="message-status"></p>
      </div>
-     
   <div class="controls">
     <button onclick="prevCard()">السابق</button>
     <button onclick="nextCard()">التالي</button>
   </div>
     </div>
+    <!-- البطاقة الثالثة -->
     <div class="card" >
-        <img src="1000218656.png"
-     style="width: 300px; height: 300px;">
-
+      <img src="1000218656.png" style="width: 200px; height: 200px;">
       <div id="countdown">
       <div class="time-box">
         <span id="days">00</span>
@@ -328,8 +316,7 @@ button:hover {
       </div>
     </div>
      <hr style="margin: 40px auto; border: 1px solid #fff; width: 80%; opacity: 0.3;" />
-     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.6707907180357!2d46.837938325403954!3d24.703841178031816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa9d80414dc89%3A0x4c6795d330c79745!2z2YLYtdixINiv2YrYqtmK2YTYsiDZhNmE2KXYrdiq2YHYp9mE2KfYqiDZiNin2YTZhdik2KrZhdix2KfYqg!5e0!3m2!1sar!2ssa!4v1754914876687!5m2!1sar!2ssa" width="200" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  
- 
+     <iframe src="https://www.google.com/maps/embed?pb=..." width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>  
       <div class="controls">
         <button onclick="prevCard()">السابق</button>
         <button onclick="nextCard()">التالي</button>
@@ -338,105 +325,80 @@ button:hover {
     </div>
     </div>
 
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <script>
 function openDoors() {
   const intro = document.getElementById("intro");
   intro.classList.add("open");
-
   setTimeout(() => {
     intro.style.display = "none";
-
-    // هنا نشغل الفيد إن للنصوص
     document.querySelectorAll(".fade-in").forEach((el, i) => {
-      setTimeout(() => {
-        el.classList.add("show");
-      }, i * 600); // يخلي كل نص يطلع بعد الثاني بـ 0.6 ثانية
+      setTimeout(() => { el.classList.add("show"); }, i * 600);
     });
-
-  }, 2200); // نفس مدة الأنيميشن حق الأبواب
+  }, 2200);
 }
-          
-    }
-    const deck = document.querySelector(".deck");
-    let cards = Array.from(document.querySelectorAll(".card"));
-    let animating = false;
+         
+const deck = document.querySelector(".deck");
+let cards = Array.from(document.querySelectorAll(".card"));
+let animating = false;
 
-    function updateCards() {
-      cards.forEach((card, i) => {
-        card.style.zIndex = cards.length - i;
-        card.style.transform = `translateY(${i * 10}px) scale(${1 - i * 0.05})`;
-        card.style.opacity = i > 2 ? 0 : 1;
-      });
-    }
+function updateCards() {
+  cards.forEach((card, i) => {
+    card.style.zIndex = cards.length - i;
+    card.style.transform = `translateY(${i * 10}px) scale(${1 - i * 0.05})`;
+    card.style.opacity = i > 2 ? 0 : 1;
+  });
+}
 
-    function nextCard() {
-      if (animating) return;
-      animating = true;
-
-      const first = cards[0];
-      first.style.transform = "translateX(400px) rotate(15deg)"; // تروح على جنب
-      first.style.opacity = 0;
-
-      setTimeout(() => {
-        deck.appendChild(first); 
-        cards = Array.from(document.querySelectorAll(".card"));
-        first.style.transition = "none";
-        first.style.transform = "translateX(0) rotate(0)";
-        setTimeout(() => {
-          first.style.transition = "transform 2s ease, opacity 3s ease";
-          first.style.opacity = 1;
-          updateCards();
-          animating = false;
-        }, 50);
-      }, 800);
-    }
-
-    function prevCard() {
-      if (animating) return;
-      animating = true;
-
-      const last = cards[cards.length - 1];
-      deck.insertBefore(last, cards[0]); // نرجعه قدام
-      cards = Array.from(document.querySelectorAll(".card"));
-      last.style.transition = "none";
-      last.style.transform = "translateX(-400px) rotate(-15deg)";
-      last.style.opacity = 0;
-
-      setTimeout(() => {
-        last.style.transition = "transform 0.8s ease, opacity 0.5s ease";
-        last.style.transform = "translateX(0) rotate(0)";
-        last.style.opacity = 1;
-        updateCards();
-        animating = false;
-      }, 50);
-    }
-
-    updateCards();
-     function startExperience() {
-    const intro = document.getElementById("intro");
-    const music = document.getElementById("bg-music");
-
-    intro.classList.add("close");
-    music.play().catch(() => {});
-
+function nextCard() {
+  if (animating) return;
+  animating = true;
+  const first = cards[0];
+  first.style.transform = "translateX(400px) rotate(15deg)";
+  first.style.opacity = 0;
+  setTimeout(() => {
+    deck.appendChild(first);
+    cards = Array.from(document.querySelectorAll(".card"));
+    first.style.transition = "none";
+    first.style.transform = "translateX(0) rotate(0)";
     setTimeout(() => {
-      intro.remove();
-    }, 1000);
-  }
+      first.style.transition = "transform 2s ease, opacity 3s ease";
+      first.style.opacity = 1;
+      updateCards();
+      animating = false;
+    }, 50);
+  }, 800);
+}
 
-  function toggleMusic() {
-    const bgMusic = document.getElementById("bg-music");
-    try { bgMusic.paused ? bgMusic.play() : bgMusic.pause(); } catch {}
-  }
+function prevCard() {
+  if (animating) return;
+  animating = true;
+  const last = cards[cards.length - 1];
+  deck.insertBefore(last, cards[0]);
+  cards = Array.from(document.querySelectorAll(".card"));
+  last.style.transition = "none";
+  last.style.transform = "translateX(-400px) rotate(-15deg)";
+  last.style.opacity = 0;
+  setTimeout(() => {
+    last.style.transition = "transform 0.8s ease, opacity 0.5s ease";
+    last.style.transform = "translateX(0) rotate(0)";
+    last.style.opacity = 1;
+    updateCards();
+    animating = false;
+  }, 50);
+}
+updateCards();
 
-  const nameParam = new URLSearchParams(location.search).get("name") || "ضيفنا";
-  const welcomeText = document.getElementById("welcomeText");
-  if (welcomeText) {
-    welcomeText.innerText += nameParam;
-  }
+function toggleMusic() {
+  const bgMusic = document.getElementById("bg-music");
+  try { bgMusic.paused ? bgMusic.play() : bgMusic.pause(); } catch {}
+}
+
+const nameParam = new URLSearchParams(location.search).get("name") || "ضيفنا";
+const welcomeText = document.getElementById("welcomeText");
+if (welcomeText) welcomeText.innerText += nameParam;
+
 
   const token = new URLSearchParams(location.search).get("token") || "";
   const qrContainer = document.getElementById("qrContainer");
@@ -580,6 +542,7 @@ var countDownDate = new Date("sep 15, 2025 20:00:00").getTime();
 
 </body>
 </html>
+
 
 
 
