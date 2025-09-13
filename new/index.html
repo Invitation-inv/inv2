@@ -16,9 +16,9 @@
       justify-content: center;
       align-items: center;
       perspective: 1200px;
-      color: rgb(148, 142, 142);
+      color: rgb(255, 255, 255);
       font-size: 60;
-      text-shadow: 2px 2px 2px black;
+      text-shadow: 2px 2px 2px rgb(175, 169, 169);
     }
      button {
       padding: 30px 30px;
@@ -135,7 +135,7 @@
       opacity: 0;
       z-index: 2;
       transition: transform 4s ease, opacity 2s ease;
-      background: url("1000218802.png") no-repeat center center/cover;
+      background: url("115948.png") no-repeat center center/cover;
       padding: 10px;
       border-radius: 8px;
       overflow: hidden;
@@ -148,12 +148,12 @@
       height: 100%;
       box-shadow: 0 8px 25px rgba(0,0,0,0.4);
       border-radius: 20px;
-      padding: 30px;
+      padding: 30px 60px 30px 30p;
       display: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      text-align: center;
+      text-align: right;
       transition: transform 3s ease-in-out, opacity 0.5s ease;
     }
 
@@ -284,9 +284,9 @@
         <div class="card active">
               <h1 class="fade-in" id="welcomeText" style="animation-delay: 0.5s;font-size: 30px">حيّاك الله، </h1>
     <p></p>
-    <h2 class="fade-in" style="animation-delay: 1s;;font-size: 40px" >دعوة خاصة</h2>
+    <h2 class="fade-in" style="animation-delay: 1s;;font-size: 40px;text-align: right;" >دعوة خاصة</h2>
     <p></p>
-    <h4 class="fade-in" style="animation-delay: 2s;;font-size: 20px">نتشرف</h4>
+    <h4 class="fade-in" style="animation-delay: 2s;;font-size: 30px">نتشرف</h4>
     
      
       <div class="fade-in" style="animation-delay: 2.5s; display: flex; justify-content: center; gap: 70px;font-size: 30px">
@@ -436,7 +436,7 @@
   const messageStatus = document.getElementById("messageStatus");
 
   // URL for the Google Apps Script
-  const scriptURL = "https://script.google.com/macros/s/AKfycbxmecszWPiwb6gVqJpD7XRjavpHOCzrJeqcQjN1ziqLOl-fShjA2kfQi41ZDz_4QZcBoA/exec";
+  const scriptURL = "https://script.google.com/macros/s/AKfycbyOw_0ss6PQvDSVBzkKrcZ3kL_VqfgSRVymE8jR9VUIfHeK7Wc5CvroUHl0ADN1edCHPQ/exec";
 
 
   function confirmAttendance(response) {
