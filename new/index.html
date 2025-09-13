@@ -16,10 +16,13 @@
       justify-content: center;
       align-items: center;
       perspective: 1200px;
+      color: rgb(148, 142, 142);
+      font-size: 60;
+      text-shadow: 2px 2px 2px black;
     }
      button {
       padding: 30px 30px;
-      font-size: 30px;
+      font-size: 18px;
       border: none;
       border-radius: 10px;
       cursor: pointer;
@@ -28,7 +31,7 @@
       background-size: cover;
       background-repeat: no-repeat;
       background-color: transparent;
-      color: #ffffff;
+      color: black;
     }
        
 
@@ -36,7 +39,7 @@
       width: 800px;
       height: 600px;
       transform-style: preserve-3d;
-      transition: transform 2s ease;
+      transition: transform 4s ease;
     }
 
     .envelope-wrapper.back {
@@ -68,7 +71,7 @@
     }
 
     .flap {
-     content:"اضغط لفتح الدعوة";
+      content:"اضغط لفتح الدعوة";
       position: absolute;
       top: 0;
       left: 0;
@@ -77,7 +80,7 @@
       background: url("8888.jpg") no-repeat center center/cover;
       clip-path: polygon(0 0, 100% 0, 50% 100%);
       transform-origin: top center;
-      transition: transform 2s ease;
+      transition: transform 4s ease;
       z-index: 1;
       box-shadow: 0 5px 10px rgba(0,0,0,0.2);
     }
@@ -86,7 +89,8 @@
       position: absolute;
       height: 100%;
       z-index: 0;
-      background: url("1000218793.jpg") no-repeat center center/cover;
+      background: url("1000218793.jpg") no-repeat center
+       center/cover;
     }
 
     .left {
@@ -130,11 +134,12 @@
       height: 200%;
       opacity: 0;
       z-index: 2;
-      transition: transform 1s ease, opacity 4s ease;
+      transition: transform 4s ease, opacity 2s ease;
       background: url("1000218802.png") no-repeat center center/cover;
       padding: 10px;
       border-radius: 8px;
       overflow: hidden;
+      font-size: 40;
     }
 
     .card {
@@ -162,16 +167,14 @@
     }
 
     .controls button {
-      padding: 30px 30px;
+      padding: 6px 12px;
       margin: 0 5px;
       border: none;
       color: rgba(0, 0, 0, 0.623);
       border-radius: 4px;
       cursor: pointer;
-      font-size: 14px;
+      font-size: 18px;
       background: url("1000218793.jpg") no-repeat center center/cover;
-      color: #ffffff;
-
 
     }
 
@@ -200,11 +203,11 @@
     }
 
     .time-box {
-      color: white;
+      color: black;
       padding: 10px 15px;
       border-radius: 15px;
       text-align: center;
-      min-width: 100px;
+      min-width: 120px;
       background: url("1000218793.jpg") no-repeat center center/cover;
 
     }
@@ -218,7 +221,7 @@
     .time-label {
       font-size: 15px;
       margin-top: 5px;
-      color: white;
+      color: black;
     }
     .message-box {
 
@@ -240,7 +243,7 @@
       border-radius: 8px;
       resize: none;
       background: white;
-      color: #ffffff;
+      color: #b6c8a2 ;
     }
 
     .message-box button {
@@ -248,12 +251,12 @@
       padding: 10px 20px;
       border: none;
       background: white;
-      color: #ffffff;
+      color: black;
       border-radius: 20px;
       cursor: pointer;
     }
     .message-box button:hover {
-      color: #ffffff;
+      background:  black;
     }
 
     .message-status {
@@ -279,12 +282,11 @@
       <div class="card-container" id="cardContainer">
         <!-- الكارد الأولى -->
         <div class="card active">
-              <h1 class="fade-in" id="welcomeText" style="animation-delay: 0.5s;">حيّاك الله، </h1>
+              <h1 class="fade-in" id="welcomeText" style="animation-delay: 0.5s;font-size: 30px">حيّاك الله، </h1>
     <p></p>
-    <h2 class="fade-in" style="animation-delay: 1s;">دعوة خاصة</h2>
+    <h2 class="fade-in" style="animation-delay: 1s;;font-size: 40px" >دعوة خاصة</h2>
     <p></p>
-    <h3 class="fade-in" style="animation-delay: 1.5s;">بارك الله لهم وبارك عليهما وجمع بينهم في خير</h3>
-    <h4 class="fade-in" style="animation-delay: 2s;">نتشرف</h4>
+    <h4 class="fade-in" style="animation-delay: 2s;;font-size: 20px">نتشرف</h4>
     
      
       <div class="fade-in" style="animation-delay: 2.5s; display: flex; justify-content: center; gap: 70px;font-size: 30px">
@@ -297,7 +299,7 @@
         <span>أم سمر</span>
       </div>
 
-    <h8 class="fade-in" style="animation-delay: 3.5s;">بدعوتكم لحضور حفل زفاف </h8>
+    <h8 class="fade-in" style="animation-delay: 3.5s;font-size: 30px">بدعوتكم لحضور حفل زفاف </h8>
 
       <div class="fade-in" style="animation-delay: 4s; display: flex; justify-content: center; gap: 70px;font-size: 30px">
         <span> أحمد</span>
@@ -305,7 +307,7 @@
         <span> سمر</span>
       </div>
 
-    <h3 class="fade-in" style="animation-delay: 4.4s;">بارك الله لهم وبارك عليهما وجمع بينهم في خير</h3>
+    <h3 class="fade-in" style="animation-delay: 4.4s;font-size: 30px">بارك الله لهم وبارك عليهما وجمع بينهم في خير</h3>
           <div class="controls">
             <button onclick="nextCard()">التالي</button>
         </div>
@@ -322,9 +324,9 @@
   <div class="qr-wrapper">
     <div id="qrContainer" style="margin-top: 20px;"></div>
   </div>
-  <h1 id="qrNote" style="display: none; font-size: 14px;">📌 استخدم رمز الدخول عند الوصول للقاعة.</h1>
+  <h1 id="qrNote" style="display: none; font-size: 20px;">📌 استخدم رمز الدخول عند الوصول للقاعة.</h1>
   <h2 id="invitationCount" style="font-size: 14px; display: none;"></h2>
-  <button id="downloadBtn" style="display: none; margin-top: 10px;">📥تحميل الدعوة</button>
+  <button id="downloadBtn" style="display: none; margin-top: 20px;">📥تحميل الدعوة</button>
   <div class="controls">
       <h1>رسالتك للعروسين</h1>
 
@@ -358,7 +360,7 @@
     </div>
        <hr style="margin: 40px auto; border: 1px solid #fff; width: 80%; opacity: 0.3;" />
 
-     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.6707907180357!2d46.837938325403954!3d24.703841178031816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa9d80414dc89%3A0x4c6795d330c79745!2z2YLYtdixINiv2YrYqtmK2YTYsiDZhNmE2KXYrdiq2YHYp9mE2KfYqiDZiNin2YTZhdik2KrZhdix2KfYqg!5e0!3m2!1sar!2ssa!4v1754914876687!5m2!1sar!2ssa" width="200" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> 
+     <iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.6707907180357!2d46.837938325403954!3d24.703841178031816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa9d80414dc89%3A0x4c6795d330c79745!2z2YLYtdixINiv2YrYqtmK2YTYsiDZhNmE2KXYrdiq2YHYp9mE2KfYqiDZiNin2YTZhdik2KrZhdix2KfYqg!5e0!3m2!1sar!2ssa!4v1754914876687!5m2!1sar!2ssa" width="200" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" ></iframe> 
      <div class="controls">
             <button onclick="prevCard()">السابق</button>
             <button onclick="nextCard()">التالي</button>
@@ -407,6 +409,7 @@
     }
 
     
+
   function toggleMusic() {
     const bgMusic = document.getElementById("bg-music");
     try { bgMusic.paused ? bgMusic.play() : bgMusic.pause(); } catch {}
@@ -560,6 +563,3 @@ var countDownDate = new Date("sep 20, 2025 20:00:00").getTime();
 
 </body>
 </html>
-
-
-
