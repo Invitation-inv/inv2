@@ -22,7 +22,7 @@
     }
      button {
       padding: 30px 30px;
-      font-size: 18px;
+      font-size: 30px;
       border: none;
       border-radius: 10px;
       cursor: pointer;
@@ -45,6 +45,7 @@
 
     .envelope-wrapper.back {
       transform: rotateY(180deg);
+
     }
 
     .envelope-wrapper.back .left,
@@ -72,7 +73,6 @@
     }
 
     .flap {
-      content:"اضغط لفتح الدعوة";
       position: absolute;
       top: 0;
       left: 0;
@@ -81,7 +81,7 @@
       background: url("8888.jpg") no-repeat center center/cover;
       clip-path: polygon(0 0, 100% 0, 50% 100%);
       transform-origin: top center;
-      transition: transform 4s ease;
+      transition: transform 0.5s ease;
       z-index: 1;
       box-shadow: 0 5px 10px rgba(0,0,0,0.2);
 
@@ -89,24 +89,23 @@
 
     }
     
-.flap-text {
-  margin-top: 250px; /* مسافة من أعلى المثلث */
-  left: -375px;
-  font-size: 22px;
-  font-weight: bold;
-  color: white;
-  text-shadow: 0 2px 5px rgba(0,0,0,0.6);
-  position: relative;
-  z-index: 2; /* النص فوق صورة المثلث */
-  pointer-events: none; /* ما يعيق الضغط على المثلث */
-}
+    .flap-text {
+      margin-top: 250px; /* مسافة من أعلى المثلث */
+      left: -375px;
+      font-size: 22px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.6);
+      position: relative;
+      z-index: 55; /* النص فوق صورة المثلث */
+      pointer-events: none; /* ما يعيق الضغط على المثلث */
+    }
 
     .left, .right, .bottom {
       position: absolute;
       height: 100%;
       z-index: 0;
-      background: url("1000218793.jpg") no-repeat center
-       center/cover;
+      background: url("1000218793.jpg") no-repeat center center/cover;
     }
 
     .left {
@@ -141,6 +140,7 @@
       z-index: 0;
     }
 
+  
     .card-container {
       position: absolute;
       bottom: 0;
@@ -155,14 +155,8 @@
       padding: 10px;
       border-radius: 8px;
       overflow: hidden;
-      font-size: 40;
     }
-.envelope.open .card-container {
-    bottom: 50%;
-    transform: translate(-50%, 50%) scale(1);
-    opacity: 1;
-}
-
+    
 
     .card {
       position: absolute;
@@ -170,13 +164,13 @@
       height: 100%;
       box-shadow: 0 8px 25px rgba(0,0,0,0.4);
       border-radius: 20px;
-      padding: 30px 60px 30px 30p;
+      padding: 30px;
       display: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      text-align: right;
-      transition: transform 3s ease-in-out, opacity 0.5s ease;
+      text-align: center;
+      transition: transform 5s ease-in-out, opacity 3s ease;
     }
 
     .card.active {
@@ -194,15 +188,13 @@
       border: none;
      color: rgb(255, 255, 255);
       text-shadow: 2px 2px 2px rgb(158, 158, 158);
-;
       border-radius: 4px;
       cursor: pointer;
-      font-size: 25px;
+      font-size: 35px;
       background: url("1000218793.jpg") no-repeat center center/cover;
 
     }
-
-    .envelope.open .flap {
+ .envelope.open .flap {
       transform: rotateX(-180deg);
     }
 
@@ -297,22 +289,38 @@
   </style>
 </head>
 <body>
+<h1 style="
+  position: absolute;
+  top: 400px;
+  right: 400px;
+  z-index: -1;
+  font-size: 35px;
+  color: white;
+  text-shadow: 2px 2px 2px black;
+">
+  اضغط للفتح
+</h1>
+
 
   <div class="envelope-wrapper back" id="wrapper">
-    <div class="envelope" id="envelope" onclick="openEnvelope()">
-<div class="flap">
-  <div class="flap-text">اضغط للفتح</div>
-</div>      <div class="left"></div>
-      <div class="right"></div>
-      <div class="bottom"></div>
-      <div class="pocket"></div>
 
+    <div class="envelope" id="envelope" onclick="openEnvelope()">
+      <div class="flap"> </div>      
+      <div class="left"></div>
+      <div class="right"></div>
+      <div class="bottom"> 
+        <div >
+
+        </div>
+      </div>
+      <div class="pocket"></div>
       <div class="card-container" id="cardContainer">
+
         <!-- الكارد الأولى -->
         <div class="card active">
               <h1 class="fade-in" id="welcomeText" style="animation-delay: 0.5s;font-size: 30px">حيّاك الله، </h1>
     <p></p>
-    <h2 class="fade-in" style="animation-delay: 1s;;font-size: 40px;text-align: right;" >دعوة خاصة</h2>
+    <h2 class="fade-in" style="animation-delay: 1s;;font-size: 40px;" >دعوة خاصة</h2>
     <p></p>
     <h4 class="fade-in" style="animation-delay: 2s;;font-size: 30px">نتشرف</h4>
     
@@ -591,4 +599,3 @@ var countDownDate = new Date("sep 20, 2025 20:00:00").getTime();
 
 </body>
 </html>
-
