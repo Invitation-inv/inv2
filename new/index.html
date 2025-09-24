@@ -214,9 +214,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      position: absolute;
-      left: 300px;
-      top: 300px; 
+  
     }
         #countdown {
         position: absolute;
@@ -370,13 +368,13 @@
     <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('yes')">نعم، بإذن الله</button>
     <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('no')">لا، أعتذر عن الحضور</button>
   </div>
-  <p id="responseMsg" style="position: absolute;top: 580px;left: 400px;"></p>
+  <p id="responseMsg" style="position: absolute;top: 580px;left: 500px;"></p>
   <div  class="qr-wrapper">
-    <div style="position: absolute;top: 300px;left: 400px;" id="qrContainer"></div>
+    <div style="position: absolute;top: 200px;left: 400px;" id="qrContainer"></div>
   </div>
   <h1 id="qrNote" style="display: none; font-size: 20px;position: absolute;top: 500px;left: 400px;">📌 استخدم رمز الدخول عند الوصول للقاعة.</h1>
-  <h2 id="invitationCount" style="font-size: 14px; display: none;position: absolute;top: 550px;left: 400px"></h2>
-  <button id="downloadBtn" style="display: none; position: absolute;top:600px;left:400px; padding: 20px 20px;">📥تحميل الدعوة</button>
+  <h2 id="invitationCount" style="font-size: 14px; display: none;position: absolute;top: 550px;left: 500px"></h2>
+  <button id="downloadBtn" style="display: none; position: absolute;top:600px;left:400px; padding: 10px 10px;">📥تحميل الدعوة</button>
   <div class="controls">
       <h1 style="position: absolute;top: 700px;left: 450px">رسالتك للعروسين</h1>
 
@@ -392,7 +390,7 @@
 </div>
   <div class="card">
       <img  src="1000218877.png"
-     style="width: 400px; height: 400px;position: absolute;top: 400px;left: 450px">
+     style="width: 400px; height: 400px;position: absolute;top: 350px;left: 450px">
 
       <div id="countdown">
       <div class="time-box">
@@ -410,9 +408,9 @@
     </div>
        <hr style="margin: 40px auto; border: 1px solid #fff; width: 80%; opacity: 0.3;" />
 
-     <iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.6707907180357!2d46.837938325403954!3d24.703841178031816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa9d80414dc89%3A0x4c6795d330c79745!2z2YLYtdixINiv2YrYqtmK2YTYsiDZhNmE2KXYrdiq2YHYp9mE2KfYqiDZiNin2YTZhdik2KrZhdix2KfYqg!5e0!3m2!1sar!2ssa!4v1754914876687!5m2!1sar!2ssa" width="200" height="150" style="border:0; position: absolute;top: 1000px;left: 600px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"  ></iframe> 
+     <iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.6707907180357!2d46.837938325403954!3d24.703841178031816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa9d80414dc89%3A0x4c6795d330c79745!2z2YLYtdixINiv2YrYqtmK2YTYsiDZhNmE2KXYrdiq2YHYp9mE2KfYqiDZiNin2YTZhdik2KrZhdix2KfYqg!5e0!3m2!1sar!2ssa!4v1754914876687!5m2!1sar!2ssa" width="200" height="150" style="border:0; position: absolute;top: 1000px;left: 500px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"  ></iframe> 
      <div class="controls">
-            <button style="position: absolute;left: 300px;top: 1100px" onclick="prevCard()">السابق</button>
+            <button style="position: absolute;left: 400px;top: 1100px" onclick="prevCard()">السابق</button>
         </div> 
   </div>
 
@@ -613,6 +611,7 @@ var countDownDate = new Date("sep 28, 2025 20:00:00").getTime();
 
 </body>
 </html>
+
 
 
 
