@@ -214,6 +214,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      position: absolute;
+      left: 300px;
+      top: 300px; 
     }
         #countdown {
         position: absolute;
@@ -369,11 +372,11 @@
   </div>
   <p id="responseMsg" style="position: absolute;top: 550px;left: 400px;"></p>
   <div  class="qr-wrapper">
-    <div id="qrContainer" style="position: absolute;top: 400px;left: 400px;"></div>
+    <div id="qrContainer"></div>
   </div>
   <h1 id="qrNote" style="display: none; font-size: 20px;position: absolute;top: 500px;left: 400px;">📌 استخدم رمز الدخول عند الوصول للقاعة.</h1>
   <h2 id="invitationCount" style="font-size: 14px; display: none;position: absolute;top: 550px;left: 400px"></h2>
-  <button id="downloadBtn" style="display: none; position: absolute;top: px;left:600px">📥تحميل الدعوة</button>
+  <button id="downloadBtn" style="display: none; position: absolute;top:600px;left:400px; padding: 30px 30px;">📥تحميل الدعوة</button>
   <div class="controls">
       <h1 style="position: absolute;top: 700px;left: 450px">رسالتك للعروسين</h1>
 
@@ -610,5 +613,6 @@ var countDownDate = new Date("sep 28, 2025 20:00:00").getTime();
 
 </body>
 </html>
+
 
 
