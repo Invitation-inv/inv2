@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>دعوة الحفل</title>
+  <title>دعوة زفاف</title>
   <style>
     body {
       margin: 0;
@@ -271,9 +271,7 @@
      <img src="1000219469.png" style="width: 300px; height: 300px;position: absolute; left: 200px;top: 100px;">
      <img src="125026.png" style="width: 500px; height: 500px;position: absolute; left: 150px;top: 170px;">
       <img src="1000219458.png" style="width: 800px; height: 1700px;position: absolute; left: 20px;top: 400px;">
-     <img src="125026.png" style="width: 500px; height: 500px;position: absolute; left: 150px;top: 1700px;">
- 
-         <p style="color: rgb(0, 0, 0); font-size: 16px;  margin-top: 40px; animation: bounce 2s infinite;position: absolute;top: 2000px;left: 350px;">
+          <p style="color: rgb(0, 0, 0); font-size: 20px;  margin-top: 40px; animation: bounce 2s infinite;position: absolute;top: 1800px;left: 350px;">
       ↓ تاكيد الحضور ↓
     </p>
    
@@ -283,12 +281,15 @@
       50% { transform: translateY(5px); }
     }
     </style>
+     <img src="125026.png" style="width: 500px; height: 500px;position: absolute; left: 150px;top: 1700px;">
+
+    </style>
     <h2 style="top:2100px;position: absolute;left: 350px;" id="attendanceTitle">هل ستحضر؟</h2>
      <div id="responseButtons" style="margin-top:30px;top:2200px;position: absolute;left: 250px;">
       <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('yes')">نعم، بإذن الله</button>
       <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('no')">لا، أعتذر عن الحضور</button>
     </div>
-     <p id="responseMsg" style="margin-top: 20px;top:2200px;position: absolute;left: 250px;"></p>
+     <p id="responseMsg" style="margin-top: 20px;top:2300px;position: absolute;left: 300px;"></p>
     <div class="qr-wrapper">
       <div id="qrContainer" style="margin-top: 20px;top:2200px;position: absolute;left: 250px;"></div>
     </div>
@@ -329,8 +330,8 @@
         <div class="time-label">دقيقة</div>
       </div>
     </div>
-     <hr style="margin: 40px auto; border: 1px solid #000000; width: 80%; opacity: 0.3;position: absolute; left: 100px;top: 4150px;" />
-     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.6707907180357!2d46.837938325403954!3d24.703841178031816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa9d80414dc89%3A0x4c6795d330c79745!2z2YLYtdixINiv2YrYqtmK2YTYsiDZhNmE2KXYrdiq2YHYp9mE2KfYqiDZiNin2YTZhdik2KrZhdix2KfYqg!5e0!3m2!1sar!2ssa!4v1754914876687!5m2!1sar!2ssa" width="200" height="200" style="border:0;position: absolute; left: 300px;top: 4200px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  
+     <hr style="margin: 40px auto; border: 1px solid #000000; width: 80%; opacity: 0.3;position: absolute; left: 100px;top: 4200px;" />
+     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.6707907180357!2d46.837938325403954!3d24.703841178031816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa9d80414dc89%3A0x4c6795d330c79745!2z2YLYtdixINiv2YrYqtmK2YTYsiDZhNmE2KXYrdiq2YHYp9mE2KfYqiDZiNin2YTZhdik2KrZhdix2KfYqg!5e0!3m2!1sar!2ssa!4v1754914876687!5m2!1sar!2ssa" width="200" height="200" style="border:0;position: absolute; left: 300px;top: 4300px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  
      
   </div>
 
@@ -348,46 +349,150 @@
       const music = document.getElementById("bg-music");
       music.paused ? music.play() : music.pause();
     }
+ const nameParam = new URLSearchParams(location.search).get("name") || "ضيفنا";
+  const welcomeText = document.getElementById("welcomeText");
+  if (welcomeText) {
+    welcomeText.innerText += nameParam;
+  }
 
-    // تأكيد الحضور
-    function confirmAttendance(response) {
-      const msg = document.getElementById("responseMsg");
-      const qrContainer = document.getElementById("qrContainer");
-      const qrNote = document.getElementById("qrNote");
-      qrContainer.innerHTML = "";
-      if (response === "yes") {
-        msg.textContent = "شكرًا لتأكيد حضورك 🌹";
-        new QRCode(qrContainer, { text: "Guest Confirmed", width: 120, height: 120 });
-        qrNote.style.display = "block";
-      } else {
-        msg.textContent = "نأسف لعدم تمكنك من الحضور 💔";
-        qrNote.style.display = "none";
-      }
+  const token = new URLSearchParams(location.search).get("token") || "";
+  const qrContainer = document.getElementById("qrContainer");
+  const responseButtons = document.getElementById("responseButtons");
+  const attendanceTitle = document.getElementById("attendanceTitle");
+  const responseMsg = document.getElementById("responseMsg");
+  const qrNote = document.getElementById("qrNote");
+  const downloadBtn = document.getElementById("downloadBtn");
+  const invitationCount = document.getElementById("invitationCount");
+ 
+  // Elements for the message box
+  const messageTextarea = document.getElementById("message");
+  const sendMessageBtn = document.getElementById("sendMessageBtn");
+  const messageStatus = document.getElementById("messageStatus");
+
+  // URL for the Google Apps Script
+  const scriptURL = "https://script.google.com/macros/s/AKfycbxmecszWPiwb6gVqJpD7XRjavpHOCzrJeqcQjN1ziqLOl-fShjA2kfQi41ZDz_4QZcBoA/exec";
+
+
+  function confirmAttendance(response) {
+    responseMsg.innerText = "⏳ جاري التسجيل...";
+    fetch(`${scriptURL}?name=${encodeURIComponent(nameParam)}&token=${token}&response=${response}`)
+      .then(res => res.json())
+      .then(res => {
+        responseButtons.style.display = "none";
+        attendanceTitle.style.display = "none";
+        responseMsg.innerText = res.message;
+
+        if (res.status === "success" || res.status === "already") {
+          showQR(res.qr, res.max);
+        } else if (res.status === "declined") {
+          qrContainer.innerHTML = "";
+          qrNote.style.display = "none";
+          invitationCount.style.display = "none";
+        }
+      })
+      .catch(() => {
+        responseMsg.innerText = "❌ حدث خطأ أثناء الاتصال بالخادم.";
+      });
+  }
+
+  function showQR(link, count) {
+    qrContainer.innerHTML = "";
+    new QRCode(qrContainer, { text: link, width: 200, height: 200 });
+    qrNote.style.display = "block";
+    invitationCount.style.display = "block";
+    invitationCount.innerText = `📩 عدد الدعوات: ${count}`;
+    downloadBtn.style.display = "inline-block";
+  }
+
+  downloadBtn.onclick = () => {
+    const img = qrContainer.querySelector("img");
+    if (img) {
+      const link = document.createElement("a");
+      link.href = img.src;
+      link.download = "qr_code.png";
+      link.click();
     }
+  };
 
-    // إرسال رسالة
-    document.getElementById("sendMessageBtn").onclick = () => {
-      const message = document.getElementById("message").value;
-      const status = document.getElementById("messageStatus");
-      if (message.trim() === "") {
-        status.textContent = "الرجاء كتابة رسالة ✍️";
-      } else {
-        status.textContent = "تم إرسال رسالتك ✅";
-        document.getElementById("message").value = "";
-      }
-    };
+var countDownDate = new Date("oct 10, 2025 20:00:00").getTime();
+  var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    document.getElementById("days").innerHTML = days;
+    document.getElementById("hours").innerHTML = hours;
+    document.getElementById("minutes").innerHTML = minutes;
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("countdown").innerHTML = "انتهى الوقت";
+    }
+  }, 1000);
 
-    // عداد تنازلي
-    const eventDate = new Date("2025-12-31T20:00:00").getTime();
-    setInterval(() => {
-      const now = new Date().getTime();
-      const diff = eventDate - now;
-      if (diff > 0) {
-        document.getElementById("days").textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
-        document.getElementById("hours").textContent = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        document.getElementById("minutes").textContent = Math.floor((diff / (1000 * 60)) % 60);
-      }
-    }, 1000);
+
+  window.addEventListener('DOMContentLoaded', () => {
+    fetch(`${scriptURL}?token=${token}&check=true`)
+      .then(res => res.json())
+      .then(res => {
+        if (res.status === "already" || res.status === "used") {
+          showQR(res.qr, res.max);
+          responseButtons.style.display = "none";
+          attendanceTitle.style.display = "none";
+          responseMsg.innerText = res.message;
+        } else if (res.status === "declined") {
+          responseButtons.style.display = "none";
+          attendanceTitle.style.display = "none";
+          responseMsg.innerText = res.message || "نأسف لعدم تمكنك من الحضور.";
+        }
+      })
+      .catch(() => {
+        responseMsg.innerText = "❌ لم نتمكن من التحقق من حالتك.";
+      });
+
+    sendMessageBtn.addEventListener("click", function() {
+        const message = messageTextarea.value.trim();
+        if(message === "") {
+          messageStatus.style.color = "white";
+          messageStatus.innerText = "⚠️ الرجاء كتابة رسالة قبل الإرسال.";
+          return;
+        }
+
+        messageStatus.style.color = "white";
+        messageStatus.innerText = "⏳ جاري إرسال الرسالة...";
+        sendMessageBtn.disabled = true;
+
+        fetch(scriptURL, {
+            method: "POST",
+            body: new URLSearchParams({
+                action: "saveMessage",
+                message: message,
+                token: token
+            })
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data.includes("success")) {
+                messageStatus.style.color = "white";
+                messageStatus.innerText = "✅ تم إرسال الرسالة بنجاح.";
+                messageTextarea.value = "";
+            } else if (data.includes("already_sent")) {
+                messageStatus.style.color = "white";
+                messageStatus.innerText = "⚠️ لقد أرسلت رسالة مسبقاً.";
+            } else {
+                messageStatus.style.color = "white";
+                messageStatus.innerText = "❌ حدث خطأ، حاول مرة أخرى.";
+            }
+            sendMessageBtn.disabled = false;
+        })
+        .catch(() => {
+            messageStatus.style.color = "red";
+            messageStatus.innerText = "❌ فشل الاتصال بالخادم.";
+            sendMessageBtn.disabled = false;
+        });
+    });
+  });
+
   </script>
 
 </body>
