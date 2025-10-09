@@ -1,258 +1,273 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>دعوة حفل زفاف</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>دعوة الحفل</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-    font-family: 'Aref Ruqaa', serif;
-      background-color: #ffffff;
-      overflow-x: hidden;
-      color: #b6c8a2;    
+     body {
+      margin: 0;
+      font-family: "Amiri", serif;
+      height: 100vh;
+      background: url('1000219690.jpg') no-repeat center/cover;
+      color: #ffffff;
+      overflow: auto;
+      background-attachment: fixed;
     }
-
-    .hidden {
-      opacity: 0;
-      transition: opacity 1.5s ease-in-out;
-    }
-    .visible {
-      opacity: 1;
-    }
-
-    #intro {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background-color: black;
-    }
-    #intro video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      z-index: 1;
-    }
-#intro .overlay {
-  position: relative;
-  z-index: 2;
-  width: 100%; /* بدل 150% حتى ما يمد العناصر */
-  height: 120%; /* بدل 150% */
-  display: block; /* بدل flex حتى ما يضغط أو يمد الزر */
-  padding-bottom: 100px;
-  background-color: rgba(0,0,0,0.0);
-  text-align: center;
-  margin-top: -30px;
-  left: 0; /* بدل 10% */
-}
-
-#intro button {
-  position: absolute;
-  top: 240px; /* المسافة من الأعلى */
-  left: 20px; /* المسافة من اليسار */
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  display: inline-block;
-  box-sizing: border-box;
-  cursor: pointer;
-  font-size: 30px;
-  border: none;
-  z-index: 3;
-  background-image: url('114582.png');
-  background-size: cover;
-  background-position: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* ظل ناعم */
-}
-
-    #intro.starting button {
-      display: none;
-    }
-    #intro.close {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 1s ease;
-    }
-
-    .section {
-      min-height: 100vh;
-      text-align: center;
-      background-size: cover;
-      background-position: center;
-      position: relative;
-      padding: 60px 20px;
-    }
-
     .page-content {
+          position: relative;
+          z-index: 2;
+          padding: 30px 15px 80px;
+          max-width: 700px;
+          margin: auto;
+        }
+   .envelope1 {
+      width: 224px;
+      height: 224px;
+      overflow: hidden;
       position: relative;
+      transition: all ease;
+      animation: tremble 1s ease-out 1;
+      position: absolute;
+      left: 70px;
+   }
+
+    .envelope--base {
+      top: 100px;
       z-index: 2;
-      margin-top: 90px
+      width: 220px;
+      height: 121px;
+      position: relative;
+      border-radius: 4px;
+      border: 2px solid #00000024;
+      background-color: #ed4135;
     }
 
-    .decor-img {
+    .envelope__tab {
+      left: 28px;
+      z-index: 1;
+      bottom: 26px;
+      width: 212px;
+      height: 140px;
+      position: absolute;
+      transform: rotateZ(45deg);
+      border-top-left-radius: 30px;
+      background-color: #f34e43;
+      border: 2px solid #00000024;
+    }
+
+    .envelope__letter {
+      left: 29px;
+      z-index: 3;
+      width: 158px;
+      bottom: 17px;
+      height: 121px;
+      cursor: pointer;
+      font-size: 16px;
+      font-style: oblique;
+      padding: 12px 18px;
+      border-radius: 8px;
+      position: absolute;
+      box-sizing: border-box;
+      background-size: cover;
+      color: #a59090;
+      border: 1px solid #00000024;
+      transition: all 0.6s linear 0.4s;
+      background-image: url("https://i.pinimg.com/564x/03/c3/fe/03c3fe8f10c79787d45f0cff0bc7bb52.jpg");
+    }
+
+    .envelope__letter:hover {
+      height: 200px;
+      color: #4c4444;
+    }
+
+    .envelope__letter:before {
+      content: "";
+      height: 0;
+      width: 6px;
+      right: -34px;
+      bottom: -17px;
+      position: absolute;
+      border-top: 56px solid transparent;
+      border-left: 107px solid #f34e43;
+      border-right: 107px solid #f34e43;
+      border-bottom: 65px solid #ed4135;
+    }
+
+    @keyframes shadow {
+      0% { width: 230px; }
+      50% { width: 200px; }
+      100% { width: 230px; }
+    }
+
+    @keyframes tremble {
+      0% { transform: rotate(-1deg); }
+      50% { transform: rotate(0deg); }
+      75% { transform: rotate(1deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    /* الظرف (الانترو) */
+    .envelope {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: auto;
+    }
+
+    .top {
       position: absolute;
       top: 0;
+      left: 0;
+      width: 100%;
+      height: 60%;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      background: url("1000219689.jpg") no-repeat center/cover;
+      transition: transform 1s ease;
+      z-index: 3;
+    }
+
+    .bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60%;
+      clip-path: polygon(0 100%, 100% 100%, 50% 0);
+      background: url("1000219689.jpg") no-repeat center/cover;
+      transition: transform 1s ease;
+      z-index: 3;
+    }
+
+    .seal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 20vw;
+      height: 20vw;
+      max-width: 300px;
+      max-height: 300px;
+      border-radius: 50%;
+      background: url('1000217182.png') no-repeat center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 4vw;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.8s ease;
+      z-index: 4;
+    }
+
+    .flowers {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .flower-bottom {
+      position: absolute;
+      bottom: -40%;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 1;
-      width: 1700px;
-      max-width: 100%;
-      opacity: 0.85;
-      pointer-events: none;
-    }
-
-    .image-full {
-      width: 100%;
-      height: auto;
-      display: block;
-      margin: auto;
-      transform: translateY(-40px);
-    }
-
-    .fade-in {
+      width: 40%;
+      max-width: 300px;
       opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInText 1s forwards;
+      transition: all 1.2s ease;
     }
 
-    @keyframes fadeInText {
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .open .top { transform: translateY(-100%); }
+    .open .bottom { transform: translateY(100%); }
+    .open .seal { transform: translate(-50%, -50%) scale(0); }
+    .open .flower-bottom { bottom: 5%; opacity: 1; }
 
-    button {
+    /* زر الموسيقى */
+    .music-btn {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 1001;
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 50px;
+      font-size: 14px;
+      border: 1px solid #fff;
+      cursor: pointer;
+    }
+  button {
       padding: 20px 20px;
       font-size: 13px;
       border: none;
       border-radius: 10px;
       cursor: pointer;
       margin: 20px;
+      background-image: url('1000220024.jpg');
       background-size: cover;
       background-repeat: no-repeat;
-      background-color: #b6c8a2;
-      color: #ffffff;
+      background-color: transparent;
+      color: #000000;
     }
-
-    .music-btn {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 999;
-      background: rgba(0,0,0,0.4);
-      color: #fff;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-size: 10px;
-    }
-
-    #bg-video {
-      position: fixed;
-      top:0;
-      left:0;
-      z-index: -1;
-      inset: 0;
-      object-fit: cover;
-      width: 100%;
-      height: 100vh;
-    }
-
-    #intro-bg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    /* المحتوى */
+    .page-content {
+      position: relative;
       z-index: 1;
-      top:0;
-      left:0;
-    }
-
-    #center-img {
-      width: 200px;
-      z-index: 2;
-      transform: translateY(-90px);
-    }
-
-    .corner {
-      position: absolute;
-      width: 175px;
-      animation: rotate360 10s linear infinite;
-      z-index: 2;
-    }
-
-    .corner1 {
-      top: 20px;
-      right: 10px;
-    }
-
-    .corner2 {
-      bottom: 20px;
-      left: 10px;
-    }
-
-    @keyframes rotate360 {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    .transparent-box {
-      background-color: rgba(0, 0, 0, 0.6); ;
-      padding: 20px;
-      border-radius: 12px;
-      color: white;
-      max-width: 90%;
-      margin: auto;
+      display: none; /* مخفي إلى أن يفتح الظرف */
       text-align: center;
+      padding: 40px 10px;
+      background-attachment: fixed;
+      width: auto;
     }
 
-    .qr-wrapper {
+    .gif-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-top: 20px;
-    }
-        #countdown {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      font-family: 'Amiri', serif;
-      margin-top: 20px;
+      margin-top: 100px;
     }
 
-    .time-box {
-      background: #b6c8a2;
-      color: white;
-      padding: 10px 15px;
+    .gif-container img {
+      width: 400px;
+      height: 800px;
+      max-width: 90vw;
+      object-fit: contain;
+    }
+      .time-box {
+      color: #3c2e1f;
+      padding: 15px;
       border-radius: 15px;
+      min-width: 80px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      width: 50px;
+      height: 50px;
       text-align: center;
-      min-width: 70px;
-    }
+       background-image: url('1000220024.jpg');
 
+
+    }
     .time-box span {
       display: block;
       font-size: 28px;
       font-weight: bold;
     }
-
-    .time-label {
-      font-size: 15px;
-      margin-top: 5px;
-      color: white;
-    }
+    
     .message-box {
+ 
       margin: 20px auto;
       padding: 10px;
-      background: #b6c8a2 ;
       border-radius: 12px;
       max-width: 300px;
       text-align: center;
+      background-image: url('1000220024.jpg');
+
+
     }
 
     .message-box textarea {
-      width: 100%;
+      width: 80%;
       height: 80px;
       border: none;
       outline: none;
@@ -260,80 +275,147 @@
       border-radius: 8px;
       resize: none;
       background: white;
-      color: #b6c8a2 ;
+      color: #000000 ;
     }
 
     .message-box button {
       margin-top: 10px;
       padding: 10px 20px;
       border: none;
-      background: white;
-      color:  #b6c8a2;
+      background: rgb(255, 249, 249);
+      color: #000000;
       border-radius: 20px;
       cursor: pointer;
+      top: 10px;
     }
     .message-box button:hover {
-      background:  #b6c8a2;
+      background:  black;
     }
 
     .message-status {
         margin-top: 10px;
         font-weight: bold;
     }
+     .envelope1 {
+      width: 224px;
+      height: 224px;
+      overflow: hidden;
+      position: relative;
+      transition: all ease;
+      animation: tremble 1s ease-out 1;
+      transform: rotate(15deg);
+    }
+
+    .envelope--base {
+      top: 100px;
+      z-index: 2;
+      width: 220px;
+      height: 121px;
+      position: relative;
+      border-radius: 4px;
+      border: 2px solid #00000024;
+      background-color: #f3f3f3;
+    }
+
+    .envelope__tab {
+      left: 28px;
+      z-index: 1;
+      bottom: 26px;
+      width: 212px;
+      height: 140px;
+      position: absolute;
+      transform: rotateZ(45deg);
+      border-top-left-radius: 30px;
+      background-color: #f3f3f3;
+      border: 2px solid #00000024;
+    }
+
+    .envelope__letter {
+      left: 29px;
+      z-index: 3;
+      width: 158px;
+      bottom: 17px;
+      height: 160px;
+      cursor: pointer;
+      font-size: 16px;
+      font-style: oblique;
+      padding: 12px 18px;
+      border-radius: 8px;
+      position: absolute;
+      box-sizing: border-box;
+      background-size: cover;
+      color: #a59090;
+      border: 1px solid #00000024;
+      transition: all 0.6s linear 0.4s;
+      background-image: url("https://i.pinimg.com/564x/03/c3/fe/03c3fe8f10c79787d45f0cff0bc7bb52.jpg");
+    }
+
+    .envelope__letter:hover {
+      height: 200px;
+      color: #4c4444;
+    }
+
+    .envelope__letter:before {
+      content: "";
+      height: 0;
+      width: 6px;
+      right: -34px;
+      bottom: -17px;
+      position: absolute;
+      border-top: 56px solid transparent;
+      border-left: 107px solid #ffffff;
+      border-right: 107px solid #ffffff;
+      border-bottom: 65px solid #f3f3f3;
+    }
+
+    @keyframes shadow {
+      0% { width: 230px; }
+      50% { width: 200px; }
+      100% { width: 230px; }
+    }
+
+    @keyframes tremble {
+      0% { transform: rotate(-1deg); }
+      50% { transform: rotate(0deg); }
+      75% { transform: rotate(1deg); }
+      100% { transform: rotate(0deg); }
+    }
 
   </style>
 </head>
 <body>
 
-<video autoplay muted loop playsinline id="bg-video">
-  <source src="3333.mp4" type="video/mp4">
-</video>
+  <!-- الظرف -->
+ <!----> <div class="envelope" id="envelope">
+    <div class="top"></div>
+    <div class="bottom"></div>
+    <div class="seal" id="seal">افتح</div>
 
-<div id="intro">
-  <img src="114555.jpg" id="intro-bg" alt="خلفية الانترو">
-  <div class="overlay">
-    <button onclick="startExperience()">افتح</button>
+
   </div>
-</div>
 
-<button class="music-btn" onclick="toggleMusic()">🎵</button>
-<audio id="bg-music" loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
+  <!-- زر الموسيقى -->
+  <button class="music-btn" onclick="toggleMusic()">🎵</button>
+  <audio id="bg-music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+ 
+  <!-- المحتوى -->
+  <div class="page-content" id="pageContent">
 
-<div class="page-content" style="margin-top: 120px;">
-  <div class="transparent-box">
-   
-    <h1 class="fade-in" id="welcomeText" style="animation-delay: 0.5s;">حيّاك الله، </h1>
-    <p></p>
-    <h2 class="fade-in" style="animation-delay: 1s;">دعوة خاصة</h2>
-    <p></p>
-    <h3 class="fade-in" style="animation-delay: 1.5s;">بارك الله لهم وبارك عليهما وجمع بينهم في خير</h3>
-    <h4 class="fade-in" style="animation-delay: 2s;">نتشرف</h4>
-   
-     
-      <div class="fade-in" style="animation-delay: 2.5s; display: flex; justify-content: center; gap: 70px;font-size: 30px">
-        <span>السيدة</span>
-        <span>السيدة</span>
-      </div>
+    <img src="1000219900.png" style="width: 400px; height: 800px; margin-top: 40px;left: 80px;position: absolute;">
+     <img src="131872.png" style="width: 800px; height: 1000px; margin-top: 40px;left: -70px;position: absolute;">
+     <img src="1000219448 (1).png" style="width: 550px; height: 1000px; margin-top: 1050px;left: 50px;position: absolute;">
 
-      <div class="fade-in" style="animation-delay: 3s; display: flex; justify-content: center; gap: 70px;font-size: 30px">
-        <span>أم أحمد</span>
-        <span>أم سمر</span>
-      </div>
-
-    <h4 class="fade-in" style="animation-delay: 3.5s;">بدعوتكم لحضور حفل زفاف </h4>
-
-      <div class="fade-in" style="animation-delay: 4s; display: flex; justify-content: center; gap: 70px;font-size: 30px">
-        <span> أحمد</span>
-         <span>&</span>
-        <span> سمر</span>
-      </div>
-
-    <h3 class="fade-in" style="animation-delay: 4.4s;">بارك الله لهم وبارك عليهما وجمع بينهم في خير</h3>
-
-   
-    <p style="color: white; font-size: 16px; text-align: center; margin-top: 40px; animation: bounce 2s infinite;">
+ <div style="position: absolute;top: 660px;left: 10px;" class="envelope1">
+    <div class="envelope__tab"></div>
+      <div class="envelope__letter">
+    <p  id="welcomeText" style="animation-delay: 0.5s;color: #d36969;">المكرمة، </p>
+    </div>
+      <div class="envelope--base"></div> 
+    </div>
+    <div class="shadow"></div>
+              <p style="color: rgb(0, 0, 0); font-size: 20px;  margin-top: 40px; animation: bounce 2s infinite;position: absolute;top: 900px;left: 250px;">
       ↓ تاكيد الحضور ↓
     </p>
    
@@ -343,286 +425,85 @@
       50% { transform: translateY(5px); }
     }
     </style>
-    <hr style="margin: 40px auto; border: 1px solid #fff; width: 80%; opacity: 0.3;" />
 
-    <h2 id="attendanceTitle">هل ستحضر؟</h2>
-      <div id="responseButtons" style="margin-top:30px;">
-        <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('yes')">نعم، بإذن الله</button>
-        <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('no')">لا، أعتذر عن الحضور</button>
-      </div>
-      <p id="responseMsg" style="margin-top: 20px;"></p>
-      <div class="qr-wrapper">
-        <div id="qrContainer" style="margin-top: 20px;"></div>
-      </div>
-      <h1 id="qrNote" style="display: none; font-size: 14px;">📌 استخدم رمز الدخول عند الوصول للقاعة.</h1>
-      <h2 id="invitationCount" style="font-size: 14px; display: none;"></h2>
-      <button id="downloadBtn" style="display: none; margin-top: 10px;">📥تحميل الدعوة</button>
-      <hr style="margin: 40px auto; border: 1px solid #fff; width: 80%; opacity: 0.3;" />
-        <h1>رسالتك للعروسين</h1>
+    <h2 style="top:1200px;position: absolute;left: 280px;" id="attendanceTitle">هل ستحضر؟</h2>
+     <div id="responseButtons" style="margin-top:30px;top:1260px;position: absolute;left: 160px;">
+      <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('yes')">نعم، بإذن الله</button>
+      <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('no')">لا، أعتذر عن الحضور</button>
+    </div>
+  <p id="responseMsg" style="margin-top: 20px;top: 1350px;position: absolute;left: 260px;"></p>
+    <div class="qr-wrapper">
+      <div id="qrContainer" style="margin-top: 20px;top:1200px;position: absolute;left: 260px;"></div>
+    </div>
+    <h1  id="qrNote" style="display: none; font-size: 14px;top:1300px;position: absolute;left: 300px;">📌 استخدم رمز الدخول عند الوصول للقاعة.</h1>
+    <h2 id="invitationCount" style="font-size: 14px; display: none;top:1350px;position: absolute;left: 260px;"></h2>
+    <button id="downloadBtn" style="display: none; margin-top: 10px;top:1400px;position: absolute;left: 330px;">📥تحميل الدعوة</button>
 
-        <div class="message-box">
-    <textarea id="message" placeholder=" اكتب تهنئتك"></textarea>
-    <button id="sendMessageBtn"> إرسال</button>
-    <p id="messageStatus" class="message-status"></p>
+     <h2 style="top:1600px;position: absolute;left: 250px;" id="attendanceTitle">رسالتك للعروسين</h2>
+    <div style="margin-top: 20px;top:1700px;position: absolute;left: 170px;" class="message-box">
+    <textarea   id="message" placeholder=" اكتب تهنئتك"></textarea>
+    <button  id="sendMessageBtn"> إرسال</button>
+    <p  id="messageStatus" class="message-status"></p>
      </div>
-
- 
-
-      <p style="color: white; font-size: 16px; text-align: center; margin-top: 40px;">
-      ↓ التفاصيل ↓
-    </p>
-   
-    <hr style="margin: 40px auto; border: 1px solid #fff; width: 80%; opacity: 0.3;" />
-       
-
-   
-    <h1>تفاصيل الحفل</h1>
-    <img src="1000217189.png"
-     style="width: 300px; height: 300px; filter: brightness(0) saturate(100%) invert(87%) sepia(8%) saturate(629%) hue-rotate(53deg) brightness(93%) contrast(90%);">
-
-    <div id="countdown">
-      <div class="time-box">
+     <img src="125026.png" style="width: 400px; height: 400px; margin-top: 40px;left: 140px;position: absolute;top:1300px ;">
+      <img src="1000220021.png" style="width: 700px; height: 600px; margin-top: 40px;left: 77px;position: absolute;top:1900px ;">
+    <div style="position: absolute;top: 2270px;left: 40px;" class="time-box">
         <span id="days">00</span>
         <div class="time-label">يوم</div>
       </div>
-      <div class="time-box">
+      <div style="position: absolute;top: 2270px;left: 190px;" class="time-box">
         <span id="hours">00</span>
         <div class="time-label">ساعة</div>
       </div>
-      <div class="time-box">
+      <div  style="position: absolute;top: 2270px;left: 350px;" class="time-box">
         <span id="minutes">00</span>
         <div class="time-label">دقيقة</div>
       </div>
     </div>
-     <hr style="margin: 40px auto; border: 1px solid #fff; width: 80%; opacity: 0.3;" />
-     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.6707907180357!2d46.837938325403954!3d24.703841178031816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa9d80414dc89%3A0x4c6795d330c79745!2z2YLYtdixINiv2YrYqtmK2YTYsiDZhNmE2KXYrdiq2YHYp9mE2KfYqiDZiNin2YTZhdik2KrZhdix2KfYqg!5e0!3m2!1sar!2ssa!4v1754914876687!5m2!1sar!2ssa" width="200" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  </div>
-</div>
+         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.6707907180357!2d46.837938325403954!3d24.703841178031816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa9d80414dc89%3A0x4c6795d330c79745!2z2YLYtdixINiv2YrYqtmK2YTYsiDZhNmE2KXYrdiq2YHYp9mE2KfYqiDZiNin2YTZhdik2KrZhdix2KfYqg!5e0!3m2!1sar!2ssa!4v1754914876687!5m2!1sar!2ssa" width="300" height="100" style="border:0;position: absolute; left: 100px;top: 2400px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  
+
+    </div>
+
+  <script>
+    const seal = document.getElementById("seal");
+    const envelope = document.getElementById("envelope");
+    const gif = document.getElementById("myGif");
+    const pageContent = document.getElementById("pageContent");
+    const gifSrc = "1000219897.gif"; // ملف الـ GIF
+
+    seal.addEventListener("click", () => {
+      envelope.classList.add("open");
+
+      setTimeout(() => {
+        gif.src = gifSrc;
+      }, 500);
+
+      // بعد الفتح، نخفي الظرف ونظهر الدعوة
+      setTimeout(() => {
+          envelope.style.display = "none";
+    document.body.style.overflow = "auto";
+    document.body.style.backgroundAttachment = "fixed";
+    document.body.style.backgroundSize = "cover";
+    pageContent.style.display = "block";
 
 
 
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
-<script>
-  function startExperience() {
-    const intro = document.getElementById("intro");
-    const music = document.getElementById("bg-music");
-
-    intro.classList.add("close");
-    music.play().catch(() => {});
-
-    setTimeout(() => {
-      intro.remove();
-    }, 1000);
-  }
-
-  function toggleMusic() {
-    const bgMusic = document.getElementById("bg-music");
-    try { bgMusic.paused ? bgMusic.play() : bgMusic.pause(); } catch {}
-  }
-
-  const nameParam = new URLSearchParams(location.search).get("name") || "ضيفنا";
-  const welcomeText = document.getElementById("welcomeText");
-  if (welcomeText) {
-    welcomeText.innerText += nameParam;
-  }
-
-  const token = new URLSearchParams(location.search).get("token") || "";
-  const qrContainer = document.getElementById("qrContainer");
-  const responseButtons = document.getElementById("responseButtons");
-  const attendanceTitle = document.getElementById("attendanceTitle");
-  const responseMsg = document.getElementById("responseMsg");
-  const qrNote = document.getElementById("qrNote");
-  const downloadBtn = document.getElementById("downloadBtn");
-  const invitationCount = document.getElementById("invitationCount");
- 
-  // Elements for the message box
-  const messageTextarea = document.getElementById("message");
-  const sendMessageBtn = document.getElementById("sendMessageBtn");
-  const messageStatus = document.getElementById("messageStatus");
-
-  // URL for the Google Apps Script
-  const scriptURL = "https://script.google.com/macros/s/AKfycbxmecszWPiwb6gVqJpD7XRjavpHOCzrJeqcQjN1ziqLOl-fShjA2kfQi41ZDz_4QZcBoA/exec";
-
-
-  function confirmAttendance(response) {
-    responseMsg.innerText = "⏳ جاري التسجيل...";
-    fetch(`${scriptURL}?name=${encodeURIComponent(nameParam)}&token=${token}&response=${response}`)
-      .then(res => res.json())
-      .then(res => {
-        responseButtons.style.display = "none";
-        attendanceTitle.style.display = "none";
-        responseMsg.innerText = res.message;
-
-        if (res.status === "success" || res.status === "already") {
-          showQR(res.qr, res.max);
-        } else if (res.status === "declined") {
-          qrContainer.innerHTML = "";
-          qrNote.style.display = "none";
-          invitationCount.style.display = "none";
-        }
-      })
-      .catch(() => {
-        responseMsg.innerText = "❌ حدث خطأ أثناء الاتصال بالخادم.";
-      });
-  }
-
-  function showQR(link, count) {
-    qrContainer.innerHTML = "";
-    new QRCode(qrContainer, { text: link, width: 200, height: 200 });
-    qrNote.style.display = "block";
-    invitationCount.style.display = "block";
-    invitationCount.innerText = `📩 عدد الدعوات: ${count}`;
-    downloadBtn.style.display = "inline-block";
-  }
-
-  downloadBtn.onclick = () => {
-    const img = qrContainer.querySelector("img");
-    if (img) {
-      const link = document.createElement("a");
-      link.href = img.src;
-      link.download = "qr_code.png";
-      link.click();
-    }
-  };
-
-var countDownDate = new Date("oct 10, 2025 20:00:00").getTime();
-  var x = setInterval(function() {
-    var now = new Date().getTime();
-    var distance = countDownDate - now;
-    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    document.getElementById("days").innerHTML = days;
-    document.getElementById("hours").innerHTML = hours;
-    document.getElementById("minutes").innerHTML = minutes;
-    if (distance < 0) {
-      clearInterval(x);
-      document.getElementById("countdown").innerHTML = "انتهى الوقت";
-    }
-  }, 1000);
-
-
-  window.addEventListener('DOMContentLoaded', () => {
-    fetch(`${scriptURL}?token=${token}&check=true`)
-      .then(res => res.json())
-      .then(res => {
-        if (res.status === "already" || res.status === "used") {
-          showQR(res.qr, res.max);
-          responseButtons.style.display = "none";
-          attendanceTitle.style.display = "none";
-          responseMsg.innerText = res.message;
-        } else if (res.status === "declined") {
-          responseButtons.style.display = "none";
-          attendanceTitle.style.display = "none";
-          responseMsg.innerText = res.message || "نأسف لعدم تمكنك من الحضور.";
-        }
-      })
-      .catch(() => {
-        responseMsg.innerText = "❌ لم نتمكن من التحقق من حالتك.";
-      });
-
-    sendMessageBtn.addEventListener("click", function() {
-        const message = messageTextarea.value.trim();
-        if(message === "") {
-          messageStatus.style.color = "white";
-          messageStatus.innerText = "⚠️ الرجاء كتابة رسالة قبل الإرسال.";
-          return;
-        }
-
-        messageStatus.style.color = "white";
-        messageStatus.innerText = "⏳ جاري إرسال الرسالة...";
-        sendMessageBtn.disabled = true;
-
-        fetch(scriptURL, {
-            method: "POST",
-            body: new URLSearchParams({
-                action: "saveMessage",
-                message: message,
-                token: token
-            })
-        })
-        .then(response => response.text())
-        .then(data => {
-            if (data.includes("success")) {
-                messageStatus.style.color = "white";
-                messageStatus.innerText = "✅ تم إرسال الرسالة بنجاح.";
-                messageTextarea.value = "";
-            } else if (data.includes("already_sent")) {
-                messageStatus.style.color = "white";
-                messageStatus.innerText = "⚠️ لقد أرسلت رسالة مسبقاً.";
-            } else {
-                messageStatus.style.color = "white";
-                messageStatus.innerText = "❌ حدث خطأ، حاول مرة أخرى.";
-            }
-            sendMessageBtn.disabled = false;
-        })
-        .catch(() => {
-            messageStatus.style.color = "red";
-            messageStatus.innerText = "❌ فشل الاتصال بالخادم.";
-            sendMessageBtn.disabled = false;
-        });
+      }, 1500);
     });
-  });
-</script>
+
+    function toggleMusic() {
+      const music = document.getElementById("bg-music");
+      if (music.paused) music.play();
+      else music.pause();
+    }
+
+    // الترحيب بالاسم من الرابط
+    const nameParam = new URLSearchParams(location.search).get("name") || "ضيفنا";
+    const welcomeText = document.getElementById("welcomeText");
+    if (welcomeText) {
+      welcomeText.innerText += " " + nameParam;
+    }
+  </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
