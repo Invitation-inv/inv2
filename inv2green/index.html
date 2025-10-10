@@ -41,31 +41,65 @@
     }
 
     /* الأبواب */
-    .door {
-      position: fixed;
-      top: 0;
-      width: 50%;
-      height: 100%;
-      z-index: 2;
-      background-size: cover;
-      background-position: center;
-      transition: transform 2.5s ease-in-out;
-    }
 
-    .door.left {
-      left: 0;
-      transform-origin: left center;
-      background-image: url("l.png"); 
-      /* ← صورة الباب الأيسر */
-     
-    }
+/* الأبواب */
+.door {
+  position: fixed;
+  top: 2vh; /* نزّل الباب شوي لتحت (غيّري الرقم لو تبين أكثر) */
+  width: 50%;
+  height: 96vh; /* خليه يغطي الباقي */
+  z-index: 2;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transition: transform 2.5s ease-in-out;
+}
 
-    .door.right {
-      right: 0;
-      transform-origin: right center;
-      background-image: url("r.png"); /* ← صورة الباب الأيمن */
-      right: -40px;
-    }
+
+/* الباب الأيسر */
+.door.left {
+  left: 0;
+  transform-origin: left center;
+  background-image: url("l.png");
+}
+
+/* الباب الأيمن */
+.door.right {
+  right: 0;
+  transform-origin: right center;
+  background-image: url("r.png");
+}
+
+/* حالة الفتح */
+.open .door.left {
+  transform: perspective(1200px) rotateY(-100deg);
+}
+
+.open .door.right {
+  transform: perspective(1200px) rotateY(100deg);
+}
+
+/* تناسب كل الشاشات */
+@media (max-width: 1024px) {
+  .door {
+    background-size: contain; /* حتى تبقى الصورة كاملة */
+  }
+}
+
+@media (max-width: 768px) {
+  .door {
+    width: 50%;
+    height: 100vh;
+    background-size: cover;
+  }
+}
+
+/* منع أي تمدد أو خروج */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
 
 
     /* زر الدخول */
@@ -509,6 +543,11 @@ var countDownDate = new Date("oct 10, 2025 20:00:00").getTime();
 
 </body>
 </html>
+
+
+
+
+
 
 
 
