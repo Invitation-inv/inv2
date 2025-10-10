@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>الباب التفاعلي</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      overflow: scroll;
+      height: 100vh;
+      font-family: "Amiri", serif;
+      background: #000;
+      background: url("11.jpg");
+    }
+
+    /* خلفية الفيديو */
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      transition: opacity 1s ease;
+    }
+
+    /* الأبواب */
+    .door {
+      position: fixed;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      z-index: 2;
+      background-size: cover;
+      background-position: center;
+      transition: transform 2.5s ease-in-out;
+    }
+
+    .door.left {
+      left: 0;
+      transform-origin: left center;
+      background-image: url("l.png"); 
+      /* ← صورة الباب الأيسر */
+      left: -10px;
+      height: 600px;
+      width: 300px;
+      top: 150px;
+    }
+
+    .door.right {
+      right: 0;
+      transform-origin: right center;
+      background-image: url("r.png"); /* ← صورة الباب الأيمن */
+      height: 600px;
+      width: 300px;
+      top: 150px;
+      right: -30px;
+    }
+
+
+    /* زر الدخول */
+    .enter-btn {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      background: rgba(255, 255, 255, 0.85);
+      color: #3b2417;
+      font-size: 1.5rem;
+      border: none;
+      padding: 15px 40px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: "Amiri", serif;
+    }
+
+    .enter-btn:hover {
+      background: #3b2417;
+      color: #fff;
+    }
+
+    /* المحتوى بعد فتح الباب */
+    .content {
+      position: relative;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 1s ease;
+      background: #fdf8f2;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+    }
+
+    /* حالة الفتح */
+    .open .door.left {
+      transform: perspective(1000px) rotateY(-100deg);
+    }
+
+    .open .door.right {
+      transform: perspective(1000px) rotateY(100deg);
+    }
+
+    .open .video-bg {
+      opacity: 0;
+    }
+
+    .show-content .content {
+      opacity: 1;
+      z-index: 3;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- فيديو خلف الأبواب -->
+  <!--<video class="video-bg" autoplay muted playsinline>
+    <source src="1111.mp4" type="video/mp4">
+  </video>-->
+
+  <!-- الأبواب 
+  <div class="door left"></div>
+  <div class="door right"></div>-->
+
+  <!-- زر الدخول 
+  <button class="enter-btn" id="enterBtn">اضغط للدخول</button>
+-->
+
+<img src="1000220051.png"  style="position: absolute;left: 500px;">
+<img src="1000220050 (1).png" style="width: 300px;position: absolute;top: 590px;left: 50px;right: 190px;z-index: 1;" >
+<img  src="1000220052.png" style="position: absolute;top: 590px;width: 100px;left: 170px;right: 470px; transform: rotate(30deg);z-index:2;">
+  <p  id="welcomeText" style="animation-delay: 0.5s;color: #1e4716;position: absolute;top: 570px;left:10px ;right: 170px;   transform: rotate(19deg);z-index: 4;">المكرمة، </p>
+<img  src="1000219900.png" style="position: absolute;top: 110px;width: 300px;left: 30px;right: 320px;">
+
+  <script>
+    const enterBtn = document.getElementById('enterBtn');
+
+    enterBtn.addEventListener('click', () => {
+      document.body.classList.add('open');
+      enterBtn.style.display = 'none'; // يخفي الزر بعد الضغط
+
+      // بعد انتهاء حركة الباب يظهر المحتوى
+      setTimeout(() => {
+        document.body.classList.add('show-content');
+      }, 2500);
+    });
+  </script>
+</body>
+</html>
