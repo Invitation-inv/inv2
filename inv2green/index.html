@@ -57,20 +57,14 @@
       transform-origin: left center;
       background-image: url("l.png"); 
       /* ← صورة الباب الأيسر */
-      left: -10px;
-      height: 600px;
-      width: 300px;
-      top: 150px;
+     
     }
 
     .door.right {
       right: 0;
       transform-origin: right center;
       background-image: url("r.png"); /* ← صورة الباب الأيمن */
-      height: 600px;
-      width: 300px;
-      top: 150px;
-      right: -30px;
+      right: -40px;
     }
 
 
@@ -107,6 +101,7 @@
       justify-content: center;
       align-items: center;
       font-size: 2rem;
+      
     }
 
     /* حالة الفتح */
@@ -130,7 +125,6 @@
     /* المحتوى العام */
     .page-content {
       position: relative;
-      z-index: 2;
       padding: 30px 15px 80px;
       max-width: 700px;
       margin: auto;
@@ -252,6 +246,17 @@
     <source src="music.mp3" type="audio/mpeg">
   </audio>
 
+  <!-- فيديو خلف الأبواب -->
+  <video class="video-bg" autoplay muted playsinline>
+    <source src="1111.mp4" type="video/mp4">
+  </video>
+
+  <!-- الأبواب -->
+  <div class="door left"></div>
+  <div class="door right"></div>
+
+  <!-- زر الدخول -->
+  <button class="enter-btn" id="enterBtn">اضغط للدخول</button>
 
 
   <!-- المحتوى -->
@@ -259,9 +264,9 @@
 
     <!-- الشعار -->
    <img src="1000220051.png"  style="position: absolute;left: 99px;">
-<img src="1000220050 (1).png" style="width: 300px;position: absolute;top: 590px;left: 50px;right: 1px;z-index: 1;" >
-<img  src="1000220052.png" style="position: absolute;top: 590px;width: 100px;left: 170px;right: -10px; transform: rotate(30deg);z-index:2;">
-  <p  id="welcomeText" style="animation-delay: 0.5s;color: #1e4716;position: absolute;top: 570px;left:10px ;right: 60px;   transform: rotate(19deg);z-index: 4;">المكرمة، </p>
+<img src="1000220050 (1).png" style="width: 300px;position: absolute;top: 590px;left: 50px;right: 1px;" >
+<img  src="1000220052.png" style="position: absolute;top: 590px;width: 100px;left: 170px;right: -10px; transform: rotate(30deg);">
+  <p  id="welcomeText" style="animation-delay: 0.5s;color: #1e4716;position: absolute;top: 570px;left:10px ;right: 60px;   transform: rotate(19deg);">المكرمة، </p>
 <img  src="1000219900.png" style="position: absolute;top: 110px;width: 300px;left: 200px;">
 
           <p style="color: #1e4716; font-size: 20px;  margin-top: 40px; animation: bounce 2s infinite;position: absolute;top: 900px;left: 300px;">
@@ -285,7 +290,7 @@
     </div>
      <p id="responseMsg" style="margin-top: 20px;top:1500px;position: absolute;left: 360px;color: #000000;"></p>
     <div class="qr-wrapper">
-      <div id="qrContainer" style="margin-top: 20px;top:1500px;position: absolute;left: 360px;"></div>
+      <div id="qrContainer" style="margin-top: 20px;top:1300px;position: absolute;left: 320px;"></div>
     </div>
     <h1 id="qrNote" style="display: none; font-size: 14px;top:1600px;position: absolute;left: 300px;">📌 استخدم رمز الدخول عند الوصول للقاعة.</h1>
     <h2 id="invitationCount" style="font-size: 14px; display: none;top:1650px;position: absolute;left: 350px;"></h2>
@@ -340,12 +345,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <script>
-    function openDoors() {
-      const intro = document.getElementById("intro");
-      intro.classList.add("open");
-      setTimeout(() => { intro.style.display = "none"; }, 2200);
-    }
+   const enterBtn = document.getElementById('enterBtn');
 
+    enterBtn.addEventListener('click', () => {
+      document.body.classList.add('open');
+      enterBtn.style.display = 'none'; // يخفي الزر بعد الضغط
+
+      // بعد انتهاء حركة الباب يظهر المحتوى
+      setTimeout(() => {
+        document.body.classList.add('show-content');
+      }, 2500);
+    });
     function toggleMusic() {
       const music = document.getElementById("bg-music");
       music.paused ? music.play() : music.pause();
