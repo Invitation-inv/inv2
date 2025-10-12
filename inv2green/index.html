@@ -47,6 +47,7 @@
 /* الأبواب */
 
 /* خلفية الفيديو */
+/* خلفية الفيديو */
 .video-bg {
   position: fixed;
   top: 0;
@@ -105,67 +106,6 @@
   font-family: "Amiri", serif;
 }
 
-
-/* حالة الفتح */
-.open .door.left {
-  transform: perspective(1200px) rotateY(-100deg);
-}
-
-.open .door.right {
-  transform: perspective(1200px) rotateY(100deg);
-}
-
-/* تناسب كل الشاشات */
-@media (max-width: 1024px) {
-  .door {
-    background-size: contain; /* حتى تبقى الصورة كاملة */
-  }
-}
-
-@media (max-width: 768px) {
-  .door {
-    width: 50%;
-    height: 100vh;
-    background-size: cover;
-  }
-}
-
-/* منع أي تمدد أو خروج */
-
-
-
- 
-        .content {
-      position: relative;
-      z-index: 0;
-      opacity: 0;
-      transition: opacity 1s ease;
-      background: #fdf8f2;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 2rem;
-      
-    }
-
-    /* حالة الفتح */
-    .open .door.left {
-      transform: perspective(1000px) rotateY(-100deg);
-    }
-
-    .open .door.right {
-      transform: perspective(1000px) rotateY(100deg);
-    }
-
-    .open .video-bg {
-      opacity: 0;
-    }
-
-    .show-content .content {
-      opacity: 1;
-      z-index: 3;
-    }
 
     /* المحتوى العام */
     .page-content {
@@ -554,6 +494,7 @@ var countDownDate = new Date("oct 20, 2025 20:00:00").getTime();
 
 </body>
 </html>
+
 
 
 
