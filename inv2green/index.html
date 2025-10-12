@@ -8,12 +8,9 @@
       margin: 0;
       font-family: "Amiri", serif;
       height: 100vh;
-      background: url("11.jpg")  ;
+      background: url("11.jpg");
       color: #1e4716;
-
-}
-
- 
+    }
 
     /* زر الموسيقى */
     .music-btn {
@@ -21,7 +18,7 @@
       top: 15px;
       left: 15px;
       z-index: 1001;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0, 0, 0, 0.5);
       color: #fff;
       padding: 8px 14px;
       border-radius: 50px;
@@ -31,7 +28,7 @@
     }
 
     /* خلفية الفيديو */
-   .video-bg {
+    .video-bg {
       position: fixed;
       top: 0;
       left: 0;
@@ -43,92 +40,103 @@
     }
 
     /* الأبواب */
+    .door {
+      position: fixed;
+      top: 2vh;
+      width: 50%;
+      height: 96vh;
+      z-index: 2;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      transition: transform 2.5s ease-in-out;
+    }
 
-/* الأبواب */
+    .door.left {
+      left: 0;
+      transform-origin: left center;
+      background-image: url("l.png");
+    }
 
-/* خلفية الفيديو */
-/* خلفية الفيديو */
-.video-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0; /* خلف كل شيء */
-  transition: opacity 1s ease;
-  pointer-events: none; /* يمنع حجب الأزرار */
-}
+    .door.right {
+      right: 0;
+      transform-origin: right center;
+      background-image: url("r.png");
+    }
 
-/* الأبواب */
-.door {
-  position: fixed;
-  top: 2vh;
-  width: 50%;
-  height: 96vh;
-  z-index: 2;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: transform 2.5s ease-in-out;
-  pointer-events: none; /* <=== يمنع حجب الضغط */
-}
+    /* حالة الفتح */
+    .open .door.left {
+      transform: perspective(1200px) rotateY(-100deg);
+    }
 
-/* الباب الأيسر */
-.door.left {
-  left: 0;
-  transform-origin: left center;
-  background-image: url("l.png");
-}
+    .open .door.right {
+      transform: perspective(1200px) rotateY(100deg);
+    }
 
-/* الباب الأيمن */
-.door.right {
-  right: 0;
-  transform-origin: right center;
-  background-image: url("r.png");
-}
+    @media (max-width: 1024px) {
+      .door {
+        background-size: contain;
+      }
+    }
 
-/* زر الدخول */
-.enter-btn {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 5; /* فوق الأبواب والفيديو */
-  background: rgba(255, 255, 255, 0.85);
-  color: #1e4716;
-  font-size: 1.5rem;
-  border: none;
-  padding: 19px 30px;
-  border-radius: 80px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: "Amiri", serif;
-}
+    @media (max-width: 768px) {
+      .door {
+        width: 50%;
+        height: 100vh;
+        background-size: cover;
+      }
+    }
 
+    /* زر الدخول */
+    .enter-btn {
+      position: fixed;
+      top: 50%;
+      left: 35%;
+      z-index: 3;
+      background: rgba(255, 255, 255, 0.85);
+      color: #1e4716;
+      font-size: 1.5rem;
+      border: none;
+      padding: 19px 30px;
+      border-radius: 80px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: "Amiri", serif;
+    }
 
-    /* المحتوى العام */
+    .enter-btn:hover {
+      background: #1e4716;
+      color: #fff;
+    }
+
+    .content {
+      position: relative;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 1s ease;
+      background: #fdf8f2;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+    }
+
+    .open .video-bg {
+      opacity: 0;
+    }
+
+    .show-content .content {
+      opacity: 1;
+      z-index: 3;
+    }
+
     .page-content {
       position: relative;
       padding: 30px 15px 80px;
       max-width: 700px;
       margin: auto;
-    }
-
-    /* الصناديق */
-    .card {
-      padding: 25px;
-      border-radius: 15px;
-      margin-bottom: 30px;
-      text-align: center;
-    }
-
-    .card h1, .card h2 {
-      margin-bottom: 20px;
-    }
-
-    /* أزرار */
-    button {
+    }   button {
       padding: 10px 20px;
       border: none;
       border-radius: 20px;
@@ -219,12 +227,11 @@
     
     
 
+
   </style>
 </head>
-<body>
 
-  <!-- شاشة البداية -->
-  
+<body>
   <!-- زر الموسيقى -->
   <button class="music-btn" onclick="toggleMusic()">🎵</button>
   <audio id="bg-music" loop>
@@ -243,11 +250,9 @@
   <!-- زر الدخول -->
   <button class="enter-btn" id="enterBtn">اضغط للدخول</button>
 
-
   <!-- المحتوى -->
   <div class="page-content">
-
-    <!-- الشعار -->
+     <!-- الشعار -->
    <img src="1000220051.png"  style="position: absolute;left: 99px;">
 <img src="1000220050 (1).png" style="width: 300px;position: absolute;top: 590px;left: 50px;right: 1px;" >
 <img  src="1000220052.png" style="position: absolute;top: 590px;width: 100px;left: 170px;right: -10px; transform: rotate(30deg);">
@@ -324,28 +329,33 @@
      <hr style="margin: 40px auto; border: 1px solid #000000; width: 80%; opacity: 0.3;position: absolute; left: 100px;top: 3700px;" />
      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.6707907180357!2d46.837938325403954!3d24.703841178031816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa9d80414dc89%3A0x4c6795d330c79745!2z2YLYtdixINiv2YrYqtmK2YTYsiDZhNmE2KXYrdiq2YHYp9mE2KfYqiDZiNin2YTZhdik2KrZhdix2KfYqg!5e0!3m2!1sar!2ssa!4v1754914876687!5m2!1sar!2ssa" width="200" height="200" style="border:0;position: absolute; left: 300px;top: 3800px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  
      
-  </div>
-
-  <!-- QR code مكتبة -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <script>
-   const enterBtn = document.getElementById('enterBtn');
+    const enterBtn = document.getElementById('enterBtn');
+    const videoBg = document.querySelector('.video-bg');
+    const doors = document.querySelectorAll('.door');
 
     enterBtn.addEventListener('click', () => {
       document.body.classList.add('open');
-      enterBtn.style.display = 'none'; // يخفي الزر بعد الضغط
+      enterBtn.style.display = 'none';
 
-      // بعد انتهاء حركة الباب يظهر المحتوى
+      // بعد فتح الأبواب
       setTimeout(() => {
         document.body.classList.add('show-content');
-      }, 2500);
+
+        // ✅ إخفاء الأبواب والفيديو تمامًا بعد الفتح
+        doors.forEach(door => door.style.display = 'none');
+        videoBg.style.display = 'none';
+      }, 2600);
     });
+
     function toggleMusic() {
       const music = document.getElementById("bg-music");
       music.paused ? music.play() : music.pause();
     }
- const nameParam = new URLSearchParams(location.search).get("name") || "ضيفنا";
+
+     const nameParam = new URLSearchParams(location.search).get("name") || "ضيفنا";
   const welcomeText = document.getElementById("welcomeText");
   if (welcomeText) {
     welcomeText.innerText += nameParam;
@@ -490,19 +500,5 @@ var countDownDate = new Date("oct 20, 2025 20:00:00").getTime();
   });
 
   </script>
-
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
