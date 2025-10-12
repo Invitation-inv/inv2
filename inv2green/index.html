@@ -45,18 +45,33 @@
     /* الأبواب */
 
 /* الأبواب */
-.door {
+
+/* خلفية الفيديو */
+.video-bg {
   position: fixed;
-  top: 2vh; /* نزّل الباب شوي لتحت (غيّري الرقم لو تبين أكثر) */
-  width: 50%;
-  height: 96vh; /* خليه يغطي الباقي */
-  z-index: 2;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  transition: transform 2.5s ease-in-out;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0; /* خلف كل شيء */
+  transition: opacity 1s ease;
+  pointer-events: none; /* يمنع حجب الأزرار */
 }
 
+/* الأبواب */
+.door {
+  position: fixed;
+  top: 2vh;
+  width: 50%;
+  height: 96vh;
+  z-index: 2;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 2.5s ease-in-out;
+  pointer-events: none; /* <=== يمنع حجب الضغط */
+}
 
 /* الباب الأيسر */
 .door.left {
@@ -71,6 +86,25 @@
   transform-origin: right center;
   background-image: url("r.png");
 }
+
+/* زر الدخول */
+.enter-btn {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5; /* فوق الأبواب والفيديو */
+  background: rgba(255, 255, 255, 0.85);
+  color: #1e4716;
+  font-size: 1.5rem;
+  border: none;
+  padding: 19px 30px;
+  border-radius: 80px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Amiri", serif;
+}
+
 
 /* حالة الفتح */
 .open .door.left {
@@ -100,27 +134,7 @@
 
 
 
-    /* زر الدخول */
-    .enter-btn {
-      position: fixed;
-      top: 50%;
-      left: 35%;
-      z-index: 3;
-      background: rgba(255, 255, 255, 0.85);
-      color: #1e4716;
-      font-size: 1.5rem;
-      border: none;
-      padding: 19px 30px;
-      border-radius: 80px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-family: "Amiri", serif;
-    }
-
-    .enter-btn:hover {
-      background: #1e4716;
-      color: #fff;
-    }
+ 
         .content {
       position: relative;
       z-index: 0;
@@ -540,6 +554,7 @@ var countDownDate = new Date("oct 20, 2025 20:00:00").getTime();
 
 </body>
 </html>
+
 
 
 
