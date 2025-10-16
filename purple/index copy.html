@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>دعوة الحفل</title>
+  <style>
+     body {
+      margin: 0;
+      font-family: "Amiri", serif;
+      height: 100vh;
+      background: url('11 (2).jpg') no-repeat center/cover;
+      color: #ffffff;
+      overflow: auto;
+      background-attachment: fixed;
+    }
+    .page-content {
+          position: relative;
+          z-index: 2;
+          padding: 30px 15px 80px;
+          max-width: 700px;
+          margin: auto;
+        }
+   .envelope1 {
+      width: 224px;
+      height: 224px;
+      overflow: hidden;
+      position: relative;
+      transition: all ease;
+      animation: tremble 1s ease-out 1;
+      position: absolute;
+      left: 70px;
+   }
+
+    .envelope--base {
+      top: 100px;
+      z-index: 2;
+      width: 220px;
+      height: 121px;
+      position: relative;
+      border-radius: 4px;
+      border: 2px solid #00000024;
+      background-color: #ed4135;
+    }
+
+    .envelope__tab {
+      left: 28px;
+      z-index: 1;
+      bottom: 26px;
+      width: 212px;
+      height: 140px;
+      position: absolute;
+      transform: rotateZ(45deg);
+      border-top-left-radius: 30px;
+      background-color: #f34e43;
+      border: 2px solid #00000024;
+    }
+
+    .envelope__letter {
+      left: 29px;
+      z-index: 3;
+      width: 158px;
+      bottom: 17px;
+      height: 121px;
+      cursor: pointer;
+      font-size: 16px;
+      font-style: oblique;
+      padding: 12px 18px;
+      border-radius: 8px;
+      position: absolute;
+      box-sizing: border-box;
+      background-size: cover;
+      color: #a59090;
+      border: 1px solid #00000024;
+      transition: all 0.6s linear 0.4s;
+      background-image: url("https://i.pinimg.com/564x/03/c3/fe/03c3fe8f10c79787d45f0cff0bc7bb52.jpg");
+    }
+
+    .envelope__letter:hover {
+      height: 200px;
+      color: #4c4444;
+    }
+
+    .envelope__letter:before {
+      content: "";
+      height: 0;
+      width: 6px;
+      right: -34px;
+      bottom: -17px;
+      position: absolute;
+      border-top: 56px solid transparent;
+      border-left: 107px solid #f34e43;
+      border-right: 107px solid #f34e43;
+      border-bottom: 65px solid #ed4135;
+    }
+
+    @keyframes shadow {
+      0% { width: 230px; }
+      50% { width: 200px; }
+      100% { width: 230px; }
+    }
+
+    @keyframes tremble {
+      0% { transform: rotate(-1deg); }
+      50% { transform: rotate(0deg); }
+      75% { transform: rotate(1deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    /* الظرف (الانترو) */
+.envelope {
+  position: fixed; /* بدل relative */
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; /* بدل auto */
+  top: 0;
+  left: 0;
+}
+
+    .top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60%;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      background: url("11 (1).jpg") no-repeat center/cover;
+      transition: transform 1s ease;
+      z-index: 3;
+    }
+
+    .bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60%;
+      clip-path: polygon(0 100%, 100% 100%, 50% 0);
+      background: url("11 (1).jpg") no-repeat center/cover;
+      transition: transform 1s ease;
+      z-index: 3;
+    }
+
+    .seal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 20vw;
+      height: 20vw;
+      max-width: 300px;
+      max-height: 300px;
+      border-radius: 50%;
+      background: url('22.png') no-repeat center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 4vw;
+      color: #4f0844;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+      z-index: 4;
+    }
+
+    .flowers {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .flower-bottom {
+      position: absolute;
+      bottom: -40%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40%;
+      max-width: 300px;
+      opacity: 0;
+      transition: all 1.2s ease;
+    }
+
+    .open .top { transform: translateY(-100%); }
+    .open .bottom { transform: translateY(100%); }
+    .open .seal { transform: translate(-50%, -50%) scale(0); }
+    .open .flower-bottom { bottom: 5%; opacity: 1; }
+
+    /* زر الموسيقى */
+    .music-btn {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 1001;
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 50px;
+      font-size: 14px;
+      border: 1px solid #fff;
+      cursor: pointer;
+    }
+  button {
+      padding: 20px 20px;
+      font-size: 13px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 20px;
+      background-image: url('1000220024.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-color: transparent;
+      color: #000000;
+    }
+    /* المحتوى */
+    .page-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 40px 10px;
+      background-attachment: fixed;
+      width: auto;
+    }
+
+    .gif-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 100px;
+    }
+
+    .gif-container img {
+      width: 400px;
+      height: 800px;
+      max-width: 90vw;
+      object-fit: contain;
+    }
+      .time-box {
+      color: #3c2e1f;
+      padding: 15px;
+      border-radius: 15px;
+      min-width: 80px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      width: 50px;
+      height: 50px;
+      text-align: center;
+       background-image: url('11 (1).jpg');
+
+
+    }
+    .time-box span {
+      display: block;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    
+    .message-box {
+ 
+      margin: 20px auto;
+      padding: 10px;
+      border-radius: 12px;
+      max-width: 300px;
+      text-align: center;
+      background-image: url('11 (1).jpg');
+
+
+    }
+
+    .message-box textarea {
+      width: 80%;
+      height: 80px;
+      border: none;
+      outline: none;
+      padding: 10px;
+      border-radius: 8px;
+      resize: none;
+      background: white;
+      color: #000000 ;
+    }
+
+    .message-box button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      border: none;
+      background: rgb(255, 249, 249);
+      color: #000000;
+      border-radius: 20px;
+      cursor: pointer;
+      top: 10px;
+    }
+    .message-box button:hover {
+      background:  black;
+    }
+
+    .message-status {
+        margin-top: 10px;
+        font-weight: bold;
+    }
+     .envelope1 {
+      width: 224px;
+      height: 224px;
+      overflow: hidden;
+      position: relative;
+      transition: all ease;
+      animation: tremble 1s ease-out 1;
+      transform: rotate(15deg);
+    }
+
+    .envelope--base {
+      top: 100px;
+      z-index: 2;
+      width: 220px;
+      height: 121px;
+      position: relative;
+      border-radius: 4px;
+      border: 2px solid #00000024;
+      background-color: #f3f3f3;
+    }
+
+    .envelope__tab {
+      left: 28px;
+      z-index: 1;
+      bottom: 26px;
+      width: 212px;
+      height: 140px;
+      position: absolute;
+      transform: rotateZ(45deg);
+      border-top-left-radius: 30px;
+      background-color: #f3f3f3;
+      border: 2px solid #00000024;
+    }
+
+    .envelope__letter {
+      left: 29px;
+      z-index: 3;
+      width: 158px;
+      bottom: 17px;
+      height: 160px;
+      cursor: pointer;
+      font-size: 16px;
+      font-style: oblique;
+      padding: 12px 18px;
+      border-radius: 8px;
+      position: absolute;
+      box-sizing: border-box;
+      background-size: cover;
+      color: #a59090;
+      border: 1px solid #00000024;
+      transition: all 0.6s linear 0.4s;
+      background-image: url("https://i.pinimg.com/564x/03/c3/fe/03c3fe8f10c79787d45f0cff0bc7bb52.jpg");
+    }
+
+    .envelope__letter:hover {
+      height: 200px;
+      color: #4c4444;
+    }
+
+    .envelope__letter:before {
+      content: "";
+      height: 0;
+      width: 6px;
+      right: -34px;
+      bottom: -17px;
+      position: absolute;
+      border-top: 56px solid transparent;
+      border-left: 107px solid #ffffff;
+      border-right: 107px solid #ffffff;
+      border-bottom: 65px solid #f3f3f3;
+    }
+
+    @keyframes shadow {
+      0% { width: 230px; }
+      50% { width: 200px; }
+      100% { width: 230px; }
+    }
+
+    @keyframes tremble {
+      0% { transform: rotate(-1deg); }
+      50% { transform: rotate(0deg); }
+      75% { transform: rotate(1deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- الظرف -->
+ <!-- <div class="envelope" id="envelope">
+    <div class="top"></div>
+    <div class="bottom"></div>
+    <div class="seal" id="seal">افتح</div>
+
+
+  </div>-->
+
+  <!-- زر الموسيقى -->
+  <button class="music-btn" onclick="toggleMusic()">🎵</button>
+  <audio id="bg-music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+ 
+  <!-- المحتوى -->
+  <div class="page-content" id="pageContent">
+
+    <img src="1000219900.png" style="width: 400px; height: 800px; margin-top: 40px;left: 80px;position: absolute;">
+     <img src="131872.png" style="width: 800px; height: 1000px; margin-top: 40px;left: -70px;position: absolute;">
+     <img src="1000219448 (1).png" style="width: 550px; height: 1000px; margin-top: 1050px;left: 50px;position: absolute;">
+     <img src="1000220240.png" style="width: 300px; height: 300px; margin-top: 600px;left: 50px;position: absolute;">
+
+ 
+              <p style="color: rgb(0, 0, 0); font-size: 20px;  margin-top: 40px; animation: bounce 2s infinite;position: absolute;top: 900px;left: 250px;">
+      ↓ تاكيد الحضور ↓
+    </p>
+   
+    <style>
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
+    </style>
+
+    <h2 style="top:1200px;position: absolute;left: 280px;" id="attendanceTitle">هل ستحضر؟</h2>
+     <div id="responseButtons" style="margin-top:30px;top:1260px;position: absolute;left: 160px;">
+      <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('yes')">نعم، بإذن الله</button>
+      <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('no')">لا، أعتذر عن الحضور</button>
+    </div>
+  <p id="responseMsg" style="margin-top: 20px;top: 1350px;position: absolute;left: 260px;"></p>
+    <div class="qr-wrapper">
+      <div id="qrContainer" style="margin-top: 20px;top:1200px;position: absolute;left: 260px;"></div>
+    </div>
+    <h1  id="qrNote" style="display: none; font-size: 14px;top:1300px;position: absolute;left: 300px;">📌 استخدم رمز الدخول عند الوصول للقاعة.</h1>
+    <h2 id="invitationCount" style="font-size: 14px; display: none;top:1350px;position: absolute;left: 260px;"></h2>
+    <button id="downloadBtn" style="display: none; margin-top: 10px;top:1400px;position: absolute;left: 330px;">📥تحميل الدعوة</button>
+
+     <h2 style="top:1600px;position: absolute;left: 250px;" id="attendanceTitle">رسالتك للعروسين</h2>
+    <div style="margin-top: 20px;top:1700px;position: absolute;left: 170px;" class="message-box">
+    <textarea   id="message" placeholder=" اكتب تهنئتك"></textarea>
+    <button  id="sendMessageBtn"> إرسال</button>
+    <p  id="messageStatus" class="message-status"></p>
+     </div>
+     <img src="125026.png" style="width: 400px; height: 400px; margin-top: 40px;left: 140px;position: absolute;top:1300px ;">
+      <img src="1000220021.png" style="width: 700px; height: 600px; margin-top: 40px;left: 77px;position: absolute;top:1900px ;">
+    <div style="position: absolute;top: 2270px;left: 40px;" class="time-box">
+        <span id="days">00</span>
+        <div class="time-label">يوم</div>
+      </div>
+      <div style="position: absolute;top: 2270px;left: 190px;" class="time-box">
+        <span id="hours">00</span>
+        <div class="time-label">ساعة</div>
+      </div>
+      <div  style="position: absolute;top: 2270px;left: 350px;" class="time-box">
+        <span id="minutes">00</span>
+        <div class="time-label">دقيقة</div>
+      </div>
+    </div>
+         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.6707907180357!2d46.837938325403954!3d24.703841178031816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa9d80414dc89%3A0x4c6795d330c79745!2z2YLYtdixINiv2YrYqtmK2YTYsiDZhNmE2KXYrdiq2YHYp9mE2KfYqiDZiNin2YTZhdik2KrZhdix2KfYqg!5e0!3m2!1sar!2ssa!4v1754914876687!5m2!1sar!2ssa" width="300" height="100" style="border:0;position: absolute; left: 100px;top: 2400px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  
+
+    </div>
+
+  <script>
+    const seal = document.getElementById("seal");
+    const envelope = document.getElementById("envelope");
+    const gif = document.getElementById("myGif");
+    const pageContent = document.getElementById("pageContent");
+    const gifSrc = "1000219897.gif"; // ملف الـ GIF
+
+    seal.addEventListener("click", () => {
+      envelope.classList.add("open");
+
+      setTimeout(() => {
+        gif.src = gifSrc;
+      }, 500);
+
+      // بعد الفتح، نخفي الظرف ونظهر الدعوة
+      setTimeout(() => {
+          envelope.style.display = "none";
+    document.body.style.overflow = "auto";
+    document.body.style.backgroundAttachment = "fixed";
+    document.body.style.backgroundSize = "cover";
+    pageContent.style.display = "block";
+
+
+
+      }, 1500);
+    });
+
+    function toggleMusic() {
+      const music = document.getElementById("bg-music");
+      if (music.paused) music.play();
+      else music.pause();
+    }
+
+    // الترحيب بالاسم من الرابط
+    const nameParam = new URLSearchParams(location.search).get("name") || "ضيفنا";
+    const welcomeText = document.getElementById("welcomeText");
+    if (welcomeText) {
+      welcomeText.innerText += " " + nameParam;
+    }
+  </script>
+
+</body>
+</html>
