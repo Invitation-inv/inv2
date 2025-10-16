@@ -9,9 +9,16 @@
       font-family: "Amiri", serif;
       height: 100vh;
       background: url('1000220163.jpg') no-repeat center/cover;
-      color: #ffffff;
+      color: #5a0b66;
       overflow: auto;
-      background-attachment: fixed;
+      background-attachment:scroll ;
+       object-fit: cover;
+         background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
+
+
     }
     .page-content {
           position: relative;
@@ -20,102 +27,17 @@
           max-width: 700px;
           margin: auto;
         }
-   .envelope1 {
-      width: 224px;
-      height: 224px;
-      overflow: hidden;
-      position: relative;
-      transition: all ease;
-      animation: tremble 1s ease-out 1;
-      position: absolute;
-      left: 70px;
-   }
 
-    .envelope--base {
-      top: 100px;
-      z-index: 2;
-      width: 220px;
-      height: 121px;
-      position: relative;
-      border-radius: 4px;
-      border: 2px solid #00000024;
-      background-color: #ed4135;
-    }
-
-    .envelope__tab {
-      left: 28px;
-      z-index: 1;
-      bottom: 26px;
-      width: 212px;
-      height: 140px;
-      position: absolute;
-      transform: rotateZ(45deg);
-      border-top-left-radius: 30px;
-      background-color: #f34e43;
-      border: 2px solid #00000024;
-    }
-
-    .envelope__letter {
-      left: 29px;
-      z-index: 3;
-      width: 158px;
-      bottom: 17px;
-      height: 121px;
-      cursor: pointer;
-      font-size: 16px;
-      font-style: oblique;
-      padding: 12px 18px;
-      border-radius: 8px;
-      position: absolute;
-      box-sizing: border-box;
-      background-size: cover;
-      color: #a59090;
-      border: 1px solid #00000024;
-      transition: all 0.6s linear 0.4s;
-      background-image: url("https://i.pinimg.com/564x/03/c3/fe/03c3fe8f10c79787d45f0cff0bc7bb52.jpg");
-    }
-
-    .envelope__letter:hover {
-      height: 200px;
-      color: #4c4444;
-    }
-
-    .envelope__letter:before {
-      content: "";
-      height: 0;
-      width: 6px;
-      right: -34px;
-      bottom: -17px;
-      position: absolute;
-      border-top: 56px solid transparent;
-      border-left: 107px solid #f34e43;
-      border-right: 107px solid #f34e43;
-      border-bottom: 65px solid #ed4135;
-    }
-
-    @keyframes shadow {
-      0% { width: 230px; }
-      50% { width: 200px; }
-      100% { width: 230px; }
-    }
-
-    @keyframes tremble {
-      0% { transform: rotate(-1deg); }
-      50% { transform: rotate(0deg); }
-      75% { transform: rotate(1deg); }
-      100% { transform: rotate(0deg); }
-    }
 
     /* الظرف (الانترو) */
-.envelope {
-  position: fixed; /* بدل relative */
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden; /* بدل auto */
-  top: 0;
-  left: 0;
-  background: url("11 (2).jpg");
-}
+    .envelope {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: auto;
+      background: url("11 (2).jpg");
+
+    }
 
     .top {
       position: absolute;
@@ -139,7 +61,6 @@
       background: url("11 (1).jpg") no-repeat center/cover;
       transition: transform 1s ease;
       z-index: 3;
-
     }
 
     .seal {
@@ -157,10 +78,10 @@
       justify-content: center;
       align-items: center;
       font-size: 4vw;
-      color: #4f0844;
+      color: #5a0b66;
       font-weight: bold;
       cursor: pointer;
-      transition: transform 0.4s ease;
+      transition: transform 0.8s ease;
       z-index: 4;
     }
 
@@ -209,11 +130,11 @@
       border-radius: 10px;
       cursor: pointer;
       margin: 20px;
-      background-image: url('1000220024.jpg');
       background-size: cover;
       background-repeat: no-repeat;
       background-color: transparent;
-      color: #ffffff;
+      color: #000000;
+      background-color: #5a0b66;
     }
     /* المحتوى */
     .page-content {
@@ -263,9 +184,9 @@
       margin: 20px auto;
       padding: 10px;
       border-radius: 12px;
-      max-width: 500px;
+      max-width: 300px;
       text-align: center;
-      background-color: #5a0b66;
+       background-image: url('11 (1).jpg');
 
 
     }
@@ -406,12 +327,13 @@
  
   <!-- المحتوى -->
   <div class="page-content" id="pageContent">
+ <img src="1000220630.png" style="width: 500px; height: 900px; margin-top: 40px;left: 80px;position: absolute;">
+  <img src="1000220667.png" style="width: 400px; height: 500px; margin-top: 40px;left: 150px;position: absolute;top: 200px;">
 
-    <img src="1000220630.png" style="width: 500px; height: 900px; margin-top: 40px;left: 80px;position: absolute;">
         <img src="1000220240.png" style="width: 300px; height: 300px; margin-top: 40px;left: 80px;position: absolute;top: 650px;">
 
      <img src="1000220241.png" style="width: 1400px; height: 1400px; margin-top: 900px;left: -350px;position: absolute;z-index: -1;">
-  <p  id="welcomeText" style="animation-delay: 0.5s;color: #1e4716;position: absolute;top: 800px; ;right: 50px;  ">المكرمة، </p>
+  <p  id="welcomeText" style="animation-delay: 0.5s;color: #1e4716;position: absolute;top: 830px; ;right: 230px;  ">المكرمة، </p>
 
               <p style="color: rgb(0, 0, 0); font-size: 20px;  margin-top: 40px; animation: bounce 2s infinite;position: absolute;top: 1000px;left: 250px;">
       ↓ تاكيد الحضور ↓
@@ -426,10 +348,10 @@
 
     <h2 style="top:1300px;position: absolute;left: 280px;" id="attendanceTitle">هل ستحضر؟</h2>
      <div id="responseButtons" style="margin-top:30px;top:1400px;position: absolute;left: 160px;z-index: 2;">
-      <button style="padding:6px 12px;font-size: 20px;border-radius:5px;  background-color: #5a0b66;" onclick="confirmAttendance('yes')">نعم، بإذن الله</button>
-      <button style="padding:6px 12px;font-size: 20px;border-radius:5px;  background-color: #5a0b66;" onclick="confirmAttendance('no')">لا، أعتذر عن الحضور</button>
+      <button style="padding:6px 12px;font-size: 20px;border-radius:5px;  background-color: #5a0b66;color: #ffffff;" onclick="confirmAttendance('yes')">نعم، بإذن الله</button>
+      <button style="padding:6px 12px;font-size: 20px;border-radius:5px;  background-color: #5a0b66;color: #ffffff;" onclick="confirmAttendance('no')">لا، أعتذر عن الحضور</button>
     </div>
-  <p id="responseMsg" style="margin-top: 20px;top: 1350px;position: absolute;left: 100px;"></p>
+  <p id="responseMsg" style="margin-top: 20px;top: 1550px;position: absolute;left: 300px;"></p>
     <div class="qr-wrapper">
       <div id="qrContainer" style="margin-top: 20px;top:1200px;position: absolute;left: 260px;"></div>
     </div>
@@ -450,6 +372,7 @@
            <img src="1000220238.png" style="width: 800px; height: 800px; margin-top: 40px;left: 140px;position: absolute;top:3400px ;">
            <img src="c971824fca18f817fa8de61bba39dcf1.png" style="width: 400px; height: 400px; margin-top: -100px;left: -150px;position: absolute;top:3900px ;">
            <img src="1000220635.png" style="width: 600px; height: 600px; margin-top: 150px;left: -130px;position: absolute;top:3700px ;">
+           <img src="1000220669.png" style="width: 350px; height: 400px; margin-top: 150px;left: 350px;position: absolute;top:3340px ;">
 
 <div style="position: absolute;top: 3900px;left: 360px;" class="time-box">
         <span id="days">00</span>
@@ -463,14 +386,13 @@
         <span id="minutes">00</span>
         <div class="time-label">دقيقة</div>
       </div>
+   
     </div>
-
-    </div>
-
+  </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <script>
-    const seal = document.getElementById("seal");
+ const seal = document.getElementById("seal");
     const envelope = document.getElementById("envelope");
     const gif = document.getElementById("myGif");
     const pageContent = document.getElementById("pageContent");
@@ -496,30 +418,14 @@
       }, 1500);
     });
 
-     const enterBtn = document.getElementById('enterBtn');
-    const videoBg = document.querySelector('.video-bg');
-    const doors = document.querySelectorAll('.door');
-
-    enterBtn.addEventListener('click', () => {
-      document.body.classList.add('open');
-      enterBtn.style.display = 'none';
-
-      // بعد فتح الأبواب
-      setTimeout(() => {
-        document.body.classList.add('show-content');
-
-        // ✅ إخفاء الأبواب والفيديو تمامًا بعد الفتح
-        doors.forEach(door => door.style.display = 'none');
-        videoBg.style.display = 'none';
-      }, 2600);
-    });
 
     function toggleMusic() {
       const music = document.getElementById("bg-music");
-      music.paused ? music.play() : music.pause();
+      if (music.paused) music.play();
+      else music.pause();
     }
 
-     const nameParam = new URLSearchParams(location.search).get("name") || "ضيفنا";
+   const nameParam = new URLSearchParams(location.search).get("name") || "ضيفنا";
   const welcomeText = document.getElementById("welcomeText");
   if (welcomeText) {
     welcomeText.innerText += nameParam;
@@ -584,7 +490,7 @@
     }
   };
 
-var countDownDate = new Date("oct 20, 2025 20:00:00").getTime();
+var countDownDate = new Date("oct 30, 2025 20:00:00").getTime();
   var x = setInterval(function() {
     var now = new Date().getTime();
     var distance = countDownDate - now;
@@ -665,5 +571,19 @@ var countDownDate = new Date("oct 20, 2025 20:00:00").getTime();
 
   </script>
 
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
