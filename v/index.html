@@ -28,6 +28,7 @@
     }
 
     /* خلفية الفيديو */
+      /* خلفية الفيديو */
     .video-bg {
       position: fixed;
       top: 0;
@@ -42,7 +43,7 @@
     /* الأبواب */
     .door {
       position: fixed;
-      top: 500px;
+      top:500px;
       width: 60%;
       height: 96vh;
       z-index: 2;
@@ -64,12 +65,19 @@
       background-image: url("55 (2).png");
     }
 
+    /* حالة الفتح */
     .open .door.left {
       transform: perspective(1200px) rotateY(-100deg);
     }
 
     .open .door.right {
       transform: perspective(1200px) rotateY(100deg);
+    }
+
+    @media (max-width: 1024px) {
+      .door {
+        background-size: contain;
+      }
     }
 
     @media (max-width: 768px) {
@@ -123,7 +131,6 @@
       opacity: 1;
       z-index: 3;
     }
-
     .page-content {
       position: relative;
       padding: 30px 15px 80px;
@@ -157,10 +164,10 @@
 
     .time-box {
       color: white;
-      padding: 10px 15px;
+      padding: 20px 20px;
       border-radius: 15px;
       text-align: center;
-      min-width: 30px;
+      min-width: 60px;
       height: 70px;
       background: #263645;
     }
@@ -226,11 +233,12 @@
     <p style="color: rgb(0, 0, 0); font-size: 16px; margin-top: 40px; animation: bounce 2s infinite;position: absolute;top: 2400px;left: 300px;">
       ↓ تفاصيل الحفل ↓
     </p>
+     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.6707907180357!2d46.837938325403954!3d24.703841178031816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa9d80414dc89%3A0x4c6795d330c79745!2z2YLYtdixINiv2YrYqtmK2YTYsiDZhNmE2KXYrdiq2YHYp9mE2KfYqiDZiNin2YTZhdik2KrZhdix2KfYqg!5e0!3m2!1sar!2ssa!4v1754914876687!5m2!1sar!2ssa" width="200" height="170" style="border:0;position: absolute; left: 250px;top: 2500px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  
 
     <img src="1000220819.png" style="width: 500px;height: 500px;position: absolute;top: 2600px;left: 90px;">
     <img src="135271.png" style="width: 1200px;height: 1200px;position: absolute;top: 3200px;left: -200px;">
 
-    <div style="position: absolute; left: 250px;top: 3100px;" id="countdown">
+    <div style="position: absolute; left: 190px;top: 3100px;" id="countdown">
       <div class="time-box">
         <span id="days">00</span>
         <div class="time-label">يوم</div>
