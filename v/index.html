@@ -430,7 +430,7 @@ enterBtn.addEventListener('click', () => {
   function confirmAttendance(response) {
     responseMsg.innerText = "⏳ جاري التسجيل...";
     fetch(`${scriptURL}?name=${encodeURIComponent(nameParam)}&token=${token}&response=${response}`)
-      .then(res => res.json())
+      .then(res => res.text())
       .then(res => {
         responseButtons.style.display = "none";
         attendanceTitle.style.display = "none";
@@ -524,7 +524,7 @@ var countDownDate = new Date("oct 30, 2025 20:00:00").getTime();
                 token: token
             })
         })
-        .then(response => response.text())
+        .then(response => response.json())
         .then(data => {
             if (data.includes("success")) {
                 messageStatus.style.color = "white";
@@ -552,6 +552,7 @@ var countDownDate = new Date("oct 30, 2025 20:00:00").getTime();
 
 </body>
 </html>
+
 
 
 
