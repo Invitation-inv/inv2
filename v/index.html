@@ -335,16 +335,7 @@
     <h2 id="invitationCount" style="font-size: 14px; display: none;top:1900px;position: absolute;left: 300px;"></h2>
     <button id="downloadBtn" style="display: none; margin-top: 10px;top:2000px;position: absolute;left: 300px;">📥تحميل الدعوة</button>
     
-    <h2 style="top:2600px;position: absolute;left: 300px;" id="attendanceTitle">رسالتك للعروسين</h2>
-    <div style="margin-top: 20px;top:2700px;position: absolute;left: 200px;" class="message-box">
-    <textarea  id="message" placeholder=" اكتب تهنئتك"></textarea>
-    <button  id="sendMessageBtn"> إرسال</button>
-    <p style="z-index: 1;"  id="messageStatus" class="message-status"></p>
-     </div>
-    <form style="margin-top: 20px;top:2700px;position: absolute;left: 200px;" id="messageForm">
-      <textarea id="message" placeholder="اكتب رسالتك هنا"></textarea>
-      <button id="submitBtn" type="submit">إرسال</button>
-    </form>
+
 
  <p style="color: rgb(0, 0, 0); font-size: 16px;  margin-top: 40px; animation: bounce 2s infinite;position: absolute;top: 2400px;left: 300px;">
       ↓  تفاصيل الحفل ↓  
@@ -508,49 +499,17 @@ var countDownDate = new Date("oct 30, 2025 20:00:00").getTime();
         responseMsg.innerText = "❌ لم نتمكن من التحقق من حالتك.";
       });
 
-  document.getElementById("messageForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const message = document.getElementById("message").value.trim();
-  const token = new URLSearchParams(window.location.search).get("token");
-  const scriptURL = "https://script.google.com/macros/s/AKfycbyC4QCsqhoSUmWGIYsxeFVVZnZObSOmm92dq4O1_JAdoiN4ekq_dwAG2S0rStjOmQTA3Q/exec";
-
-  const submitBtn = document.getElementById("submitBtn");
-  submitBtn.textContent = "جاري الإرسال...";
-  submitBtn.disabled = true;
-
-  try {
-    const res = await fetch(scriptURL, {
-      method: "POST",
-      body: new URLSearchParams({
-        action: "saveMessage",
-        message: message,
-        token: token
       }),
     });
 
-    const text = await res.text();
-    console.log("Server response:", text);
 
-    if (res.ok && text.includes("success")) {
-      alert("تم إرسال رسالتك بنجاح ");
-      document.getElementById("message").value = "";
-    } else {
-      alert("حدث خطأ في الخادم:\n" + text);
-    }
-  } catch (error) {
-    console.error("Network error:", error);
-    alert("تعذر الاتصال بالخادم ⚠️");
-  } finally {
-    submitBtn.textContent = "إرسال";
-    submitBtn.disabled = false;
-  }
-});
 
   </script>
 
 
 </body>
 </html>
+
 
 
 
