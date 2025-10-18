@@ -335,14 +335,13 @@
       <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('no')">لا، أعتذر عن الحضور</button>
     </div>
      <p id="responseMsg" style="margin-top: 20px;top:2100px;position: absolute;left: 300px;color: #000000;"></p>
-     <div id="message" class="message"></div>
 
 
  <h2 style="top:2600px;position: absolute;left: 300px;" id="attendanceTitle">رسالتك للعروسين</h2>
     <div style="margin-top: 20px;top:2700px;position: absolute;left: 200px;" class="message-box">
     <textarea   id="message" placeholder=" اكتب تهنئتك"></textarea>
     <button  id="sendMessageBtn"> إرسال</button>
-    <p  id="messageStatus" class="message-status"></p>
+    <p style="z-index: 1;"  id="messageStatus" class="message-status"></p>
      </div>
  <p style="color: rgb(0, 0, 0); font-size: 16px;  margin-top: 40px; animation: bounce 2s infinite;position: absolute;top: 2400px;left: 300px;">
       ↓  تفاصيل الحفل ↓  
@@ -505,55 +504,58 @@ var countDownDate = new Date("oct 30, 2025 20:00:00").getTime();
       .catch(() => {
         responseMsg.innerText = "❌ لم نتمكن من التحقق من حالتك.";
       });
+    
 
-    sendMessageBtn.addEventListener("click", function() {
-        const message = messageTextarea.value.trim();
-        if(message === "") {
-          messageStatus.style.color = "white";
-          messageStatus.innerText = "⚠️ الرجاء كتابة رسالة قبل الإرسال.";
-          return;
-        }
+sendMessageBtn.addEventListener("click", function() {
+  const message = messageTextarea.value.trim();
+  if (message === "") {
+    messageStatus.style.color = "white";
+    messageStatus.innerText = "⚠️ الرجاء كتابة رسالة قبل الإرسال.";
+    return;
+  }
 
-        messageStatus.style.color = "white";
-        messageStatus.innerText = "⏳ جاري إرسال الرسالة...";
-        sendMessageBtn.disabled = true;
+  messageStatus.style.color = "white";
+  messageStatus.innerText = "⏳ جاري إرسال الرسالة...";
+  sendMessageBtn.disabled = true;
 
-        fetch(scriptURL, {
-            method: "POST",
-            body: new URLSearchParams({
-                action: "saveMessage",
-                message: message,
-                token: token
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.includes("success")) {
-                messageStatus.style.color = "white";
-                messageStatus.innerText = "✅ تم إرسال الرسالة بنجاح.";
-                messageTextarea.value = "";
-            } else if (data.includes("already_sent")) {
-                messageStatus.style.color = "white";
-                messageStatus.innerText = "⚠️ لقد أرسلت رسالة مسبقاً.";
-            } else {
-                messageStatus.style.color = "white";
-                messageStatus.innerText = "❌ حدث خطأ، حاول مرة أخرى.";
-            }
-            sendMessageBtn.disabled = false;
-        })
-        .catch(() => {
-            messageStatus.style.color = "red";
-            messageStatus.innerText = "❌ فشل الاتصال بالخادم.";
-            sendMessageBtn.disabled = false;
-        });
-    });
+  fetch(scriptURL, {
+    method: "POST",
+    body: new URLSearchParams({
+      action: "saveMessage",
+      message: message,
+      token: token
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    // هنا نستخدم خاصية status من نتيجة السكربت
+    if (data.status === "success") {
+      messageStatus.style.color = "white";
+      messageStatus.innerText = "✅ تم إرسال الرسالة بنجاح.";
+      messageTextarea.value = "";
+    } else if (data.status === "already_sent") {
+      messageStatus.style.color = "white";
+      messageStatus.innerText = "⚠️ لقد أرسلت رسالة مسبقاً.";
+    } else {
+      messageStatus.style.color = "white";
+      messageStatus.innerText = "❌ حدث خطأ، حاول مرة أخرى.";
+    }
+    sendMessageBtn.disabled = false;
+  })
+  .catch(() => {
+    messageStatus.style.color = "red";
+    messageStatus.innerText = "❌ فشل الاتصال بالخادم.";
+    sendMessageBtn.disabled = false;
   });
+});
+
 
   </script>
 
 
 </body>
 </html>
+
 
 
 
