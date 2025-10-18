@@ -7,12 +7,12 @@
     body {
       margin: 0;
       font-family: "Amiri", serif;
-      height: 100vh;
       background: url("1000220163.jpg");
+      background-size: cover;
       color: #263645;
+      overflow-x: hidden;
     }
 
-    /* زر الموسيقى */
     .music-btn {
       position: fixed;
       top: 15px;
@@ -27,7 +27,6 @@
       cursor: pointer;
     }
 
-    /* خلفية الفيديو */
     .video-bg {
       position: fixed;
       top: 0;
@@ -39,7 +38,6 @@
       transition: opacity 1s ease;
     }
 
-    /* الأبواب */
     .door {
       position: fixed;
       top: 500px;
@@ -47,44 +45,14 @@
       height: 96vh;
       z-index: 2;
       background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
+      background-position: center;
       transition: transform 2.5s ease-in-out;
     }
+    .door.left { left: 50px; transform-origin: left center; background-image: url("55 (1).png"); }
+    .door.right { right: -250px; transform-origin: right center; background-image: url("55 (2).png"); }
+    .open .door.left { transform: perspective(1200px) rotateY(-100deg); }
+    .open .door.right { transform: perspective(1200px) rotateY(100deg); }
 
-    .door.left {
-      left: 50px;
-      transform-origin: left center;
-      background-image: url("55 (1).png");
-    }
-
-    .door.right {
-      right: -250px;
-      transform-origin: right center;
-      background-image: url("55 (2).png");
-    }
-
-    .open .door.left {
-      transform: perspective(1200px) rotateY(-100deg);
-    }
-
-    .open .door.right {
-      transform: perspective(1200px) rotateY(100deg);
-    }
-
-    @media (max-width: 1024px) {
-      .door { background-size: contain; }
-    }
-
-    @media (max-width: 768px) {
-      .door {
-        width: 50%;
-        height: 100vh;
-        background-size: cover;
-      }
-    }
-
-    /* زر الدخول */
     .enter-btn {
       position: fixed;
       top: 50%;
@@ -102,27 +70,12 @@
     }
     .enter-btn:hover { background: #263645; color: #fff; }
 
-    .content {
-      position: relative;
-      z-index: 0;
-      opacity: 0;
-      transition: opacity 1s ease;
-      background: #fdf8f2;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 2rem;
-    }
-
-    .open .video-bg { opacity: 0; }
-    .show-content .content { opacity: 1; z-index: 3; }
-
     .page-content {
       position: relative;
-      padding: 30px 15px 80px;
-      max-width: 700px;
-      margin: auto;
+      z-index: 3;
+      text-align: center;
+      padding: 40px 15px 100px;
+      background: rgba(255, 255, 255, 0.9);
     }
 
     button {
@@ -138,12 +91,12 @@
     }
     button:hover { transform: scale(1.05); }
 
-    /* عداد */
     #countdown {
       display: flex;
       justify-content: center;
       gap: 15px;
       flex-wrap: wrap;
+      margin-top: 20px;
     }
 
     .time-box {
@@ -151,64 +104,33 @@
       padding: 10px 15px;
       border-radius: 15px;
       text-align: center;
-      min-width: 30px;
-      height: 70px;
       background: #263645;
     }
 
-    .time-box span {
-      display: block;
-      font-size: 30px;
-      font-weight: bold;
-    }
-
-    .time-label {
-      font-size: 30px;
-      margin-top: 5px;
-      color: white;
-    }
-
     .message-box {
-      margin: 20px auto;
-      padding: 20px;
-      border-radius: 19px;
-      max-width: 600px;
-      text-align: center;
       background: #1e4716;
-    }
-
-    .message-box textarea {
+      color: white;
+      border-radius: 15px;
+      padding: 20px;
       width: 80%;
+      max-width: 500px;
+      margin: 40px auto;
+      text-align: center;
+    }
+    .message-box textarea {
+      width: 90%;
       height: 80px;
       border: none;
       outline: none;
       padding: 10px;
       border-radius: 8px;
       resize: none;
-      background: white;
-      color: black;
     }
 
-    .message-box button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      border: none;
-      background: white;
-      color: black;
-      border-radius: 20px;
-      cursor: pointer;
-    }
-
-    .message-box button:hover { background: rgb(255, 255, 255); }
     .message-status { margin-top: 10px; font-weight: bold; }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(5px); }
-    }
   </style>
 </head>
-
 <body>
   <button class="music-btn" onclick="toggleMusic()">🎵</button>
   <audio id="bg-music" loop>
@@ -224,41 +146,31 @@
   <button class="enter-btn" id="enterBtn">اضغط للدخول</button>
 
   <div class="page-content">
-    <img src="1000220777.png" style="position:absolute;left:-200px;">
-    <img src="1000220817.png" style="width:600px;height:900px;position:absolute;top:200px;left:10px;">
-    <img src="1000220794.png" style="position:absolute;top:1600px;width:900px;left:-110px;">
+    <h2 id="welcomeText">أهلاً وسهلاً المكرمة <span id="guestName"></span></h2>
+    <h3 id="attendanceTitle">هل ستشرفينا بحضورك؟</h3>
 
-    <p style="color:#263645;font-size:20px;margin-top:40px;animation:bounce 2s infinite;position:absolute;top:1500px;left:300px;">↓ تأكيد الحضور ↓</p>
-
-    <p id="welcomeText" style="animation-delay:0.5s;font-size:30px;color:#263645;position:absolute;top:1800px;left:322px;">المكرمة، </p>
-
-    <h2 id="attendanceTitle" style="top:1850px;position:absolute;left:280px;font-size:40px;">هل ستحضر؟</h2>
-
-    <div id="responseButtons" style="margin-top:30px;top:1950px;position:absolute;left:210px;">
-      <button style="padding:6px 12px;font-size:20px;border-radius:5px;" onclick="confirmAttendance('yes')">نعم، بإذن الله</button>
-      <button style="padding:6px 12px;font-size:20px;border-radius:5px;" onclick="confirmAttendance('no')">لا، أعتذر عن الحضور</button>
+    <div id="responseButtons">
+      <button onclick="confirmAttendance('yes')">نعم، بإذن الله</button>
+      <button onclick="confirmAttendance('no')">لا، أعتذر عن الحضور</button>
     </div>
 
-    <p id="responseMsg" style="margin-top:20px;top:2100px;position:absolute;left:300px;color:#000;"></p>
+    <p id="responseMsg" style="margin-top:10px;"></p>
+    <div id="qrContainer" style="margin-top:20px;"></div>
 
-    <div id="qrContainer" style="margin-top:20px;top:1950px;position:absolute;left:250px;"></div>
-
-    <!-- صندوق الرسائل -->
-    <div class="message-box" style="position:absolute;top:2150px;left:200px;">
-      <textarea id="message" placeholder="اكتب تهنئتك هنا..."></textarea><br>
+    <!-- صندوق الرسالة -->
+    <div class="message-box">
+      <h3>اكتبي تهنئتك 💌</h3>
+      <textarea id="message" placeholder="اكتبي رسالتك هنا..."></textarea><br>
       <button id="sendMessageBtn">إرسال</button>
       <div id="messageStatus" class="message-status"></div>
     </div>
 
-    <p style="color:black;font-size:16px;margin-top:40px;animation:bounce 2s infinite;position:absolute;top:2400px;left:300px;">↓ تفاصيل الحفل ↓</p>
-
-    <img src="1000220819.png" style="width:500px;height:500px;position:absolute;top:2600px;left:90px;">
-    <img src="135271.png" style="width:1200px;height:1200px;position:absolute;top:3200px;left:-200px;">
-
-    <div id="countdown" style="position:absolute;left:250px;top:3100px;">
-      <div class="time-box"><span id="days">00</span><div class="time-label">يوم</div></div>
-      <div class="time-box"><span id="hours">00</span><div class="time-label">ساعة</div></div>
-      <div class="time-box"><span id="minutes">00</span><div class="time-label">دقيقة</div></div>
+    <!-- العد التنازلي -->
+    <h3>العد التنازلي للحفل 🎉</h3>
+    <div id="countdown">
+      <div class="time-box"><span id="days">00</span>يوم</div>
+      <div class="time-box"><span id="hours">00</span>ساعة</div>
+      <div class="time-box"><span id="minutes">00</span>دقيقة</div>
     </div>
   </div>
 
@@ -272,10 +184,9 @@
       document.body.classList.add('open');
       enterBtn.style.display = 'none';
       setTimeout(() => {
-        document.body.classList.add('show-content');
-        doors.forEach(door => door.style.display = 'none');
+        doors.forEach(d => d.style.display = 'none');
         videoBg.style.display = 'none';
-      }, 2600);
+      }, 2500);
     });
 
     function toggleMusic() {
@@ -283,19 +194,30 @@
       music.paused ? music.play() : music.pause();
     }
 
-    const nameParam = new URLSearchParams(location.search).get("name") || "ضيفنا";
-    document.getElementById("welcomeText").innerText += nameParam;
+    const params = new URLSearchParams(location.search);
+    const nameParam = params.get("name") || "ضيفنا";
+    const token = params.get("token") || "";
+    document.getElementById("guestName").innerText = nameParam;
 
-    const token = new URLSearchParams(location.search).get("token") || "";
-    const qrContainer = document.getElementById("qrContainer");
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyC4QCsqhoSUmWGIYsxeFVVZnZObSOmm92dq4O1_JAdoiN4ekq_dwAG2S0rStjOmQTA3Q/exec";
+
     const responseButtons = document.getElementById("responseButtons");
     const attendanceTitle = document.getElementById("attendanceTitle");
     const responseMsg = document.getElementById("responseMsg");
-    const messageTextarea = document.getElementById("message");
-    const sendMessageBtn = document.getElementById("sendMessageBtn");
-    const messageStatus = document.getElementById("messageStatus");
+    const qrContainer = document.getElementById("qrContainer");
 
-    const scriptURL = "https://script.google.com/macros/s/AKfycbyC4QCsqhoSUmWGIYsxeFVVZnZObSOmm92dq4O1_JAdoiN4ekq_dwAG2S0rStjOmQTA3Q/exec";
+    // ✅ التحقق من الرد السابق (يمنع التكرار)
+    fetch(`${scriptURL}?token=${token}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === "already") {
+          responseButtons.style.display = "none";
+          attendanceTitle.style.display = "none";
+          responseMsg.innerText = data.message;
+          if (data.qr) showQR(data.qr);
+        }
+      })
+      .catch(err => console.log("Error:", err));
 
     function confirmAttendance(response) {
       responseMsg.innerText = "⏳ جاري التسجيل...";
@@ -315,6 +237,7 @@
       new QRCode(qrContainer, { text: link, width: 200, height: 200 });
     }
 
+    // ✅ عداد تنازلي
     var countDownDate = new Date("Nov 07, 2025 20:00:00").getTime();
     var x = setInterval(function() {
       var now = new Date().getTime();
@@ -325,11 +248,13 @@
       document.getElementById("days").innerText = days;
       document.getElementById("hours").innerText = hours;
       document.getElementById("minutes").innerText = minutes;
-      if (distance < 0) {
-        clearInterval(x);
-        document.getElementById("countdown").innerText = "انتهى الوقت";
-      }
+      if (distance < 0) clearInterval(x);
     }, 1000);
+
+    // ✅ إرسال الرسائل
+    const messageTextarea = document.getElementById("message");
+    const sendMessageBtn = document.getElementById("sendMessageBtn");
+    const messageStatus = document.getElementById("messageStatus");
 
     sendMessageBtn.addEventListener("click", () => {
       const message = messageTextarea.value.trim();
@@ -339,6 +264,7 @@
       }
       messageStatus.innerText = "⏳ جاري إرسال الرسالة...";
       sendMessageBtn.disabled = true;
+
       fetch(scriptURL, {
         method: "POST",
         body: new URLSearchParams({
@@ -353,9 +279,9 @@
           messageStatus.innerText = "✅ تم إرسال الرسالة بنجاح.";
           messageTextarea.value = "";
         } else if (data.includes("already_sent")) {
-          messageStatus.innerText = "⚠️ لقد أرسلت رسالة مسبقاً.";
+          messageStatus.innerText = "⚠️ لقد أرسلتِ رسالة مسبقاً.";
         } else {
-          messageStatus.innerText = "❌ حدث خطأ، حاول مرة أخرى.";
+          messageStatus.innerText = "❌ حدث خطأ، حاولِ مرة أخرى.";
         }
         sendMessageBtn.disabled = false;
       })
