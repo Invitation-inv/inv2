@@ -425,7 +425,7 @@ enterBtn.addEventListener('click', () => {
   const messageStatus = document.getElementById("messageStatus");
 
   // URL for the Google Apps Script
-  const scriptURL = "https://script.google.com/macros/s/AKfycbxD8YlQIDgmZDE9WIwjsQvaclpD1RqWme1pBCUsReDbhkGC4l7zPbdewgq2vhZ76I-aMw/exec";
+  const scriptURL = "https://script.google.com/macros/s/AKfycbyc3WxEYZUOwbszG0lrbMQnGK_cVOKG5qWZvRlog14LkoxoFrsbnCauuZtKE-DtX9w_Bw/exec";
 
 
   function confirmAttendance(response) {
@@ -526,7 +526,7 @@ var countDownDate = new Date("oct 30, 2025 20:00:00").getTime();
                 token: token
             })
         })
-        .then(response => response.text())
+        .then(response => response.json())
         .then(data => {
             if (data.includes("success")) {
                 messageStatus.style.color = "white";
@@ -554,6 +554,7 @@ var countDownDate = new Date("oct 30, 2025 20:00:00").getTime();
 
 </body>
 </html>
+
 
 
 
