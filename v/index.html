@@ -331,6 +331,7 @@
     <div class="qr-wrapper">
       <div id="qrContainer" style="margin-top: 20px;top:1950px;position: absolute;left: 250px;"></div>
     </div>
+    <h1 id="qrNote" style="display: none; font-size: 14px;top:2150px;position: absolute;left: 300px;">📌 استخدم رمز الدخول عند الوصول للقاعة.</h1>
     <h2 id="invitationCount" style="font-size: 14px; display: none;top:2200px;position: absolute;left: 350px;"></h2>
     <button id="downloadBtn" style="display: none; margin-top: 10px;top:2250px;position: absolute;left: 330px;">📥تحميل الدعوة</button>
     
@@ -424,13 +425,13 @@ enterBtn.addEventListener('click', () => {
   const messageStatus = document.getElementById("messageStatus");
 
   // URL for the Google Apps Script
-  const scriptURL = "https://script.google.com/macros/s/AKfycbyc3WxEYZUOwbszG0lrbMQnGK_cVOKG5qWZvRlog14LkoxoFrsbnCauuZtKE-DtX9w_Bw/exec";
+  const scriptURL = "https://script.google.com/macros/s/AKfycbxmecszWPiwb6gVqJpD7XRjavpHOCzrJeqcQjN1ziqLOl-fShjA2kfQi41ZDz_4QZcBoA/exec";
 
 
   function confirmAttendance(response) {
     responseMsg.innerText = "⏳ جاري التسجيل...";
     fetch(`${scriptURL}?name=${encodeURIComponent(nameParam)}&token=${token}&response=${response}`)
-      .then(res => res.text())
+      .then(res => res.json())
       .then(res => {
         responseButtons.style.display = "none";
         attendanceTitle.style.display = "none";
@@ -487,7 +488,7 @@ var countDownDate = new Date("oct 30, 2025 20:00:00").getTime();
 
   window.addEventListener('DOMContentLoaded', () => {
     fetch(`${scriptURL}?token=${token}&check=true`)
-      .then(res => res.text())
+      .then(res => res.json())
       .then(res => {
         if (res.status === "already" || res.status === "used") {
           showQR(res.qr, res.max);
@@ -504,7 +505,7 @@ var countDownDate = new Date("oct 30, 2025 20:00:00").getTime();
         responseMsg.innerText = "❌ لم نتمكن من التحقق من حالتك.";
       });
 
-  sendMessageBtn.addEventListener("click", function() {
+    sendMessageBtn.addEventListener("click", function() {
         const message = messageTextarea.value.trim();
         if(message === "") {
           messageStatus.style.color = "white";
@@ -524,7 +525,7 @@ var countDownDate = new Date("oct 30, 2025 20:00:00").getTime();
                 token: token
             })
         })
-        .then(response => response.json())
+        .then(response => response.text())
         .then(data => {
             if (data.includes("success")) {
                 messageStatus.style.color = "white";
@@ -552,10 +553,6 @@ var countDownDate = new Date("oct 30, 2025 20:00:00").getTime();
 
 </body>
 </html>
-
-
-
-
 
 
 
