@@ -425,7 +425,7 @@ enterBtn.addEventListener('click', () => {
   const messageStatus = document.getElementById("messageStatus");
 
   // URL for the Google Apps Script
-  const scriptURL = "https://script.google.com/macros/s/AKfycbzggJDRxxMOrWEn0N7v6mcaPeCKwq3PNnDb5rGYe2uaFCqxU8tWCZbXE2x_n7nPyjLx2Q/exec";
+  const scriptURL = "https://script.google.com/macros/s/AKfycbyC4QCsqhoSUmWGIYsxeFVVZnZObSOmm92dq4O1_JAdoiN4ekq_dwAG2S0rStjOmQTA3Q/exec";
 
 
   function confirmAttendance(response) {
@@ -505,7 +505,8 @@ var countDownDate = new Date("oct 30, 2025 20:00:00").getTime();
         responseMsg.innerText = "❌ لم نتمكن من التحقق من حالتك.";
       });
 
-   sendMessageBtn.addEventListener("click", function() {
+  
+    sendMessageBtn.addEventListener("click", function() {
         const message = messageTextarea.value.trim();
         if(message === "") {
           messageStatus.style.color = "white";
@@ -526,18 +527,20 @@ var countDownDate = new Date("oct 30, 2025 20:00:00").getTime();
             })
         })
         .then(response => response.text())
-              .then(data => {
-          if (data.includes("success")) {
-            messageStatus.innerText = "✅ تم إرسال الرسالة بنجاح.";
-            messageTextarea.value = "";
-          } else if (data.includes("already_sent")) {
-            messageStatus.innerText = "⚠️ لقد أرسلت رسالة مسبقاً.";
-          } else {
-            messageStatus.innerText = "❌ حدث خطأ، حاول مرة أخرى.";
-          }
-          sendMessageBtn.disabled = false;
+        .then(data => {
+            if (data.includes("success")) {
+                messageStatus.style.color = "white";
+                messageStatus.innerText = "✅ تم إرسال الرسالة بنجاح.";
+                messageTextarea.value = "";
+            } else if (data.includes("already_sent")) {
+                messageStatus.style.color = "white";
+                messageStatus.innerText = "⚠️ لقد أرسلت رسالة مسبقاً.";
+            } else {
+                messageStatus.style.color = "white";
+                messageStatus.innerText = "❌ حدث خطأ، حاول مرة أخرى.";
+            }
+            sendMessageBtn.disabled = false;
         })
-
         .catch(() => {
             messageStatus.style.color = "red";
             messageStatus.innerText = "❌ فشل الاتصال بالخادم.";
@@ -545,11 +548,13 @@ var countDownDate = new Date("oct 30, 2025 20:00:00").getTime();
         });
     });
   });
+
   </script>
 
 
 </body>
 </html>
+
 
 
 
