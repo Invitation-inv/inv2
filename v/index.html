@@ -364,7 +364,7 @@
   const messageStatus = document.getElementById("messageStatus");
 
   // URL for the Google Apps Script
-  const scriptURL = "https://script.google.com/macros/s/AKfycbyC4QCsqhoSUmWGIYsxeFVVZnZObSOmm92dq4O1_JAdoiN4ekq_dwAG2S0rStjOmQTA3Q/exec";
+  const scriptURL = "https://script.google.com/macros/s/AKfycbxmecszWPiwb6gVqJpD7XRjavpHOCzrJeqcQjN1ziqLOl-fShjA2kfQi41ZDz_4QZcBoA/exec";
 
 
   function confirmAttendance(response) {
@@ -378,25 +378,31 @@
 
         if (res.status === "success" || res.status === "already") {
           showQR(res.qr, res.max);
-        } else if (res.status === "declined") {
-          qrContainer.innerHTML = "";
-          qrNote.style.display = "none";
-          invitationCount.style.display = "none";
-        }
+        }  else if (res.status === "declined") {
+        qrContainer.innerHTML = "";
+        if (qrNote) qrNote.style.display = "none";
+        if (invitationCount) invitationCount.style.display = "none";
+      }
+
       })
       .catch(() => {
         responseMsg.innerText = "❌ حدث خطأ أثناء الاتصال بالخادم.";
       });
   }
 
-  function showQR(link, count) {
-    qrContainer.innerHTML = "";
-    new QRCode(qrContainer, { text: link, width: 200, height: 200 });
-    qrNote.style.display = "block";
+ function showQR(link, count) {
+  qrContainer.innerHTML = "";
+  new QRCode(qrContainer, { text: link, width: 200, height: 200 });
+
+  if (typeof qrNote !== "undefined" && qrNote) qrNote.style.display = "block";
+  if (typeof invitationCount !== "undefined" && invitationCount) {
     invitationCount.style.display = "block";
     invitationCount.innerText = `📩 عدد الدعوات: ${count}`;
-    downloadBtn.style.display = "inline-block";
   }
+  if (typeof downloadBtn !== "undefined" && downloadBtn)
+    downloadBtn.style.display = "inline-block";
+}
+
 
   downloadBtn.onclick = () => {
     const img = qrContainer.querySelector("img");
