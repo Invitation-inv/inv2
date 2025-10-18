@@ -10,9 +10,12 @@
       height: 100vh;
       background: url("1000220163.jpg")   ;
       color: #263645;
-    
-}
+      
+     
 
+
+
+}
 
  
 
@@ -155,8 +158,7 @@
 
     .open .video-bg {
       opacity: 0;
-       pointer-events: none;
-
+        pointer-events: none;
     }
 
     .show-content .content {
@@ -170,6 +172,7 @@
       padding: 30px 15px 80px;
       max-width: 700px;
       margin: auto;
+      
     }
 
     /* الصناديق */
@@ -233,7 +236,7 @@
       
 
     }
-.message-box {
+  .message-box {
  
       margin: 20px auto;
       padding: 20px;
@@ -277,8 +280,6 @@
     }
     
     
-    
-    
 
   </style>
 </head>
@@ -318,7 +319,7 @@
     }
     </style>
 
-   <p  id="welcomeText" style="animation-delay: 0.5s;font-size: 30px; color: #263645;position: absolute;top: 1800px;left:300px ; ">المكرمة، </p>
+   <p  id="welcomeText" style="animation-delay: 0.5s;font-size: 30px; color: #263645;position: absolute;top: 1800px;left:322px ; ">المكرمة، </p>
 
 
     <h2 style="top:1850px;position: absolute;left: 280px;font-size:40px;" id="attendanceTitle">هل ستحضر؟</h2>
@@ -327,14 +328,21 @@
       <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('no')">لا، أعتذر عن الحضور</button>
     </div>
      <p id="responseMsg" style="margin-top: 20px;top:2100px;position: absolute;left: 300px;color: #000000;"></p>
-
-
- <h2 style="top:2600px;position: absolute;left: 300px;" id="attendanceTitle">رسالتك للعروسين</h2>
+    <div class="qr-wrapper">
+      <div id="qrContainer" style="margin-top: 20px;top:1950px;position: absolute;left: 250px;"></div>
+    </div>
+    <h1 id="qrNote" style="display: none; font-size: 14px;top:2150px;position: absolute;left: 300px;">📌 استخدم رمز الدخول عند الوصول للقاعة.</h1>
+    <h2 id="invitationCount" style="font-size: 14px; display: none;top:2200px;position: absolute;left: 350px;"></h2>
+    <button id="downloadBtn" style="display: none; margin-top: 10px;top:2250px;position: absolute;left: 330px;">📥تحميل الدعوة</button>
+    
+    <h2 style="top:2600px;position: absolute;left: 300px;" id="attendanceTitle">رسالتك للعروسين</h2>
     <div style="margin-top: 20px;top:2700px;position: absolute;left: 200px;" class="message-box">
-    <textarea   id="message" placeholder=" اكتب تهنئتك"></textarea>
+    <textarea  id="message" placeholder=" اكتب تهنئتك"></textarea>
     <button  id="sendMessageBtn"> إرسال</button>
     <p style="z-index: 1;"  id="messageStatus" class="message-status"></p>
      </div>
+
+
  <p style="color: rgb(0, 0, 0); font-size: 16px;  margin-top: 40px; animation: bounce 2s infinite;position: absolute;top: 2400px;left: 300px;">
       ↓  تفاصيل الحفل ↓  
     </p>
@@ -386,7 +394,8 @@ enterBtn.addEventListener('click', () => {
 
     // وبعد ثانية نحذفها من الصفحة نهائيًا
     setTimeout(() => {
-      doors.forEach(door => door.style.display = "none");
+     doors.forEach(door => door.remove()); // يحذف العنصر تماماً
+
     }, 1000);
   }, 2500); // نفس مدة حركة الباب
 });
@@ -416,7 +425,7 @@ enterBtn.addEventListener('click', () => {
   const messageStatus = document.getElementById("messageStatus");
 
   // URL for the Google Apps Script
-  const scriptURL = "https://script.google.com/macros/s/AKfycbyc3WxEYZUOwbszG0lrbMQnGK_cVOKG5qWZvRlog14LkoxoFrsbnCauuZtKE-DtX9w_Bw/exec";
+  const scriptURL = "https://script.google.com/macros/s/AKfycbxmecszWPiwb6gVqJpD7XRjavpHOCzrJeqcQjN1ziqLOl-fShjA2kfQi41ZDz_4QZcBoA/exec";
 
 
   function confirmAttendance(response) {
@@ -477,7 +486,6 @@ var countDownDate = new Date("oct 30, 2025 20:00:00").getTime();
   }, 1000);
 
 
-
   window.addEventListener('DOMContentLoaded', () => {
     fetch(`${scriptURL}?token=${token}&check=true`)
       .then(res => res.json())
@@ -496,84 +504,55 @@ var countDownDate = new Date("oct 30, 2025 20:00:00").getTime();
       .catch(() => {
         responseMsg.innerText = "❌ لم نتمكن من التحقق من حالتك.";
       });
-    
 
-sendMessageBtn.addEventListener("click", function() {
-  const message = messageTextarea.value.trim();
-  if (message === "") {
-    messageStatus.style.color = "white";
-    messageStatus.innerText = "⚠️ الرجاء كتابة رسالة قبل الإرسال.";
-    return;
-  }
+    sendMessageBtn.addEventListener("click", function() {
+        const message = messageTextarea.value.trim();
+        if(message === "") {
+          messageStatus.style.color = "white";
+          messageStatus.innerText = "⚠️ الرجاء كتابة رسالة قبل الإرسال.";
+          return;
+        }
 
-  messageStatus.style.color = "white";
-  messageStatus.innerText = "⏳ جاري إرسال الرسالة...";
-  sendMessageBtn.disabled = true;
+        messageStatus.style.color = "white";
+        messageStatus.innerText = "⏳ جاري إرسال الرسالة...";
+        sendMessageBtn.disabled = true;
 
-  fetch(scriptURL, {
-    method: "POST",
-    body: new URLSearchParams({
-      action: "saveMessage",
-      message: message,
-      token: token
-    })
-  })
-  .then(response => response.json())
-  .then(data => {
-    // هنا نستخدم خاصية status من نتيجة السكربت
-    if (data.status === "success") {
-      messageStatus.style.color = "white";
-      messageStatus.innerText = "✅ تم إرسال الرسالة بنجاح.";
-      messageTextarea.value = "";
-    } else if (data.status === "already_sent") {
-      messageStatus.style.color = "white";
-      messageStatus.innerText = "⚠️ لقد أرسلت رسالة مسبقاً.";
-    } else {
-      messageStatus.style.color = "white";
-      messageStatus.innerText = "❌ حدث خطأ، حاول مرة أخرى.";
-    }
-    sendMessageBtn.disabled = false;
-  })
-  .catch(() => {
-    messageStatus.style.color = "red";
-    messageStatus.innerText = "❌ فشل الاتصال بالخادم.";
-    sendMessageBtn.disabled = false;
+        fetch(scriptURL, {
+            method: "POST",
+            body: new URLSearchParams({
+                action: "saveMessage",
+                message: message,
+                token: token
+            })
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data.includes("success")) {
+                messageStatus.style.color = "white";
+                messageStatus.innerText = "✅ تم إرسال الرسالة بنجاح.";
+                messageTextarea.value = "";
+            } else if (data.includes("already_sent")) {
+                messageStatus.style.color = "white";
+                messageStatus.innerText = "⚠️ لقد أرسلت رسالة مسبقاً.";
+            } else {
+                messageStatus.style.color = "white";
+                messageStatus.innerText = "❌ حدث خطأ، حاول مرة أخرى.";
+            }
+            sendMessageBtn.disabled = false;
+        })
+        .catch(() => {
+            messageStatus.style.color = "red";
+            messageStatus.innerText = "❌ فشل الاتصال بالخادم.";
+            sendMessageBtn.disabled = false;
+        });
+    });
   });
-});
-
 
   </script>
 
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
