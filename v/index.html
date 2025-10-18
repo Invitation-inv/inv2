@@ -505,7 +505,7 @@ var countDownDate = new Date("oct 30, 2025 20:00:00").getTime();
         responseMsg.innerText = "❌ لم نتمكن من التحقق من حالتك.";
       });
 
-    sendMessageBtn.addEventListener("click", function() {
+   sendMessageBtn.addEventListener("click", function() {
         const message = messageTextarea.value.trim();
         if(message === "") {
           messageStatus.style.color = "white";
@@ -525,7 +525,7 @@ var countDownDate = new Date("oct 30, 2025 20:00:00").getTime();
                 token: token
             })
         })
-        .then(response => response.json())
+        .then(response => response.text())
         .then(data => {
             if (data.includes("success")) {
                 messageStatus.style.color = "white";
@@ -547,12 +547,12 @@ var countDownDate = new Date("oct 30, 2025 20:00:00").getTime();
         });
     });
   });
-
   </script>
 
 
 </body>
 </html>
+
 
 
 
