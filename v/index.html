@@ -479,7 +479,6 @@ var countDownDate = new Date("oct 30, 2025 20:00:00").getTime();
     }
   }, 1000);
 
-
   window.addEventListener('DOMContentLoaded', () => {
     fetch(`${scriptURL}?token=${token}&check=true`)
       .then(res => res.json())
@@ -499,8 +498,48 @@ var countDownDate = new Date("oct 30, 2025 20:00:00").getTime();
         responseMsg.innerText = "❌ لم نتمكن من التحقق من حالتك.";
       });
 
-      }),
+    sendMessageBtn.addEventListener("click", function() {
+        const message = messageTextarea.value.trim();
+        if(message === "") {
+          messageStatus.style.color = "white";
+          messageStatus.innerText = "⚠️ الرجاء كتابة رسالة قبل الإرسال.";
+          return;
+        }
+
+        messageStatus.style.color = "white";
+        messageStatus.innerText = "⏳ جاري إرسال الرسالة...";
+        sendMessageBtn.disabled = true;
+
+        fetch(scriptURL, {
+            method: "POST",
+            body: new URLSearchParams({
+                action: "saveMessage",
+                message: message,
+                token: token
+            })
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data.includes("success")) {
+                messageStatus.style.color = "white";
+                messageStatus.innerText = "✅ تم إرسال الرسالة بنجاح.";
+                messageTextarea.value = "";
+            } else if (data.includes("already_sent")) {
+                messageStatus.style.color = "white";
+                messageStatus.innerText = "⚠️ لقد أرسلت رسالة مسبقاً.";
+            } else {
+                messageStatus.style.color = "white";
+                messageStatus.innerText = "❌ حدث خطأ، حاول مرة أخرى.";
+            }
+            sendMessageBtn.disabled = false;
+        })
+        .catch(() => {
+            messageStatus.style.color = "red";
+            messageStatus.innerText = "❌ فشل الاتصال بالخادم.";
+            sendMessageBtn.disabled = false;
+        });
     });
+  });
 
 
 
@@ -509,6 +548,7 @@ var countDownDate = new Date("oct 30, 2025 20:00:00").getTime();
 
 </body>
 </html>
+
 
 
 
