@@ -373,13 +373,14 @@
   statusDiv.innerText = "⏳ جاري الإرسال...";
 
   try {
-    const response = await fetch(scriptURL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token, message })
-    });
+ const response = await fetch(scriptURL, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ token, message })
+});
 
-    const result = await response.json();
+const result = await response.json();
+
 
     if (result.success) {
       msg.disabled = true;
@@ -402,5 +403,6 @@
   </script>
 </body>
 </html>
+
 
 
