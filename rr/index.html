@@ -297,7 +297,7 @@
     const attendanceTitle = document.getElementById("attendanceTitle");
     const responseMsg = document.getElementById("responseMsg");
 
-    const scriptURL = "https://script.google.com/macros/s/AKfycbzs7iSiCr3sSrsTcv0XvAOVYEZxOg7QLbfv2B_yRL-alLu0KFEVgyGbXC8eoXaNOHkw6A/exec";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwuFLEm3B_a5HtYPXn5jFmCZjSjYHoaohvwdPqznfFgPqn8Y9V65CaF8yZl62PB879hZQ/exec";
 
     function confirmAttendance(response) {
       responseMsg.innerText = "⏳ جاري التسجيل...";
@@ -362,40 +362,45 @@
     const btn = document.getElementById("sendBtn");
     const statusDiv = document.getElementById("status");
 
-    btn.addEventListener("click", async () => {
-      const message = msg.value.trim();
-      if (!message) {
-        statusDiv.style.color = "crimson";
-        statusDiv.innerText = "⚠️ الرجاء كتابة رسالة أولاً.";
-        return;
-      }
+ btn.addEventListener("click", async () => {
+  const message = msg.value.trim();
+  if (!message) {
+    alert("⚠️ الرجاء كتابة رسالة أولاً.");
+    return;
+  }
 
-      btn.disabled = true;
-      statusDiv.style.color = "#333";
-      statusDiv.innerText = "⏳ جاري الإرسال...";
+  btn.disabled = true;
+  statusDiv.innerText = "⏳ جاري الإرسال...";
 
-      try {
-        const response = await fetch(scriptURL, {
-          method: "POST",
-          mode: "no-cors", // أو "cors" لو تم تفعيلها في السكربت
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ message }),
-        });
-
-        // بسبب no-cors لن نستقبل رد فعليًا، فنكتفي بعرض نجاح محلي
-        statusDiv.style.color = "green";
-        statusDiv.innerText = "✅ تم الإرسال بنجاح!";
-        msg.value = "";
-      } catch (err) {
-        statusDiv.style.color = "crimson";
-        statusDiv.innerText = "❌ حدث خطأ في الاتصال: " + err.message;
-      } finally {
-        btn.disabled = false;
-      }
+  try {
+    const response = await fetch(scriptURL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token, message })
     });
+
+    const result = await response.json();
+
+    if (result.success) {
+      msg.disabled = true;
+      btn.style.display = "none";
+      statusDiv.innerText = "✅ تم إرسال الرسالة بنجاح";
+    } else {
+      statusDiv.innerText = result.message || "❌ حدث خطأ";
+      if (result.message?.includes("مسبقًا")) {
+        msg.disabled = true;
+        btn.style.display = "none";
+      }
+    }
+  } catch (err) {
+    statusDiv.innerText = "❌ حدث خطأ أثناء الإرسال";
+  } finally {
+    btn.disabled = false;
+  }
+});
+
   </script>
 </body>
 </html>
+
 
