@@ -26,6 +26,48 @@
       border: 1px solid #fff;
       cursor: pointer;
     }
+       .message-box {
+ 
+      margin: 20px auto;
+      padding: 10px;
+      border-radius: 12px;
+      max-width: 300px;
+      text-align: center;
+       background-image: url('11 (1).jpg');
+
+
+    }
+
+    .message-box textarea {
+      width: 80%;
+      height: 80px;
+      border: none;
+      outline: none;
+      padding: 10px;
+      border-radius: 8px;
+      resize: none;
+      background: white;
+      color: #000000 ;
+    }
+
+    .message-box button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      border: none;
+      background: rgb(255, 249, 249);
+      color: #000000;
+      border-radius: 20px;
+      cursor: pointer;
+      top: 10px;
+    }
+    .message-box button:hover {
+      background:  black;
+    }
+
+    .message-status {
+        margin-top: 10px;
+        font-weight: bold;
+    }
 
     /* خلفية الفيديو */
       /* خلفية الفيديو */
@@ -237,7 +279,13 @@
     </div>
     <p id="responseMsg" style="margin-top:10px;position: absolute;top: 2100px;left: 330px;"></p>
     <div id="qrContainer" style="margin-top:20px;position: absolute;top: 2200px;left: 200px;"></div>
-
+  <h2 style="top:3900px;position: absolute;left: 250px;" id="attendanceTitle">رسالتك للعروسين</h2>
+    <div style="margin-top: 20px;top:4500px;position: absolute;left: 170px;" class="message-box">
+    <textarea   id="message" placeholder=" اكتب تهنئتك"></textarea>
+    <button  id="sendMessageBtn"> إرسال</button>
+    <p  id="messageStatus" class="message-status"></p>
+     </div>
+    
     <p style="color: rgb(0, 0, 0); font-size: 16px; margin-top: 40px; animation: bounce 2s infinite;position: absolute;top: 2400px;left: 300px;">
       ↓ تفاصيل الحفل ↓
     </p>
@@ -245,11 +293,7 @@
 
     <img src="1000220819.png" style="width: 500px;height: 500px;position: absolute;top: 2600px;left: 90px;">
     <img src="135271.png" style="width: 1200px;height: 1200px;position: absolute;top: 3200px;left: -200px;">
-    <h2 style="top:4000px;position: absolute;left: 280px;font-size:40px;">رسالتك الى العروسين</h2>
-      <textarea style="top:4100px;position: absolute;left: 280px;font-size:40px;" id="msg" placeholder="اكتب رسالتك هنا..."></textarea><br>
-      <button style="top:4300px;position: absolute;left: 280px;font-size:40px;" id="sendBtn">إرسال</button>
-      <div style="top:4350px;position: absolute;left: 280px;font-size:40px;" class="status" id="status"></div>
-
+    
     <div style="position: absolute; left: 190px;top: 3100px;" id="countdown">
       <div class="time-box">
         <span id="days">00</span>
@@ -400,11 +444,9 @@
             sendMessageBtn.disabled = false;
         });
     });
-  });
   </script>
 </body>
 </html>
-
 
 
 
