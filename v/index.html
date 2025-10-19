@@ -12,20 +12,7 @@
       color: #263645;
     }
 
-    /* زر الموسيقى */
-    .music-btn {
-      position: fixed;
-      top: 15px;
-      left: 15px;
-      z-index: 1001;
-      background: rgba(0, 0, 0, 0.5);
-      color: #fff;
-      padding: 8px 14px;
-      border-radius: 50px;
-      font-size: 14px;
-      border: 1px solid #fff;
-      cursor: pointer;
-    }
+
 
     /* خلفية الفيديو */
       /* خلفية الفيديو */
@@ -192,11 +179,7 @@
 </head>
 
 <body>
-  <!-- زر الموسيقى -->
-  <button class="music-btn" onclick="toggleMusic()">🎵</button>
-  <audio id="bg-music" loop>
-    <source src="music.mp3" type="audio/mpeg">
-  </audio>
+
 
   <!-- فيديو خلف الأبواب -->
   <video class="video-bg" autoplay muted playsinline>
@@ -213,7 +196,7 @@
   <!-- المحتوى -->
   <div class="page-content">
     <img src="1000220777.png" style="position: absolute;left: -200px;">
-    <img src="1000220817.png" style="width: 600px;height: 900px;position: absolute;top: 200px;left: 10px;">
+    <img src="1000221014.png" style="width: 600px;height: 850px;position: absolute;top: 230px;left: 10px;">
     <img src="1000220794.png" style="position: absolute;top: 1600px;width: 900px;left: -110px;">
 
     <p style="color: #263645; font-size: 20px; margin-top: 40px; animation: bounce 2s infinite;position: absolute;top: 1500px;left: 300px;">
@@ -227,13 +210,13 @@
       <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('yes')">نعم، بإذن الله</button>
       <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('no')">لا، أعتذر عن الحضور</button>
     </div>
-    <p id="responseMsg" style="margin-top:10px;position: absolute;top: 2100px;left: 330px;"></p>
+    <p id="responseMsg" style="margin-top:10px;position: absolute;top: 2100px;left: 330px;">الدعوة لشخص واحد</p>
     <div id="qrContainer" style="margin-top:20px;position: absolute;top: 2200px;left: 200px;"></div>
 
     <p style="color: rgb(0, 0, 0); font-size: 16px; margin-top: 40px; animation: bounce 2s infinite;position: absolute;top: 2400px;left: 300px;">
       ↓ تفاصيل الحفل ↓
     </p>
-     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3710.505383694149!2d39.22260300000001!3d21.5661873!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15c3d1001bafa6ff%3A0x92adcdd2c7d4ba7d!2z2YHZhtiv2YIg2K_YqNmE2YrZiCDYp9mJ!5e0!3m2!1sar!2ssa!4v1760824755504!5m2!1sar!2ssa" width="200" height="170" style="border:0;position: absolute; left: 250px;top: 2500px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  
+     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.6707907180357!2d46.837938325403954!3d24.703841178031816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa9d80414dc89%3A0x4c6795d330c79745!2z2YLYtdixINiv2YrYqtmK2YTYsiDZhNmE2KXYrdiq2YHYp9mE2KfYqiDZiNin2YTZhdik2KrZhdix2KfYqg!5e0!3m2!1sar!2ssa!4v1754914876687!5m2!1sar!2ssa" width="200" height="170" style="border:0;position: absolute; left: 250px;top: 2500px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  
 
     <img src="1000220819.png" style="width: 500px;height: 500px;position: absolute;top: 2600px;left: 90px;">
     <img src="135271.png" style="width: 1200px;height: 1200px;position: absolute;top: 3200px;left: -200px;">
@@ -271,10 +254,7 @@
       }, 2600);
     });
 
-    function toggleMusic() {
-      const music = document.getElementById("bg-music");
-      music.paused ? music.play() : music.pause();
-    }
+
 
     const nameParam = new URLSearchParams(location.search).get("name") || "ضيفنا";
     document.getElementById("welcomeText").innerText += nameParam;
@@ -285,7 +265,7 @@
     const attendanceTitle = document.getElementById("attendanceTitle");
     const responseMsg = document.getElementById("responseMsg");
 
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwRVSZevoVpAqpoV_1j6fQ0vhLUvGQWVU9IiENF3HlZLptPosxyA7AyzSQ4GpYZqYJZMQ/exec";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyC4QCsqhoSUmWGIYsxeFVVZnZObSOmm92dq4O1_JAdoiN4ekq_dwAG2S0rStjOmQTA3Q/exec";
 
     function confirmAttendance(response) {
       responseMsg.innerText = "⏳ جاري التسجيل...";
@@ -348,7 +328,3 @@
   </script>
 </body>
 </html>
-
-
-
-
