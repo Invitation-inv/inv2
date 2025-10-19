@@ -358,50 +358,53 @@
         });
     });
 
-    const msg = document.getElementById("msg");
-    const btn = document.getElementById("sendBtn");
-    const statusDiv = document.getElementById("status");
 
-btn.addEventListener("click", async () => {
-  const message = msg.value.trim();
-  if (!message) {
-    alert("⚠️ الرجاء كتابة رسالة أولاً.");
-    return;
-  }
+    sendMessageBtn.addEventListener("click", function() {
+        const message = messageTextarea.value.trim();
+        if(message === "") {
+          messageStatus.style.color = "white";
+          messageStatus.innerText = "⚠️ الرجاء كتابة رسالة قبل الإرسال.";
+          return;
+        }
 
-  btn.disabled = true;
-  statusDiv.innerText = "⏳ جاري الإرسال...";
+        messageStatus.style.color = "white";
+        messageStatus.innerText = "⏳ جاري إرسال الرسالة...";
+        sendMessageBtn.disabled = true;
 
-  try {
-    const response = await fetch(scriptURL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token, message })
+        fetch(scriptURL, {
+            method: "POST",
+            body: new URLSearchParams({
+                action: "saveMessage",
+                message: message,
+                token: token
+            })
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data.includes("success")) {
+                messageStatus.style.color = "white";
+                messageStatus.innerText = "✅ تم إرسال الرسالة بنجاح.";
+                messageTextarea.value = "";
+            } else if (data.includes("already_sent")) {
+                messageStatus.style.color = "white";
+                messageStatus.innerText = "⚠️ لقد أرسلت رسالة مسبقاً.";
+            } else {
+                messageStatus.style.color = "white";
+                messageStatus.innerText = "❌ حدث خطأ، حاول مرة أخرى.";
+            }
+            sendMessageBtn.disabled = false;
+        })
+        .catch(() => {
+            messageStatus.style.color = "red";
+            messageStatus.innerText = "❌ فشل الاتصال بالخادم.";
+            sendMessageBtn.disabled = false;
+        });
     });
-
-    const result = await response.json();
-
-    if (result.success) {
-      msg.disabled = true;
-      btn.style.display = "none";
-      statusDiv.innerText = "✅ تم إرسال الرسالة بنجاح";
-    } else {
-      statusDiv.innerText = result.message || "❌ حدث خطأ";
-      if (result.message?.includes("مسبقًا")) {
-        msg.disabled = true;
-        btn.style.display = "none";
-      }
-    }
-  } catch (err) {
-    statusDiv.innerText = "❌ حدث خطأ أثناء الإرسال";
-  } finally {
-    btn.disabled = false;
-  }
-});
-
+  });
   </script>
 </body>
 </html>
+
 
 
 
