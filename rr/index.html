@@ -8,8 +8,9 @@
       margin: 0;
       font-family: "Amiri", serif;
       height: 100vh;
-      background: url("1000220163.jpg");
-      color: #263645;
+      background: url("115904.jpg") no-repeat center center/cover;
+      color: #000000;
+      overflow-x: hidden;
     }
 
     /* زر الموسيقى */
@@ -18,7 +19,7 @@
       top: 15px;
       left: 15px;
       z-index: 1001;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0,0,0,0.5);
       color: #fff;
       padding: 8px 14px;
       border-radius: 50px;
@@ -26,15 +27,167 @@
       border: 1px solid #fff;
       cursor: pointer;
     }
-       .message-box {
+
+    /* خلفية الفيديو */
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      object-fit: cover;
+      width: 100%;
+      height: 100vh;
+    }
+
+    /* المحتوى العام */
+    .page-content {
+      position: relative;
+      z-index: 2;
+      padding: 30px 15px 80px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    /* الصناديق */
+    .card {
+      padding: 25px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .card h1, .card h2 {
+      margin-bottom: 20px;
+    }
+
+    /* أزرار */
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      background: #fff;
+      color: #3c2e1f;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 5px;
+      transition: 0.3s;
+    }
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    /* عداد */
+    #countdown {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .time-box {
+      background: white;
+      color: #3c2e1f;
+      padding: 15px;
+      border-radius: 15px;
+      min-width: 80px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    .time-box span {
+      display: block;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+ 
+    .intro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: rgba(0,0,0,0.6);
+    }
+    .doors {
+      display: flex;
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+    }
+    .door {
+      flex: 1;
+      background-size: cover;
+      background-position: center;
+      transition: transform 2s ease-in-out;
+    }
+    .left-door {
+      background-image: url("77.jpg");
+      transform-origin: left center;
+    }
+    .right-door {
+      background-image: url("88.jpg");
+      transform-origin: right center;
+    }
+    .intro.open .left-door { transform: translateX(100%); }
+    .intro.open .right-door { transform: translateX(-100%); }
+
+    .start-btn {
+      z-index: 2001;
+      padding: 12px 24px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background: #fff;
+      color: #3c2e1f;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+       #countdown {
+      
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      font-family: 'Amiri', serif;
+      margin-top: 20px;
+
+    }
+
+    .time-box {
+      color: white;
+    
+      padding: 10px 15px;
+      border-radius: 15px;
+      text-align: center;
+      min-width: 120px;
+      background: #000000;
+
+    }
+
+    .time-box span {
+      display: block;
+      font-size: 60px;
+      font-weight: bold;
+    }
+
+    .time-label {
+      font-size: 40px;
+      margin-top: 5px;
+      color: white;
+      
+
+    }
+  .message-box {
  
       margin: 20px auto;
       padding: 10px;
       border-radius: 12px;
       max-width: 300px;
       text-align: center;
-       background-image: url('11 (1).jpg');
-
+      background: black;
 
     }
 
@@ -47,18 +200,17 @@
       border-radius: 8px;
       resize: none;
       background: white;
-      color: #000000 ;
+      color: white ;
     }
 
     .message-box button {
       margin-top: 10px;
       padding: 10px 20px;
       border: none;
-      background: rgb(255, 249, 249);
-      color: #000000;
+      background: white;
+      color: black;
       border-radius: 20px;
       cursor: pointer;
-      top: 10px;
     }
     .message-box button:hover {
       background:  black;
@@ -68,190 +220,39 @@
         margin-top: 10px;
         font-weight: bold;
     }
+    
+    
 
-    /* خلفية الفيديو */
-      /* خلفية الفيديو */
-    .video-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 120%;
-      height: 120%;
-      object-fit: cover;
-      z-index: 1;
-      transition: opacity 1s ease;
-    }
-
-    /* الأبواب */
-    .door {
-      position: fixed;
-      top:500px;
-      width: 60%;
-      height: 96vh;
-      z-index: 2;
-      background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
-      transition: transform 2.5s ease-in-out;
-    }
-
-    .door.left {
-      left: 50px;
-      transform-origin: left center;
-      background-image: url("55 (1).png");
-    }
-
-    .door.right {
-      right: -250px;
-      transform-origin: right center;
-      background-image: url("55 (2).png");
-    }
-
-    /* حالة الفتح */
-    .open .door.left {
-      transform: perspective(1200px) rotateY(-100deg);
-    }
-
-    .open .door.right {
-      transform: perspective(1200px) rotateY(100deg);
-    }
-
-    @media (max-width: 1024px) {
-      .door {
-        background-size: contain;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .door {
-        width: 50%;
-        height: 100vh;
-        background-size: cover;
-      }
-    }
-
-    /* زر الدخول */
-    .enter-btn {
-      position: fixed;
-      top: 50%;
-      left: 55%;
-      z-index: 3;
-      background: rgba(255, 255, 255, 0.85);
-      color: #263645;
-      font-size: 1.5rem;
-      border: none;
-      padding: 19px 30px;
-      border-radius: 80px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-family: "Amiri", serif;
-    }
-
-    .enter-btn:hover {
-      background: #263645;
-      color: #fff;
-    }
-
-    .content {
-      position: relative;
-      z-index: 0;
-      opacity: 0;
-      transition: opacity 1s ease;
-      background: #fdf8f2;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 2rem;
-    }
-
-    .open .video-bg {
-      opacity: 0;
-    }
-
-    .show-content .content {
-      opacity: 1;
-      z-index: 3;
-    }
-    .page-content {
-      position: relative;
-      padding: 30px 15px 80px;
-      max-width: 700px;
-      margin: auto;
-    }
-    textarea {
-      width: 80%;
-      height: 120px;
-      font-size: 16px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-
-    button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 20px;
-      background: #263645;
-      color: #ffffff;
-      font-weight: bold;
-      cursor: pointer;
-      margin: 5px;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      transform: scale(1.05);
-    }
-
-    /* عداد */
-    #countdown {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    .time-box {
-      color: white;
-      padding: 20px 20px;
-      border-radius: 15px;
-      text-align: center;
-      min-width: 60px;
-      height: 70px;
-      background: #263645;
-    }
-
-    .time-box span {
-      display: block;
-      font-size: 30px;
-      font-weight: bold;
-    }
-
-    .time-label {
-      font-size: 30px;
-      margin-top: 5px;
-      color: white;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(5px); }
-    }
   </style>
 </head>
-
 <body>
+
+  <!-- شاشة البداية -->
+  <div class="intro" id="intro">
+    <div class="doors">
+      <div class="door left-door"></div>
+      <div class="door right-door"></div>
+    </div>
+    <button class="start-btn" onclick="openDoors()">ابدأ</button>
+  </div>
+
   <!-- زر الموسيقى -->
   <button class="music-btn" onclick="toggleMusic()">🎵</button>
   <audio id="bg-music" loop>
     <source src="music.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- فيديو خلف الأبواب -->
-  <video class="video-bg" autoplay muted playsinline>
-    <source src="a.mp4" type="video/mp4">
+  <!-- خلفية فيديو -->
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="94cd3d1ae499b5b354c111c7c311dc00.mp4" type="video/mp4">
   </video>
+
+  <!-- المحتوى -->
+  <div class="page-content">
+
+   
+  <!-- فيديو خلف الأبواب -->
+  <img class="video-bg" src="10002207641.png" alt="خلفية البداية">
 
   <!-- الأبواب -->
   <div class="door left"></div>
@@ -260,41 +261,63 @@
   <!-- زر الدخول -->
   <button class="enter-btn" id="enterBtn">اضغط للدخول</button>
 
+
   <!-- المحتوى -->
   <div class="page-content">
-    <img src="1000220777.png" style="position: absolute;left: -200px;">
-    <img src="1000220817.png" style="width: 600px;height: 900px;position: absolute;top: 200px;left: 10px;">
-    <img src="1000220794.png" style="position: absolute;top: 1600px;width: 900px;left: -110px;">
 
-    <p style="color: #263645; font-size: 20px; margin-top: 40px; animation: bounce 2s infinite;position: absolute;top: 1500px;left: 300px;">
+    <!-- الشعار -->
+   <img src="1000220777.png"  style="position: absolute;left: -200px;">
+<img src="1000220786.png" style="width: 600px;height: 900px;position: absolute;top: 200px;left: 10px;" >
+<img  src="1000220794.png" style="position: absolute;top: 1600px;width: 900px;width: 900px;left: -110px;">
+
+          <p style="color: #263645; font-size: 20px;  margin-top: 40px; animation: bounce 2s infinite;position: absolute;top: 1500px;left: 300px;">
       ↓ تاكيد الحضور ↓
     </p>
+   
+    <style>
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
+    </style>
 
-    <p id="welcomeText" style="font-size: 30px; color: #263645;position: absolute;top: 1800px;left:322px;">المكرمة، </p>
+   <p  id="welcomeText" style="animation-delay: 0.5s;font-size: 30px; color: #263645;position: absolute;top: 1800px;left:322px ; ">المكرمة، </p>
+
 
     <h2 style="top:1850px;position: absolute;left: 280px;font-size:40px;" id="attendanceTitle">هل ستحضر؟</h2>
-    <div id="responseButtons" style="margin-top:30px;top:1950px;position: absolute;left: 210px;">
+     <div id="responseButtons" style="margin-top:30px;top:1950px;position: absolute;left: 210px;">
       <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('yes')">نعم، بإذن الله</button>
       <button style="padding:6px 12px;font-size: 20px;border-radius:5px;" onclick="confirmAttendance('no')">لا، أعتذر عن الحضور</button>
     </div>
-    <p id="responseMsg" style="margin-top:10px;position: absolute;top: 2100px;left: 330px;"></p>
-    <div id="qrContainer" style="margin-top:20px;position: absolute;top: 2200px;left: 200px;"></div>
-  <h2 style="top:3900px;position: absolute;left: 250px;" id="attendanceTitle">رسالتك للعروسين</h2>
-    <div style="margin-top: 20px;top:4500px;position: absolute;left: 170px;" class="message-box">
-    <textarea   id="message" placeholder=" اكتب تهنئتك"></textarea>
+     <p id="responseMsg" style="margin-top: 20px;top:2100px;position: absolute;left: 300px;color: #000000;"></p>
+    <div class="qr-wrapper">
+      <div id="qrContainer" style="margin-top: 20px;top:1950px;position: absolute;left: 250px;"></div>
+    </div>
+    <h1 id="qrNote" style="display: none; font-size: 14px;top:2150px;position: absolute;left: 300px;">📌 استخدم رمز الدخول عند الوصول للقاعة.</h1>
+    <h2 id="invitationCount" style="font-size: 14px; display: none;top:2200px;position: absolute;left: 350px;"></h2>
+    <button id="downloadBtn" style="display: none; margin-top: 10px;top:2250px;position: absolute;left: 330px;">📥تحميل الدعوة</button>
+    
+    <h2 style="top:2600px;position: absolute;left: 300px;" id="attendanceTitle">رسالتك للعروسين</h2>
+    <div style="margin-top: 20px;top:2700px;position: absolute;left: 200px;" class="message-box">
+    <textarea  id="message" placeholder=" اكتب تهنئتك"></textarea>
     <button  id="sendMessageBtn"> إرسال</button>
-    <p  id="messageStatus" class="message-status"></p>
+    <p style="z-index: 1;"  id="messageStatus" class="message-status"></p>
      </div>
-    
-    <p style="color: rgb(0, 0, 0); font-size: 16px; margin-top: 40px; animation: bounce 2s infinite;position: absolute;top: 2400px;left: 300px;">
-      ↓ تفاصيل الحفل ↓
-    </p>
-     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.6707907180357!2d46.837938325403954!3d24.703841178031816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa9d80414dc89%3A0x4c6795d330c79745!2z2YLYtdixINiv2YrYqtmK2YTYsiDZhNmE2KXYrdiq2YHYp9mE2KfYqiDZiNin2YTZhdik2KrZhdix2KfYqg!5e0!3m2!1sar!2ssa!4v1754914876687!5m2!1sar!2ssa" width="200" height="170" style="border:0;position: absolute; left: 250px;top: 2500px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  
 
-    <img src="1000220819.png" style="width: 500px;height: 500px;position: absolute;top: 2600px;left: 90px;">
-    <img src="135271.png" style="width: 1200px;height: 1200px;position: absolute;top: 3200px;left: -200px;">
-    
-    <div style="position: absolute; left: 190px;top: 3100px;" id="countdown">
+
+ <p style="color: rgb(0, 0, 0); font-size: 16px;  margin-top: 40px; animation: bounce 2s infinite;position: absolute;top: 2400px;left: 300px;">
+      ↓  تفاصيل الحفل ↓  
+    </p>
+   
+    <style>
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
+    </style>
+ <img src="135271.png" style="width: 1200px;height: 1200px;position: absolute;top: 3400px;left: -200px;" >
+ 
+ <div style="position: absolute; left: 150px;top: 3350px;" id="countdown">
       <div class="time-box">
         <span id="days">00</span>
         <div class="time-label">يوم</div>
@@ -308,145 +331,158 @@
         <div class="time-label">دقيقة</div>
       </div>
     </div>
+     
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  </div>
+<script>
+function openDoors() {
+    const intro = document.getElementById("intro");
+    intro.classList.add("open");
+    setTimeout(() => { intro.style.display = "none"; }, 2200);
+  }
 
-  <script>
-    const enterBtn = document.getElementById('enterBtn');
-    const videoBg = document.querySelector('.video-bg');
-    const doors = document.querySelectorAll('.door');
+  function toggleMusic() {
+    const music = document.getElementById("bg-music");
+    music.paused ? music.play() : music.pause();
+  }
 
-    enterBtn.addEventListener('click', () => {
-      document.body.classList.add('open');
-      enterBtn.style.display = 'none';
-      setTimeout(() => {
-        document.body.classList.add('show-content');
-        doors.forEach(door => door.style.display = 'none');
-        videoBg.style.display = 'none';
-      }, 2600);
+  const nameParam = new URLSearchParams(location.search).get("name") || "ضيفنا";
+  const welcomeText = document.getElementById("welcomeText");
+  if (welcomeText) {
+    welcomeText.innerText += nameParam;
+  }
+
+  const token = new URLSearchParams(location.search).get("token") || "";
+  const responseButtons = document.getElementById("responseButtons");
+  const attendanceTitle = document.getElementById("attendanceTitle");
+  const responseMsg = document.getElementById("responseMsg");
+
+  // عناصر الرسائل
+  const messageTextarea = document.getElementById("message");
+  const sendMessageBtn = document.getElementById("sendMessageBtn");
+  const messageStatus = document.getElementById("messageStatus");
+
+  // رابط السكربت
+  const scriptURL = "hhttps://script.google.com/macros/s/AKfycbwRVSZevoVpAqpoV_1j6fQ0vhLUvGQWVU9IiENF3HlZLptPosxyA7AyzSQ4GpYZqYJZMQ/exec";
+
+  // دالة تأكيد الحضور
+  function confirmAttendance(response) {
+    responseMsg.innerText = "⏳ جاري التسجيل...";
+    responseButtons.style.pointerEvents = "none"; // منع الضغط أكثر من مرة
+    fetch(scriptURL, {
+      method: "POST",
+      body: new URLSearchParams({
+        action: "confirmAttendance",
+        name: nameParam,
+        token: token,
+        response: response
+      })
+    })
+    .then(res => res.json())
+    .then(res => {
+      responseButtons.style.display = "none";
+      attendanceTitle.style.display = "none";
+
+      if (res.status === "success") {
+        if (response === "yes") {
+          responseMsg.innerText = "✅ تم تأكيد حضورك، شكرًا لتلبيتك الدعوة.";
+        } else {
+          responseMsg.innerText = "❌ تم تسجيل اعتذارك، نشكرك على ردك.";
+        }
+      } else if (res.status === "already") {
+        responseMsg.innerText = "⚠️ لقد تم تسجيل ردك مسبقًا، لا يمكن تغييره.";
+      } else {
+        responseMsg.innerText = "⚠️ لم نتمكن من معالجة الطلب.";
+      }
+    })
+    .catch(() => {
+      responseMsg.innerText = "❌ حدث خطأ أثناء الاتصال بالخادم.";
     });
+  }
 
-    function toggleMusic() {
-      const music = document.getElementById("bg-music");
-      music.paused ? music.play() : music.pause();
+  // عداد الوقت
+  var countDownDate = new Date("nov 07, 2025 20:00:00").getTime();
+  var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    document.getElementById("days").innerHTML = days;
+    document.getElementById("hours").innerHTML = hours;
+    document.getElementById("minutes").innerHTML = minutes;
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("countdown").innerHTML = "انتهى الوقت";
     }
+  }, 1000);
 
-    const nameParam = new URLSearchParams(location.search).get("name") || "ضيفنا";
-    document.getElementById("welcomeText").innerText += nameParam;
-
-    const token = new URLSearchParams(location.search).get("token") || "";
-    const qrContainer = document.getElementById("qrContainer");
-    const responseButtons = document.getElementById("responseButtons");
-    const attendanceTitle = document.getElementById("attendanceTitle");
-    const responseMsg = document.getElementById("responseMsg");
-
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwRVSZevoVpAqpoV_1j6fQ0vhLUvGQWVU9IiENF3HlZLptPosxyA7AyzSQ4GpYZqYJZMQ/exec";
-
-    function confirmAttendance(response) {
-      responseMsg.innerText = "⏳ جاري التسجيل...";
-      fetch(`${scriptURL}?name=${encodeURIComponent(nameParam)}&token=${token}&response=${response}`)
-        .then(res => res.json())
-        .then(res => {
+  // التحقق من حالة الضيف عند تحميل الصفحة
+  window.addEventListener('DOMContentLoaded', () => {
+    fetch(`${scriptURL}?token=${token}&check=true`)
+      .then(res => res.json())
+      .then(res => {
+        if (res.status === "already") {
           responseButtons.style.display = "none";
           attendanceTitle.style.display = "none";
-          responseMsg.innerText = res.message;
-          if (res.status === "success" || res.status === "already") {
-            showQR(res.qr);
-          } else if (res.status === "declined") {
-            qrContainer.innerHTML = "";
+          if (res.response === "yes") {
+            responseMsg.innerText = "✅ تم تأكيد حضورك مسبقًا.";
+          } else {
+            responseMsg.innerText = "❌ تم تسجيل اعتذارك مسبقًا.";
           }
-        })
-        .catch(() => {
-          responseMsg.innerText = "❌ حدث خطأ أثناء الاتصال بالخادم.";
-        });
-    }
-
-    function showQR(link) {
-      qrContainer.innerHTML = "";
-      new QRCode(qrContainer, { text: link, width: 200, height: 200 });
-    }
-
-    var countDownDate = new Date("Nov 07, 2025 20:00:00").getTime();
-    setInterval(function() {
-      var now = new Date().getTime();
-      var distance = countDownDate - now;
-      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      document.getElementById("days").innerHTML = days;
-      document.getElementById("hours").innerHTML = hours;
-      document.getElementById("minutes").innerHTML = minutes;
-      if (distance < 0) {
-        document.getElementById("countdown").innerHTML = "انتهى الوقت";
-      }
-    }, 1000);
-
-    window.addEventListener('DOMContentLoaded', () => {
-      fetch(`${scriptURL}?token=${token}&check=true`)
-        .then(res => res.json())
-        .then(res => {
-          if (res.status === "already" || res.status === "used") {
-            showQR(res.qr);
-            responseButtons.style.display = "none";
-            attendanceTitle.style.display = "none";
-            responseMsg.innerText = res.message;
-          } else if (res.status === "declined") {
-            responseButtons.style.display = "none";
-            attendanceTitle.style.display = "none";
-            responseMsg.innerText = res.message || "نأسف لعدم تمكنك من الحضور.";
-          }
-        })
-        .catch(() => {
-          responseMsg.innerText = "❌ لم نتمكن من التحقق من حالتك.";
-        });
-    });
-
-
-    sendMessageBtn.addEventListener("click", function() {
-        const message = messageTextarea.value.trim();
-        if(message === "") {
-          messageStatus.style.color = "white";
-          messageStatus.innerText = "⚠️ الرجاء كتابة رسالة قبل الإرسال.";
-          return;
         }
+      })
+      .catch(() => {
+        responseMsg.innerText = "❌ لم نتمكن من التحقق من حالتك.";
+      });
 
+    // إرسال الرسائل
+    sendMessageBtn.addEventListener("click", function() {
+      const message = messageTextarea.value.trim();
+      if (message === "") {
         messageStatus.style.color = "white";
-        messageStatus.innerText = "⏳ جاري إرسال الرسالة...";
-        sendMessageBtn.disabled = true;
+        messageStatus.innerText = "⚠️ الرجاء كتابة رسالة قبل الإرسال.";
+        return;
+      }
 
-        fetch(scriptURL, {
-            method: "POST",
-            body: new URLSearchParams({
-                action: "saveMessage",
-                message: message,
-                token: token
-            })
+      messageStatus.style.color = "white";
+      messageStatus.innerText = "⏳ جاري إرسال الرسالة...";
+      sendMessageBtn.disabled = true;
+
+      fetch(scriptURL, {
+        method: "POST",
+        body: new URLSearchParams({
+          action: "saveMessage",
+          message: message,
+          token: token
         })
-        .then(response => response.text())
-        .then(data => {
-            if (data.includes("success")) {
-                messageStatus.style.color = "white";
-                messageStatus.innerText = "✅ تم إرسال الرسالة بنجاح.";
-                messageTextarea.value = "";
-            } else if (data.includes("already_sent")) {
-                messageStatus.style.color = "white";
-                messageStatus.innerText = "⚠️ لقد أرسلت رسالة مسبقاً.";
-            } else {
-                messageStatus.style.color = "white";
-                messageStatus.innerText = "❌ حدث خطأ، حاول مرة أخرى.";
-            }
-            sendMessageBtn.disabled = false;
-        })
-        .catch(() => {
-            messageStatus.style.color = "red";
-            messageStatus.innerText = "❌ فشل الاتصال بالخادم.";
-            sendMessageBtn.disabled = false;
-        });
+      })
+      .then(response => response.text())
+      .then(data => {
+        if (data.includes("success")) {
+          messageStatus.style.color = "white";
+          messageStatus.innerText = "✅ تم إرسال الرسالة بنجاح.";
+          messageTextarea.value = "";
+        } else if (data.includes("already_sent")) {
+          messageStatus.style.color = "white";
+          messageStatus.innerText = "⚠️ لقد أرسلت رسالة مسبقًا.";
+        } else {
+          messageStatus.style.color = "white";
+          messageStatus.innerText = "❌ حدث خطأ، حاول مرة أخرى.";
+        }
+        sendMessageBtn.disabled = false;
+      })
+      .catch(() => {
+        messageStatus.style.color = "red";
+        messageStatus.innerText = "❌ فشل الاتصال بالخادم.";
+        sendMessageBtn.disabled = false;
+      });
     });
-  </script>
-</body>
-</html>
+  });
+</script>
+
+
 
 
 
