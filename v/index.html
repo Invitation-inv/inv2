@@ -185,6 +185,8 @@
   <video class="video-bg" autoplay muted playsinline>
     <source src="a.mp4" type="video/mp4">
   </video>
+    <audio id="doorSound" src="2222.mp3" preload="auto"></audio>
+
 
   <!-- الأبواب -->
   <div class="door left"></div>
@@ -244,8 +246,14 @@
     const enterBtn = document.getElementById('enterBtn');
     const videoBg = document.querySelector('.video-bg');
     const doors = document.querySelectorAll('.door');
+    const doorSound = document.getElementById('doorSound');
 
     enterBtn.addEventListener('click', () => {
+
+      doorSound.currentTime = 0;
+      doorSound.play();
+
+
       document.body.classList.add('open');
       enterBtn.style.display = 'none';
       setTimeout(() => {
@@ -329,7 +337,6 @@
   </script>
 </body>
 </html>
-
 
 
 
