@@ -17,20 +17,18 @@
 </head>
 <body>
   <div class="card">
-    <h2>نموذج تسجيل — يرسل إلى Google Sheets</h2><form id="guestForm">
+   <form id="guestForm">
   <!-- الحقل 1 -->
   <label for="field1">الاسم</label>
   <input id="field1" name="field1" type="text" placeholder="اكتب الاسم" required>
 
   <!-- الحقل 2 -->
+  <label for="field2">رقم الهاتف</label>
+  <input id="field2" name="field2" type="text" placeholder="+9665..." required>
 
   <!-- الحقل 3 -->
-  <label for="field2">رقم الهاتف</label>
-  <input id="field2" name="field3" type="text" placeholder="+9665..." required>
-
-  <!-- الحقل 4 -->
   <label for="field3">ملاحظة / رسالة</label>
-  <textarea id="field3" name="field4" rows="3" placeholder="اكتب ملاحظة إن وُجدت"></textarea>
+  <textarea id="field3" name="field3" rows="3" placeholder="اكتب ملاحظة إن وُجدت"></textarea>
 
   <!-- اختيار نعم / لا -->
   <label>هل تؤكد الحضور؟</label>
@@ -40,6 +38,7 @@
   </div>
 
   <button type="submit">إرسال</button>
+
 </form>
 
 <div class="msg" id="response"></div>
@@ -83,6 +82,7 @@
     });
   </script></body>
 </html>
+
 
 
 
