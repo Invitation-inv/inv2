@@ -49,16 +49,20 @@
             border-radius: 4px;
             text-align: center;
         }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
     </style>
   </head>
   <body>
     <div class="container">
       <h2>نموذج إدخال بيانات مخصص (GitHub)</h2>
       
-      <form action="https://script.google.com/macros/s/AKfycbw2MJLQermEI6XFJ8L3aPlTqNaKq1N9CdsK3tX0G4DdTG8zrn7qiQY6UJHcKuFL5zLt/exec" method="POST" target="_blank"> 
+      <form id="myForm"> 
         
         <label for="input1">المدخل الأول (الاسم):</label>
-        <input type="text" id="input1" name="input1" required> <label for="input2">المدخل الثاني (العمر/الرقم):</label>
+        <input type="text" id="input1" name="input1" required> 
+
+        <label for="input2">المدخل الثاني (العمر/الرقم):</label>
         <input type="text" id="input2" name="input2" required>
 
         <label for="input3">المدخل الثالث (ملاحظات):</label>
@@ -74,9 +78,66 @@
           <label for="no">لا</label>
         </div>
 
-        <input type="submit" value="إرسال البيانات إلى Google">
+        <input type="submit" value="إرسال البيانات" id="submitButton">
       </form>
-      </div>
+
+      <div id="output" class="message"></div>
+    </div>
+
+    <script>
+      // 💡 الرابط الخاص بك: يجب تغيير هذا إلى Web App URL الخاص بك
+      const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz4oCJnBYwvjRVoihZQIeHjhDqG4LiRwLvk3Wfuks7RGwGswiHWIAjYaFu8-nW_bbvL/exec'; 
+
+      document.getElementById('myForm').addEventListener('submit', handleFormSubmit);
+
+      async function handleFormSubmit(e) {
+        e.preventDefault(); 
+        
+        const form = e.target;
+        const outputDiv = document.getElementById('output');
+        const submitButton = document.getElementById('submitButton');
+        
+        // 1. عرض رسالة جاري الإرسال
+        outputDiv.className = 'message';
+        outputDiv.innerHTML = 'جاري إرسال البيانات... ⏳';
+        submitButton.disabled = true; // تعطيل الزر لمنع الإرسال المتعدد
+
+        // جمع البيانات
+        const data = new FormData(form);
+        const params = new URLSearchParams(data).toString();
+
+        try {
+          // 2. إرسال البيانات عبر AJAX (Fetch API)
+          const response = await fetch(APP_SCRIPT_URL, {
+            method: 'POST',
+            body: params,
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+          });
+
+          // 3. تحليل الاستجابة
+          const result = await response.json(); 
+
+          if (result.status === 'success') {
+            // 4. عرض رسالة النجاح
+            outputDiv.className = 'message success';
+            outputDiv.innerHTML = result.message;
+            form.reset(); // مسح النموذج
+          } else {
+            // 4. عرض رسالة الخطأ
+            outputDiv.className = 'message error';
+            outputDiv.innerHTML = 'خطأ في الخادم: ' + result.message;
+          }
+
+        } catch (error) {
+          // 4. عرض خطأ الاتصال
+          outputDiv.className = 'message error';
+          outputDiv.innerHTML = 'فشل الاتصال بخدمة Google: ' + error.message;
+        } finally {
+          submitButton.disabled = false; // تفعيل الزر مرة أخرى
+        }
+      }
+    </script>
   </body>
 </html>
-
