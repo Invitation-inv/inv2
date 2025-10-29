@@ -3,111 +3,154 @@
   <head>
     <base target="_top">
     <style>
-        /* (تضمين نفس كود CSS السابق هنا) */
+        /* تصميم النموذج الأساسي */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             padding: 20px;
-            background-color: #f4f4f4;
-            direction: rtl; 
+            background-color: #e9e9e9; /* خلفية أفتح */
+            direction: rtl;
             text-align: right;
         }
         .container {
             max-width: 500px;
             margin: 0 auto;
             background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 35px;
+            border-radius: 12px; /* حواف أكثر استدارة */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
-        input[type="text"], input[type="submit"] {
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #007bff; /* خط أزرق تحت العنوان */
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        /* تنسيق حقول الإدخال والنص */
+        input[type="text"], input[type="tel"], textarea {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin: 8px 0;
             display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            border: 1px solid #ddd; /* حدود أفتح */
+            border-radius: 6px;
             box-sizing: border-box;
+            transition: border-color 0.3s;
+            resize: vertical; /* السماح بتغيير حجم الرسالة عمودياً */
+            min-height: 100px; /* ارتفاع أدنى للرسالة */
+        }
+        input[type="text"]:focus, input[type="tel"]:focus, textarea:focus {
+            border-color: #007bff; /* إطار أزرق عند التركيز */
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+            outline: none;
+        }
+
+        /* تنسيق خيارات الراديو */
+        .radio-group {
+            padding: 10px 0;
+            border: 1px solid #eee;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
         }
         .radio-group label {
-            margin-left: 15px;
+            font-weight: normal;
+            display: inline-block;
+            margin-left: 10px;
+            margin-top: 0;
             cursor: pointer;
+            color: #333;
         }
+        
+        /* تنسيق زر الإرسال */
         input[type="submit"] {
-            background-color: #4CAF50;
+            background-color: #007bff; /* لون أزرق جذاب */
             color: white;
             border: none;
             cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
+            font-size: 18px;
+            padding: 12px 20px;
+            margin-top: 25px;
+            border-radius: 6px;
+            transition: background-color 0.3s;
         }
         input[type="submit"]:hover {
-            background-color: #45a049;
+            background-color: #0056b3;
         }
+
+        /* تنسيق رسائل الحالة */
         .message {
             margin-top: 20px;
-            padding: 10px;
-            border-radius: 4px;
+            padding: 15px;
+            border-radius: 8px;
             text-align: center;
+            font-weight: bold;
         }
-        .success { background-color: #d4edda; color: #155724; }
-        .error { background-color: #f8d7da; color: #721c24; }
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
     </style>
   </head>
   <body>
     <div class="container">
-      <h2>نموذج إدخال بيانات مخصص (GitHub)</h2>
-      
-      <form id="myForm"> 
-        
-        <label for="input1">المدخل الأول (الاسم):</label>
-        <input type="text" id="input1" name="input1" required> 
+      <h2>💌 نموذج تواصل المناسبة</h2>
+     
+      <form id="myForm">
+       
+        <label for="input1">الاسم الكامل (إجباري):</label>
+        <input type="text" id="input1" name="input1" placeholder="أدخل اسمك هنا" required>
 
-        <label for="input2">المدخل الثاني (العمر/الرقم):</label>
-        <input type="text" id="input2" name="input2" required>
+        <label for="input2">رقم الجوال (إجباري):</label>
+        <input type="tel" id="input2" name="input2" placeholder="مثال: 05xxxxxxxxx" required>
 
-        <label for="input3">المدخل الثالث (ملاحظات):</label>
-        <input type="text" id="input3" name="input3">
-        
+        <label for="input3">رسالة لصاحب المناسبة:</label>
+        <textarea id="input3" name="input3" placeholder="اكتب تهنئتك أو ملاحظتك هنا" required></textarea>
+       
         <br>
-        <label>هل توافق على الشروط؟</label>
-        <div class="radio-group" style="padding: 10px 0;">
+        <label style="margin-top: 20px;">هل تأكدت من البيانات وتوافق على الإرسال؟ (إجباري)</label>
+        <div class="radio-group">
           <input type="radio" id="yes" name="yes_no" value="نعم" required>
-          <label for="yes">نعم</label>
-          
-          <input type="radio" id="no" name="yes_no" value="لا" required style="margin-right: 20px;">
-          <label for="no">لا</label>
+          <label for="yes">نعم، أؤكد</label>
+         
+          <input type="radio" id="no" name="yes_no" value="لا" required style="margin-right: 30px;">
+          <label for="no">لا، ما زلت أريد المراجعة</label>
         </div>
 
-        <input type="submit" value="إرسال البيانات" id="submitButton">
+        <input type="submit" value="إرسال البيانات والتأكيد" id="submitButton">
       </form>
 
       <div id="output" class="message"></div>
     </div>
 
     <script>
-      // 💡 الرابط الخاص بك: يجب تغيير هذا إلى Web App URL الخاص بك
-      const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz4oCJnBYwvjRVoihZQIeHjhDqG4LiRwLvk3Wfuks7RGwGswiHWIAjYaFu8-nW_bbvL/exec'; 
+      // ⚠️ يجب التأكد من صحة هذا الرابط.
+      const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzjixByDRJ4Fxn2zcQVrR8ndni7PsDeSdnSWXVKv2iGvz_cYAygIQOg-8i5VJEZG-3R/exec';
 
       document.getElementById('myForm').addEventListener('submit', handleFormSubmit);
 
       async function handleFormSubmit(e) {
-        e.preventDefault(); 
-        
+        e.preventDefault();
+       
         const form = e.target;
         const outputDiv = document.getElementById('output');
         const submitButton = document.getElementById('submitButton');
-        
-        // 1. عرض رسالة جاري الإرسال
+       
+        // عرض رسالة جاري الإرسال
         outputDiv.className = 'message';
         outputDiv.innerHTML = 'جاري إرسال البيانات... ⏳';
-        submitButton.disabled = true; // تعطيل الزر لمنع الإرسال المتعدد
+        submitButton.disabled = true;
 
         // جمع البيانات
         const data = new FormData(form);
         const params = new URLSearchParams(data).toString();
 
         try {
-          // 2. إرسال البيانات عبر AJAX (Fetch API)
           const response = await fetch(APP_SCRIPT_URL, {
             method: 'POST',
             body: params,
@@ -116,28 +159,25 @@
             }
           });
 
-          // 3. تحليل الاستجابة
-          const result = await response.json(); 
+          const result = await response.json();
 
           if (result.status === 'success') {
-            // 4. عرض رسالة النجاح
             outputDiv.className = 'message success';
             outputDiv.innerHTML = result.message;
-            form.reset(); // مسح النموذج
+            form.reset();
           } else {
-            // 4. عرض رسالة الخطأ
             outputDiv.className = 'message error';
             outputDiv.innerHTML = 'خطأ في الخادم: ' + result.message;
           }
 
         } catch (error) {
-          // 4. عرض خطأ الاتصال
           outputDiv.className = 'message error';
           outputDiv.innerHTML = 'فشل الاتصال بخدمة Google: ' + error.message;
         } finally {
-          submitButton.disabled = false; // تفعيل الزر مرة أخرى
+          submitButton.disabled = false;
         }
       }
     </script>
   </body>
 </html>
+
