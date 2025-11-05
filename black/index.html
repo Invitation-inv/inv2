@@ -1,86 +1,370 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>نموذج إرسال إلى Google Sheets</title>
+  <meta charset="UTF-8">
+  <title>دعوة زفاف</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; background: #f7f9fc; color: #222; }
-    .card { max-width: 600px; margin: 0 auto; background: #fff; padding: 18px; border-radius: 8px; box-shadow: 0 6px 18px rgba(20,30,60,0.06); }
-    label { display:block; margin-top:12px; font-weight:600; }
-    input[type=text], input[type=email], textarea, select { width:100%; padding:10px; margin-top:6px; border:1px solid #d7dbe0; border-radius:6px; box-sizing:border-box; }
-    .radios { display:flex; gap:12px; margin-top:8px; }
-    button { margin-top:16px; padding:10px 14px; border:0; background:#2563eb; color:#fff; border-radius:8px; cursor:pointer; }
-    .msg { margin-top:12px; }
+    body {
+      margin: 0;
+      font-family: "Amiri", serif;
+      height: 100vh;
+      background: url("11.jpeg")no-repeat center/cover;
+      color: #263645;
+      background-color: #000000;
+    }
+
+
+
+    /* خلفية الفيديو */
+      /* خلفية الفيديو */
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 120%;
+      height: 120%;
+      object-fit: cover;
+      z-index: 1;
+      transition: opacity 1s ease;
+    }
+
+   
+
+   
+    .content {
+      position: relative;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 1s ease;
+      background: #0f0f0f;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      animation: fadeIn 1s ease;
+
+    }
+
+    .open .video-bg {
+      opacity: 0;
+    }
+
+    .show-content .content {
+      opacity: 1;
+      z-index: 3;
+    }
+    .page-content {
+      position: relative;
+      padding: 30px 15px 80px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      background: #263645;
+      color: #ffffff;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 5px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    /* عداد */
+  #countdown {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .time-box {
+      color: white;
+      padding: 10px 15px;
+      border-radius: 15px;
+      text-align: center;
+      min-width: 80px;
+      min-height: 60px;
+      background: linear-gradient(90deg, #d4af37, #b68d2a);
+      text-align: center;
+    }
+
+    .time-box span {
+      display: block;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .time-label {
+      font-size: 14px;
+      color: white;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    h2 {
+      font-size: 1.9rem;
+      color: #fff9e6;
+      margin-bottom: 25px;
+      position: relative;
+      text-shadow: 0 2px 10px rgba(255,255,255,0.3);
+    }
+
+    h2::after {
+      content: "";
+      position: absolute;
+      width: 70px;
+      height: 3px;
+      background: #d4af37;
+      bottom: -10px;
+      right: 50%;
+      transform: translateX(50%);
+      border-radius: 2px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-top: 18px;
+      margin-bottom: 5px;
+      color: #fff;
+      font-size: 15px;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      font-size: 15px;
+      text-align: center;
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(255,255,255,0.7);
+    }
+
+    input:focus,
+    textarea:focus {
+      background: rgba(255,255,255,0.3);
+      box-shadow: 0 0 10px rgba(255,255,255,0.4);
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    /* أزرار نعم / لا */
+    .yes-no-toggle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .yes-no-toggle input[type="radio"] {
+      display: none;
+    }
+
+    .yes-no-toggle label {
+      padding: 10px 30px;
+      border-radius: 25px;
+      border: 2px solid rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+
+    .yes-no-toggle input[type="radio"]:checked + label {
+      background: linear-gradient(90deg, #d4af37, #b68d2a);
+      border-color: transparent;
+      box-shadow: 0 0 15px rgba(212,175,55,0.6);
+      transform: scale(1.05);
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      background: linear-gradient(90deg, #d4af37, #b68d2a);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      font-size: 17px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 25px;
+      transition: transform 0.2s, opacity 0.3s;
+      box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+    }
+
+    input[type="submit"]:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    .message {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      display: none;
+    }
+
+    .success {
+      background: rgba(46, 204, 113, 0.2);
+      border: 1px solid rgba(46, 204, 113, 0.4);
+    }
+
+    .error {
+      background: rgba(231, 76, 60, 0.2);
+      border: 1px solid rgba(231, 76, 60, 0.4);
+    }
   </style>
 </head>
+
 <body>
-  <div class="card">
-    <h2>نموذج تسجيل — يرسل إلى Google Sheets</h2><form id="guestForm">
-  <!-- الحقل 1 -->
-  <label for="field1">الاسم</label>
-  <input id="field1" name="field1" type="text" placeholder="اكتب الاسم" required>
 
-  <!-- الحقل 2 -->
 
-  <!-- الحقل 3 -->
-  <label for="field3">رقم الهاتف</label>
-  <input id="field3" name="field3" type="text" placeholder="+9665..." required>
 
-  <!-- الحقل 4 -->
-  <label for="field4">ملاحظة / رسالة</label>
-  <textarea id="field4" name="field4" rows="3" placeholder="اكتب ملاحظة إن وُجدت"></textarea>
+  <!-- المحتوى -->
+  <div class="page-content">
+    <img src="111.png" style="position: absolute;left: 100px;width: 700px;">
+   
+    <p style="color: #ffffff; font-size: 20px; margin-top: 40px; animation: bounce 2s infinite;position: absolute;top: 1000px;left: 400px;">
+      ↓ تاكيد الحضور ↓
+    </p>
+<h2 style="position: absolute;top: 1300px;left: 350px;">تأكيد الحضور</h2>
 
-  <!-- اختيار نعم / لا -->
-  <label>هل تؤكد الحضور؟</label>
-  <div class="radios">
-    <label><input type="radio" name="yesNo" value="نعم" checked> نعم</label>
-    <label><input type="radio" name="yesNo" value="لا"> لا</label>
+    <form style="position: absolute;top: 1400px;left: 300px;" id="myForm">
+      <label for="input1">الاسم (إجباري):</label>
+      <input type="text" id="input1" name="input1" placeholder="أدخل اسمك الكامل" required>
+
+      <label for="input2">رقم الجوال (إجباري):</label>
+      <input type="tel" id="input2" name="input2" placeholder="05xxxxxxxxx" required>
+
+      <label for="input3">تهنئتك (اختياري):</label>
+      <textarea id="input3" name="input3" placeholder="اكتب تهنئتك"></textarea>
+
+      <label>هل ترغب في الحضور؟</label>
+      <div class="yes-no-toggle">
+        <input type="radio" id="yes" name="yes_no" value="نعم" required>
+        <label for="yes">نعم بإذن الله</label>
+        <input type="radio" id="no" name="yes_no" value="لا">
+        <label for="no">أعتذر عن الحضور</label>
+      </div>
+
+      <input type="submit" value="إرسال" id="submitButton">
+    </form>
+
+   
+    <p style="color: rgb(255, 255, 255); font-size: 16px; margin-top: 40px; animation: bounce 2s infinite;position: absolute;top: 2000px;left: 400px;">
+      ↓ تفاصيل الحفل ↓
+    </p>
+     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3710.505383694149!2d39.22260300000001!3d21.5661873!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15c3d1001bafa6ff%3A0x92adcdd2c7d4ba7d!2z2YHZhtiv2YIg2K_YqNmE2YrZiCDYp9mJ!5e0!3m2!1sar!2ssa!4v1760960554348!5m2!1sar!2ssa width="200" height="170" style="border:0;position: absolute; left: 230px;top: 2900px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  
+    <img src="22.png" style="width: 500px;height: 500px;position: absolute;top: 2100px;left: 150px;">
+
+    <div style="position: absolute; left: 250px;top: 2700px;" id="countdown">
+      <div class="time-box">
+        <span id="days">00</span>
+        <div class="time-label">يوم</div>
+      </div>
+      <div class="time-box">
+        <span id="hours">00</span>
+        <div class="time-label">ساعة</div>
+      </div>
+      <div class="time-box">
+        <span id="minutes">00</span>
+        <div class="time-label">دقيقة</div>
+      </div>
+    </div>
   </div>
+  <script>
 
-  <button type="submit">إرسال</button>
-</form>
+   const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzjixByDRJ4Fxn2zcQVrR8ndni7PsDeSdnSWXVKv2iGvz_cYAygIQOg-8i5VJEZG-3R/exec';
 
-<div class="msg" id="response"></div>
-
-  </div> <script>
-    // ضع هنا رابط نشر Google Apps Script Web App
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyR8ndLz6uZnIyNji8mNaCuDNiP_pXqKtw6fU_pGZsUnnGoXe9lOx_kRDGIf6TOl-14/exec';
-
-    const form = document.getElementById('guestForm');
-    const respDiv = document.getElementById('response');
-
-    form.addEventListener('submit', async (e) => {
+    document.getElementById('myForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      respDiv.textContent = 'جاري الإرسال...';
+      const form = e.target;
+      const outputDiv = document.getElementById('output');
+      const submitButton = document.getElementById('submitButton');
 
-      const data = {
-        field1: document.getElementById('field1').value.trim(),
-        field2: document.getElementById('field2').value.trim(),
-        field3: document.getElementById('field3').value.trim(),
-        field4: document.getElementById('field4').value.trim(),
-        yesNo: (document.querySelector('input[name="yesNo"]:checked') || {}).value || ''
-      };
+      outputDiv.style.display = "block";
+      outputDiv.className = 'message';
+      outputDiv.innerHTML = '⏳ جاري إرسال البيانات...';
+      submitButton.disabled = true;
+
+      const data = new FormData(form);
+      const params = new URLSearchParams(data).toString();
 
       try {
-        const res = await fetch(scriptURL, {
+        const response = await fetch(APP_SCRIPT_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
+          body: params,
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         });
+        const result = await response.json();
 
-        const result = await res.json();
         if (result.status === 'success') {
-          respDiv.textContent = 'تم الإرسال بنجاح ✅';
+          outputDiv.className = 'message success';
+          outputDiv.innerHTML = result.message;
           form.reset();
         } else {
-          respDiv.textContent = 'حدث خطأ: ' + (result.message || JSON.stringify(result));
+          outputDiv.className = 'message error';
+          outputDiv.innerHTML = '⚠️ خطأ في الخادم: ' + result.message;
         }
-      } catch (err) {
-        console.error(err);
-        respDiv.textContent = 'فشل الاتصال. تأكد من رابط Web App وصلاحيات النشر.';
+      } catch (error) {
+        outputDiv.className = 'message error';
+        outputDiv.innerHTML = '❌ فشل الاتصال بـ Google: ' + error.message;
+      } finally {
+        submitButton.disabled = false;
       }
     });
-  </script></body>
+    
+    // العداد الزمني
+    const countDownDate = new Date("Nov 25, 2025 20:00:00").getTime();
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = countDownDate - now;
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+      document.getElementById("days").innerHTML = days;
+      document.getElementById("hours").innerHTML = hours;
+      document.getElementById("minutes").innerHTML = minutes;
+    }, 1000);
+  </script>
+</body>
 </html>
+
+
+
+
+
+
+
+
