@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>دعوة</title>
+  <title>Intro Curtain</title>
 
   <style>
     body {
@@ -37,7 +37,7 @@
       top: 0;
       width: 50%;
       height: 100%;
-      background-image: url("11111.png"); /* 👈 صورة واحدة فقط */
+      background-image: url("1111.png"); /* 👈 صورة واحدة فقط */
       background-size: 200% 100%;
       background-repeat: no-repeat;
       transition: transform 3.8s cubic-bezier(.22,.61,.36,1);
@@ -63,7 +63,7 @@
     width: 200px;        /* 👈 مهم */
     height: 400px;        /* 👈 مهم */
 
-    background-image: url("3333.png");
+    background-image: url("333.png");
     background-size: contain;   /* أو cover حسب الصورة */
     background-repeat: no-repeat;
     background-position: center;
@@ -282,7 +282,6 @@
   <div class="curtain right"></div>
   <button class="enter-btn" onclick="openIntro()">افتح الدعوة</button>
 </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <script>
   function openIntro() {
@@ -293,7 +292,7 @@
       intro.style.display = "none";
     }, 3800);
   }
-  const nameParam = new URLSearchParams(location.search).get("name") || "ضيفنا";
+   const nameParam = new URLSearchParams(location.search).get("name") || "ضيفنا";
   const welcomeText = document.getElementById("welcomeText");
   if (welcomeText) {
     welcomeText.innerText += nameParam;
@@ -314,7 +313,7 @@
   const messageStatus = document.getElementById("messageStatus");
 
   // URL for the Google Apps Script
-  const scriptURL = "https://script.google.com/macros/s/AKfycbyOw_0ss6PQvDSVBzkKrcZ3kL_VqfgSRVymE8jR9VUIfHeK7Wc5CvroUHl0ADN1edCHPQ/exec";
+  const scriptURL = "https://script.google.com/macros/s/AKfycbyLQxg9aK1Qi3GzP6pqTPd_U2yPSbr318QHjUVHbu7tVdn-_vSvLDTW3i4lZcaRhZFJ/exec";
 
 
   function confirmAttendance(response) {
@@ -358,7 +357,7 @@
     }
   };
 
-var countDownDate = new Date("dec 20, 2025 20:00:00").getTime();
+var countDownDate = new Date("sep 28, 2025 20:00:00").getTime();
   var x = setInterval(function() {
     var now = new Date().getTime();
     var distance = countDownDate - now;
@@ -441,5 +440,3 @@ var countDownDate = new Date("dec 20, 2025 20:00:00").getTime();
 
 </body>
 </html>
-
-
