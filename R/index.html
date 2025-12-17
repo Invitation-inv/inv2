@@ -293,7 +293,8 @@
       intro.style.display = "none";
     }, 3800);
   }
-   const nameParam = new URLSearchParams(location.search).get("name") || "ضيفنا";
+   
+ const nameParam = new URLSearchParams(location.search).get("name") || "ضيفنا";
   const welcomeText = document.getElementById("welcomeText");
   if (welcomeText) {
     welcomeText.innerText += nameParam;
@@ -314,7 +315,7 @@
   const messageStatus = document.getElementById("messageStatus");
 
   // URL for the Google Apps Script
-  const scriptURL = "https://script.google.com/macros/s/AKfycbzzgEdxbn2T4vxmfISY9Y6WiryzoRlHt-D34V79tU3MGmoaLmddKyb-lbLNRHcuOZmy/exec";
+  const scriptURL = "https://script.google.com/macros/s/AKfycbxmecszWPiwb6gVqJpD7XRjavpHOCzrJeqcQjN1ziqLOl-fShjA2kfQi41ZDz_4QZcBoA/exec";
 
 
   function confirmAttendance(response) {
@@ -358,7 +359,7 @@
     }
   };
 
-var countDownDate = new Date("sep 28, 2025 20:00:00").getTime();
+var countDownDate = new Date("oct 10, 2025 20:00:00").getTime();
   var x = setInterval(function() {
     var now = new Date().getTime();
     var distance = countDownDate - now;
@@ -437,10 +438,12 @@ var countDownDate = new Date("sep 28, 2025 20:00:00").getTime();
     });
   });
 
+
 </script>
 
 </body>
 </html>
+
 
 
 
