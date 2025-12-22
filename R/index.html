@@ -223,21 +223,17 @@
   position: relative;
   height: 1600px; /* ثابته مهما تغيّر النص */
 }
+
 #welcomeText {
- position: absolute;
-  top: 1000px;
-
-  right: 50%;
-  transform: translateX(50%);
-
-  width: auto;
-  max-width: none;
-
+  position: absolute;
+  top: 1200px;
+  left: 75px;
+  transform: translateX(-50%);
+  max-width: 90%;
   text-align: center;
-  white-space: nowrap;
+  white-space: nowrap;       /* الكلام بسطر واحد */
+  text-overflow: ellipsis;   /* … لو الاسم طويل */
 }
-
-
 
 
 
@@ -460,6 +456,7 @@ var countDownDate = new Date("jan 11, 2026 20:00:00").getTime();
 
 </body>
 </html>
+
 
 
 
