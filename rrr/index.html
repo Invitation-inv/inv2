@@ -67,13 +67,10 @@ h2 {
 
 /* ===== QR ===== */
 #qrContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  marhin: 20px auto;
-   height: 200px;
+  position: absolute;
+  top: 1000px;
+  height: 200px;
   width: 200px;
-  
 }
 
 /* ===== العد التنازلي ===== */
@@ -140,13 +137,13 @@ h2 {
   <h1 id="welcomeText">حيّاك الله،</h1>
 
   <h2 id="attendanceTitle">الرجاء تأكيد حضورك</h2>
-
   <div id="responseButtons">
        <button style="padding:6px 12px;font-size: 30px;border-radius:33px;background-color: #285069;color: #f6f2ec;width: 200px;" onclick="confirmAttendance('yes')">نعم، بإذن الله</button>
       <button style="padding:6px 12px;font-size: 30px;border-radius:33px;background-color: #285069;color: #f6f2ec;width: 250px" onclick="confirmAttendance('no')">لا، أعتذر عن الحضور</button>
     </div>
 
   <p style="text-align: center;" id="responseMsg"></p>
+<img id="thankYouImage" src="66666.png" alt="شكرًا لك" style="display:none; margin: 20px auto; max-width: 300px;">
 
   <div style="align-items: center;" id="qrContainer"></div>
   <p  id="qrNote" style="display:none;text-align: center;">📌 استخدم رمز الدخول عند الوصول للقاعة</p>
@@ -225,11 +222,16 @@ h2 {
 
   function showQR(link, count) {
     qrContainer.innerHTML = "";
-    new QRCode(qrContainer, { text: link, width: 200, height: 200 });
+    new QRCode(qrContainer, { text: link, width: 200, height: 200  });
     qrNote.style.display = "block";
     invitationCount.style.display = "block";
     invitationCount.innerText = `📩 عدد الدعوات: ${count}`;
+
+     const thankYouImage = document.getElementById("thankYouImage");
+  if (thankYouImage) {
+    thankYouImage.style.display = "block";
   }
+}
 
  
 var countDownDate = new Date("jan 11, 2026 20:00:00").getTime();
@@ -315,8 +317,3 @@ var countDownDate = new Date("jan 11, 2026 20:00:00").getTime();
 
 </body>
 </html>
-
-
-
-
-
