@@ -12,6 +12,18 @@
       background-image: url("22.jpg");
     }
 
+@supports (-webkit-touch-callout: none) {
+
+  html, body {
+    overflow-x: hidden !important;
+    width: 100%;
+  }
+
+  * {
+    max-width: 100vw;
+  }
+
+}
 
 
     /* ===== المحتوى ===== */
@@ -442,6 +454,7 @@ var countDownDate = new Date("jan 11, 2026 20:00:00").getTime();
 
 </body>
 </html>
+
 
 
 
