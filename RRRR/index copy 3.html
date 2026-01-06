@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>دعوة</title>
+
+<style>
+/* ===== أساسيات آمنة ===== */
+* {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: Arial;
+  background: url("22.jpg") repeat;
+  color: #285069;
+}
+
+/* ===== حاوية الصفحة ===== */
+.page {
+  margin: auto;
+  text-align: center;
+  padding-bottom: 80px;
+}
+
+/* ===== صور ===== */
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px auto;
+}
+
+/* ===== الترحيب ===== */
+#welcomeText {
+  font-size: 28px;
+  margin: 40px 10px 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== العناوين ===== */
+h2 {
+  margin-top: 40px;
+}
+
+/* ===== الأزرار ===== */
+#responseButtons button {
+  width: 100%;
+  font-size: 20px;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 30px;
+  background: #285069;
+  color: #f6f2ec;
+  border: none;
+  cursor: pointer;
+}
+
+/* ===== QR ===== */
+#qrContainer {
+  margin-top: 20px;
+}
+
+/* ===== العد التنازلي ===== */
+#countdown {
+  display: flex;
+  justify-content: space-between;
+  margin: 44px 0;
+  height: 100px;
+  width: 600px;
+  text-align: center;
+  position: absolute;
+  top: 2600px;
+  left: 170px;
+}
+
+.time-box {
+  background: #285069;
+  color: white;
+  border-radius: 40px;
+  padding: 10px;
+  width: 30%;
+}
+
+.time-box span {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.time-label {
+  font-size: 35px;
+}
+
+/* ===== الخريطة ===== */
+
+
+/* ===== حركة السهم ===== */
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+.bounce {
+  animation: bounce 2s infinite;
+}
+
+/* ===== Safari Fix ===== */
+@supports (-webkit-touch-callout: none) {
+  body {
+    overflow-x: hidden;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <img src="444.png">
+  <img style="position: absolute;top:240px;width: 800px;height: 900px;left: 100px;" src="777.png">
+
+  <p class="bounce">↓ تأكيد الحضور ↓</p>
+
+  <h1 id="welcomeText">حيّاك الله،</h1>
+
+  <h2 id="attendanceTitle">الرجاء تأكيد حضورك</h2>
+
+  <div id="responseButtons">
+       <button style="padding:6px 12px;font-size: 30px;border-radius:33px;background-color: #285069;color: #f6f2ec;width: 200px;" onclick="confirmAttendance('yes')">نعم، بإذن الله</button>
+      <button style="padding:6px 12px;font-size: 30px;border-radius:33px;background-color: #285069;color: #f6f2ec;width: 250px" onclick="confirmAttendance('no')">لا، أعتذر عن الحضور</button>
+    </div>
+  </div>
+
+  <p style="text-align: center;" id="responseMsg"></p>
+
+  <div id="qrContainer"></div>
+  <p id="qrNote" style="display:none;">📌 استخدم رمز الدخول عند الوصول للقاعة</p>
+  <p id="invitationCount" style="display:none;"></p>
+
+
+  <img src="6666.png">
+  <img src="555.png">
+
+  <div id="countdown">
+    <div class="time-box">
+      <span id="days">00</span>
+      <div class="time-label">يوم</div>
+    </div>
+    <div class="time-box">
+      <span id="hours">00</span>
+      <div class="time-label">ساعة</div>
+    </div>
+    <div class="time-box">
+      <span id="minutes">00</span>
+      <div class="time-label">دقيقة</div>
+    </div>
+  </div>
+
+    <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3705.7689325279557!2d39.14814!3d21.750482!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjHCsDQ1JzAxLjciTiAzOcKwMDgnNTMuMyJF!5e0!3m2!1sar!2ssa!4v1765997650121!5m2!1sar!2ssa" width="300" height="150" style="border:0;position: absolute; left: 350px;top: 2800px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+ const nameParam = new URLSearchParams(location.search).get("name") || "ضيفنا";
+  const welcomeText = document.getElementById("welcomeText");
+  if (welcomeText) {
+    welcomeText.innerText += nameParam;
+  }
+
+  const token = new URLSearchParams(location.search).get("token") || "";
+  const qrContainer = document.getElementById("qrContainer");
+  const responseButtons = document.getElementById("responseButtons");
+  const attendanceTitle = document.getElementById("attendanceTitle");
+  const responseMsg = document.getElementById("responseMsg");
+  const qrNote = document.getElementById("qrNote");
+  const invitationCount = document.getElementById("invitationCount");
+ 
+  // Elements for the message box
+  const messageTextarea = document.getElementById("message");
+  const sendMessageBtn = document.getElementById("sendMessageBtn");
+  const messageStatus = document.getElementById("messageStatus");
+
+  // URL for the Google Apps Script
+  const scriptURL = "https://script.google.com/macros/s/AKfycbzJFJD0r_u3Q5aQiqDegHxCYPyMjlIhLPNixihh9F4LhwQUG2PlWiiPCLD5CZZ554hI/exec";
+
+
+  function confirmAttendance(response) {
+    responseMsg.innerText = "⏳ جاري التسجيل...";
+    fetch(`${scriptURL}?name=${encodeURIComponent(nameParam)}&token=${token}&response=${response}`)
+      .then(res => res.json())
+      .then(res => {
+        responseButtons.style.display = "none";
+        attendanceTitle.style.display = "none";
+        responseMsg.innerText = res.message;
+
+        if (res.status === "success" || res.status === "already") {
+          showQR(res.qr, res.max);
+        } else if (res.status === "declined") {
+          qrContainer.innerHTML = "";
+          qrNote.style.display = "none";
+          invitationCount.style.display = "none";
+        }
+      })
+      .catch(() => {
+        responseMsg.innerText = "❌ حدث خطأ أثناء الاتصال بالخادم.";
+      });
+  }
+
+  function showQR(link, count) {
+    qrContainer.innerHTML = "";
+    new QRCode(qrContainer, { text: link, width: 200, height: 200 });
+    qrNote.style.display = "block";
+    invitationCount.style.display = "block";
+    invitationCount.innerText = `📩 عدد الدعوات: ${count}`;
+  }
+
+ 
+var countDownDate = new Date("jan 11, 2026 20:00:00").getTime();
+  var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    document.getElementById("days").innerHTML = days;
+    document.getElementById("hours").innerHTML = hours;
+    document.getElementById("minutes").innerHTML = minutes;
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("countdown").innerHTML = "انتهى الوقت";
+    }
+  }, 1000);
+
+
+  window.addEventListener('DOMContentLoaded', () => {
+    fetch(`${scriptURL}?token=${token}&check=true`)
+      .then(res => res.json())
+      .then(res => {
+        if (res.status === "already" || res.status === "used") {
+          showQR(res.qr, res.max);
+          responseButtons.style.display = "none";
+          attendanceTitle.style.display = "none";
+          responseMsg.innerText = res.message;
+        } else if (res.status === "declined") {
+          responseButtons.style.display = "none";
+          attendanceTitle.style.display = "none";
+          responseMsg.innerText = res.message || "نأسف لعدم تمكنك من الحضور.";
+        }
+      })
+      .catch(() => {
+        responseMsg.innerText = "❌ لم نتمكن من التحقق من حالتك.";
+      });
+
+    sendMessageBtn.addEventListener("click", function() {
+        const message = messageTextarea.value.trim();
+        if(message === "") {
+          messageStatus.style.color = "white";
+          messageStatus.innerText = "⚠️ الرجاء كتابة رسالة قبل الإرسال.";
+          return;
+        }
+
+        messageStatus.style.color = "white";
+        messageStatus.innerText = "⏳ جاري إرسال الرسالة...";
+        sendMessageBtn.disabled = true;
+
+        fetch(scriptURL, {
+            method: "POST",
+            body: new URLSearchParams({
+                action: "saveMessage",
+                message: message,
+                token: token
+            })
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data.includes("success")) {
+                messageStatus.style.color = "white";
+                messageStatus.innerText = "✅ تم إرسال الرسالة بنجاح.";
+                messageTextarea.value = "";
+            } else if (data.includes("already_sent")) {
+                messageStatus.style.color = "white";
+                messageStatus.innerText = "⚠️ لقد أرسلت رسالة مسبقاً.";
+            } else {
+                messageStatus.style.color = "white";
+                messageStatus.innerText = "❌ حدث خطأ، حاول مرة أخرى.";
+            }
+            sendMessageBtn.disabled = false;
+        })
+        .catch(() => {
+            messageStatus.style.color = "red";
+            messageStatus.innerText = "❌ فشل الاتصال بالخادم.";
+            sendMessageBtn.disabled = false;
+        });
+    });
+  });
+
+</script>
+
+</body>
+</html>
